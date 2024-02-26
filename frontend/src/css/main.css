@@ -1,0 +1,596 @@
+/* Header */
+.header {}
+
+.header__form {
+    height: var(--header-form);
+    width: 100%;
+    background-image: var(--primary-color);
+}
+
+.header__form-content {
+    height: var(--header-form);
+}
+
+.header__form-list {
+    display: flex;
+    justify-content: right;
+    height: 100%;
+    padding-left: 0;
+    list-style: none;
+    font-size: 1.2rem;
+    color: #fff;
+}
+
+.header__form-item {
+    position: relative;
+    line-height: var(--header-form);
+    margin-right: 6px;
+    cursor: pointer;
+}
+
+.header__form-item:first-child {
+    margin-right: 10px;
+}
+
+.header__form-item:first-child::before {
+    content: "";
+    position: absolute;
+    width: 1px;
+    height: 24px;
+    background-color: #ffffff;
+    right: -5px;
+    top: 7px;
+    opacity: 0.6;
+}
+
+.header__main {
+    display: flex;
+    position: relative;
+    min-width: 1200px;
+    background-color: #fff;
+    justify-content: space-between;
+    align-items: center;
+    height: calc(var(--header-form) + 40px);
+    z-index: 99;
+    box-shadow: 0 5px 10px #999;
+}
+
+.header__main::after {
+    content: "";
+    position: absolute;
+    background-color: #fff;
+    width: 150px;
+    height: calc(var(--header-form) + 40px);
+    left: -136px;
+    z-index: 1;
+    box-shadow: -10px 5px 10px #999;
+
+}
+
+.header__main::before {
+    content: "";
+    position: absolute;
+    background-color: #fff;
+    width: 150px;
+    height: calc(var(--header-form) + 40px);
+    right: -136px;
+    z-index: 1;
+    box-shadow: 10px 5px 10px #999;
+}
+
+.header__main-logo {
+    display: flex;
+    align-items: center;
+    float: left;
+    margin: 0 20px;
+    cursor: pointer;
+    color: black;
+    text-decoration: none;
+}
+
+.header__main-logo-container {
+    width: 80px;
+    height: 80px;
+    background-image: url('../img/snapedit_1706797613132.png');
+    background-size: 200%;
+    background-position: center;
+    background-repeat: no-repeat;
+    transform: translateY(10px);
+}
+
+.header__main-logo-icon {
+    width: 100%;
+}
+
+.header__main-logo-title {
+    font-size: 2rem;
+}
+
+.header__main-find {
+    height: 100%;
+    line-height: 80px;
+}
+
+.header__main-find-input {
+    width: 336px;
+    height: 40px;
+    padding: 8px;
+    border: 1px solid #7496ea;
+    border-top-left-radius: 2px;
+    border-bottom-left-radius: 2px;
+    font-size: 1.4rem;
+}
+
+.header__main-find-button {
+    padding: 10px;
+    height: 40px;
+    font-size: 1.4rem;
+    border-top-right-radius: 2px;
+    border-bottom-right-radius: 2px;
+    cursor: pointer;
+    background-color: #7496ea;
+    color: #fff;
+    border: 1px solid #7496ea;
+}
+
+.header__main-find-button:hover,
+.register-form_submit:hover,
+.login-app_benefit-link:hover,
+.login-form_submit:hover {
+    opacity: 0.8;
+}
+
+.header__main-cart {}
+
+.header__cover {
+    background-color: #fff;
+    height: calc(var(--header-form) + 40px);
+    width: 100%;
+    display: none;
+}
+
+/* Home page */
+.main {
+    width: 100%;
+    height: 800px;
+    padding: 20px 0;
+    background-image: url('../img/anhNen.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.caterory {
+    padding: 10px;
+    border-radius: 2px;
+}
+
+.caterory-list {
+    background-color: #fff;
+    list-style: none;
+    font-size: 1.4rem;
+    padding-left: 0;
+    box-shadow: 0 1px 3px #999;
+}
+
+.caterory-title {
+    position: relative;
+    font-size: 1.6rem;
+    padding: 20px 10px 20px;
+}
+
+.caterory-title::before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    background-color: #e4e4e4;
+    bottom: 0;
+    left: 0;
+}
+
+.caterory-item {
+    position: relative;
+    padding: 10px 0 10px 4px;
+}
+
+.caterory-item:hover {
+    color: #7496ea;
+    background-color: #f2f2f2;
+    cursor: pointer;
+}
+
+.caterory-item::before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 1px;
+    background-color: #edecec;
+    bottom: 0;
+    left: 0;
+}
+
+
+.product {
+    padding: 10px 0;
+}
+
+.product-list {
+    list-style: none;
+    padding-left: 0;
+    display: flex;
+}
+
+.product-item {
+    background-color: #fff;
+    width: 100%;
+    height: 280px;
+    border: 1px solid #f8f8f8;
+    box-shadow: 0 1px 3px #999;
+}
+
+.product-item:hover {
+    cursor: pointer;
+    opacity: 0.9;
+    transform: translateY(-8px);
+}
+
+.product-item_img {
+    width: 100%;
+    height: 180px;
+    background-image: url('../img/khautrang.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.product-item_information {
+    padding: 10px;
+}
+
+.product-item_name {
+    font-size: 1.6rem;
+    margin: 0 0 10px;
+}
+
+.product-item_price {
+    font-size: 1.4rem;
+}
+
+/* Register */
+.Register {
+    width: 100%;
+    height: 800px;
+    background-image: url('../img/anhNen.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.register-form {}
+
+.register-infor {
+    height: 260px;
+    margin: 40px 0;
+    background-color: #fff;
+    border-radius: 4px;
+    box-shadow: 0 5px 10px #999;
+    z-index: 1;
+}
+
+.register-infor_title,
+.register-app_title {
+    font-size: 2rem;
+    padding: 20px 0;
+    border-bottom: 1px solid #ccc;
+}
+
+.register-infor_phone {
+    width: 200px;
+    height: 40px;
+    padding: 8px;
+    border: 1px solid #7496ea;
+    border-top-left-radius: 2px;
+    border-bottom-left-radius: 2px;
+    font-size: 1.4rem;
+    margin: 20px 20px 0 0;
+}
+
+.register-infor_name {
+    width: 368px;
+    height: 40px;
+    padding: 8px;
+    border: 1px solid #7496ea;
+    border-top-left-radius: 2px;
+    border-bottom-left-radius: 2px;
+    font-size: 1.4rem;
+}
+
+.register-infor_address {
+    width: 100%;
+    height: 40px;
+    padding: 8px;
+    border: 1px solid #7496ea;
+    border-top-left-radius: 2px;
+    border-bottom-left-radius: 2px;
+    font-size: 1.4rem;
+    margin: 20px 20px 20px 0;
+}
+
+.register-infor_yob,
+.register-infor_gender {
+    padding: 10px 0;
+    border: 1px solid #7496ea;
+    font-size: 1.4rem;
+    text-align: center;
+}
+
+.register-infor_gender {
+    margin-left: 20px;
+}
+
+.register-app {
+    height: 260px;
+    margin: 40px 0;
+    background-color: #fff;
+    border-radius: 4px;
+    box-shadow: 0 5px 10px #999;
+}
+
+.register-app_title {}
+
+.register-app_passwd {
+    width: 100%;
+    height: 40px;
+    padding: 8px;
+    border: 1px solid #7496ea;
+    border-top-left-radius: 2px;
+    border-bottom-left-radius: 2px;
+    font-size: 1.4rem;
+    margin: 20px 0;
+}
+
+.register-app_repasswd {
+    width: 100%;
+    height: 40px;
+    padding: 8px;
+    border: 1px solid #7496ea;
+    border-top-left-radius: 2px;
+    border-bottom-left-radius: 2px;
+    font-size: 1.4rem;
+    margin-bottom: 20px;
+}
+
+.register-app_repasswd {}
+
+.register-form_submit {
+    padding: 10px;
+    height: 40px;
+    font-size: 1.4rem;
+    border-top-right-radius: 2px;
+    border-bottom-right-radius: 2px;
+    cursor: pointer;
+    background-color: #7496ea;
+    color: #fff;
+    border: 1px solid #7496ea;
+    margin: 0 auto;
+    box-shadow: 0 5px 10px #999;
+    float: right;
+}
+
+/* Login */
+.Login {
+    width: 100%;
+    height: 800px;
+    background-image: url('../img/anhNen.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.login-form {}
+
+.login-infor {
+    height: 360px;
+    margin: 40px 0;
+    background-color: #fff;
+    border-radius: 4px;
+    box-shadow: 0 5px 10px #999;
+    z-index: 1;
+}
+
+.login-infor_title,
+.login-app_title {
+    font-size: 2rem;
+    padding: 20px 0;
+    border-bottom: 1px solid #ccc;
+}
+
+.login-infor_phoneLabel,
+.login-infor_passwdLabel {
+    font-size: 1.6rem;
+    margin: 20px 0 10px;
+}
+
+.login-infor_phone {
+    width: 100%;
+    height: 40px;
+    padding: 8px;
+    border: 1px solid #7496ea;
+    border-top-left-radius: 2px;
+    border-bottom-left-radius: 2px;
+    font-size: 1.4rem;
+    margin-bottom: 20px;
+}
+
+.login-infor_passwd {
+    width: 100%;
+    height: 40px;
+    padding: 8px;
+    border: 1px solid #7496ea;
+    border-top-left-radius: 2px;
+    border-bottom-left-radius: 2px;
+    font-size: 1.4rem;
+    margin-bottom: 20px;
+}
+
+.login-app {
+    height: 300px;
+    margin: 40px 0;
+    background-color: #fff;
+    border-radius: 4px;
+    box-shadow: 0 5px 10px #999;
+}
+
+.login-app_title {}
+
+.login-app_benefit-list {}
+
+.login-app_benefit-title {
+    font-size: 1.6rem;
+    margin: 20px 0;
+}
+
+.login-app_benefit-item {
+    font-size: 1.6rem;
+    margin-bottom: 10px;
+}
+
+.login-app_benefit-link {
+    position: absolute;
+    width: 120px;
+    height: 40px;
+    text-align: center;
+    font-size: 1.6rem;
+    padding: 10px;
+    border-radius: 2px;
+    cursor: pointer;
+    background-color: #7496ea;
+    color: #fff;
+    border: 1px solid #7496ea;
+    margin: 10px 0;
+    box-shadow: 0 5px 10px #999;
+    margin-top: 10px;
+}
+
+.login-form_submit {
+    width: 120px;
+    height: 40px;
+    padding: 10px;
+    font-size: 1.6rem;
+    border-radius: 2px;
+    cursor: pointer;
+    background-color: #7496ea;
+    color: #fff;
+    border: 1px solid #7496ea;
+    box-shadow: 0 5px 10px #999;
+    margin: 10px 0;
+}
+
+/* User */
+.user {
+    width: 100%;
+    height: 800px;
+    padding: 20px 0;
+    background-image: url('../img/anhNen.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.user-caterogy {
+    height: 200px;
+    background-color: #fff;
+    border-radius: 2px;
+}
+
+.user-caterogy_title {
+    font-size: 2rem;
+    padding: 20px;
+    border-bottom: 1px solid #ccc;
+}
+
+.user-caterogy_list {
+    list-style: none;
+}
+
+.user-caterogy_item {
+    font-size: 1.6rem;
+    margin-top: 10px;
+}
+
+.user-caterogy_item:hover {
+    color: #7496ea;
+    cursor: pointer;
+}
+
+.user-caterogy_item-link {
+    color: #000;
+}
+
+.user-detail {
+    height: 300px;
+    border-radius: 2px;
+    box-shadow: 0 5px 10px #999;
+    background-color: #fff;
+
+}
+
+.user-detail_title {
+    font-size: 2rem;
+    padding: 20px;
+    border-bottom: 1px solid #ccc;
+}
+
+.user-detail_label-list {}
+
+.user-detail_label-item {
+    font-size: 1.6rem;
+    margin-top: 20px;
+    text-align: end;
+}
+
+.user-detail_info-list {}
+
+.user-detail_info-item {
+    font-size: 1.6rem;
+    margin-top: 20px;
+}
+
+/* History */
+.History {
+    width: 100%;
+    height: 800px;
+    padding: 20px 0;
+    background-image: url('../img/anhNen.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+/* Footer */
+.Footer {
+    position: relative;
+    width: 100%;
+    background-image: var(--primary-color);
+    bottom: 0;
+}
+
+.footer_main-list {
+    text-align: left;
+    list-style: none;
+    padding-left: 0;
+}
+
+.footer_main-title {
+    margin: 20px 0;
+}
+
+.footer_main-item {
+    margin-bottom: 10px;
+    cursor: pointer;
+}
+
+.footer_main-item:hover {
+    color: #7496ea;
+}
