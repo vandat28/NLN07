@@ -19,8 +19,6 @@ export default function AdminPage() {
                     </Routes>
                 </div>
             </div>
-
-
         </>
     )
 }
