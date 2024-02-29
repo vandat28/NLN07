@@ -1,112 +1,59 @@
-#wrapper {
-    display: flex;
-    background-image: url(http://localhost:3000/static/media/anhNen.008ea2e2642603899174.jpg);
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
+.title {
+    font-size: 35px;
     padding: 20px;
+    text-align: center;
+    background: white;
+    margin: 20px auto;
+    width: 475px;
+    text-transform: uppercase;
+    border-radius: 10px;
 }
-
-/*-------------------------------*/
-/*     Sidebar nav styles        */
-/*-------------------------------*/
 
 .sidebar-nav {
-    width: 220px;
-    margin: 0;
-    padding: 0;
-    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2%;
+    width: 100%;
 }
 
-.sidebar-nav li {
-    position: relative;
+.sidebar-nav a {
     line-height: 20px;
-    display: inline-block;
-    width: 100%;
     font-size: 18px;
+    border-radius: 25px;
+    width: 23.5%;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin: 10px 0;
+    background-color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px 20px;
+    border: #4a4949 8px solid;
 }
 
-.sidebar-nav li:before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: 3px;
-    background-color: #1c1c1c;
-    z-index: -1;
-    -webkit-transition: width .2s ease-in;
-    -moz-transition: width .2s ease-in;
-    -ms-transition: width .2s ease-in;
-    transition: width .2s ease-in;
+.sidebar-nav a:hover {
+    cursor: pointer;
+    background-color: rgb(81, 132, 240);
+}
 
+.sidebar-nav a img {
+    width: 100px;
+}
+
+.sidebar-nav a:hover img {
+    transform: scale(1.2);
+}
+
+.sidebar-nav a:hover p {
+    color: white;
+    font-weight: 600;
 }
 
 
-
-.sidebar-nav li a {
+.sidebar-nav a p {
+    color: black;
     display: block;
-    text-decoration: none;
-    padding: 10px 15px 10px 30px;
-    background-color: #5ba8f0;
-}
-
-.sidebar-nav li a:hover,
-.sidebar-nav li a:active,
-.sidebar-nav li a:focus,
-.sidebar-nav li.open a:hover,
-.sidebar-nav li.open a:active,
-.sidebar-nav li.open a:focus {
-    color: #302f2f;
-    text-decoration: none;
-    background-color: rgb(231, 227, 235);
-
-}
-
-.sidebar-header {
     text-align: center;
-    font-size: 20px;
-    position: relative;
+    padding: 10px 5px;
     width: 100%;
-    display: inline-block;
-}
-
-.sidebar-brand {
-    height: 65px;
-    position: relative;
-    background: #212531;
-    background: linear-gradient(to right bottom, #2f3441 50%, #212531 50%);
-    padding-top: 1em;
-}
-
-.sidebar-brand a {
-    color: #ddd;
-}
-
-.sidebar-brand a:hover {
-    color: #fff;
-    text-decoration: none;
-}
-
-.dropdown-header {
-    text-align: center;
-    font-size: 1em;
-    color: #ddd;
-    background: #212531;
-    background: linear-gradient(to right bottom, #2f3441 50%, #212531 50%);
-}
-
-.sidebar-nav .dropdown-menu {
-    position: relative;
-    width: 100%;
-    padding: 0;
-    margin: 0;
-    border-radius: 0;
-    border: none;
-    background-color: #222;
-    box-shadow: none;
-}
-
-.dropdown-menu.show {
-    top: 0;
 }
