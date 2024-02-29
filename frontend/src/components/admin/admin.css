@@ -57,3 +57,101 @@
     padding: 10px 5px;
     width: 100%;
 }
+
+.product-manager {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    font-size: 14px;
+    font-family: system-ui;
+}
+
+.filter-section {
+    margin-bottom: 20px;
+}
+
+.filter-section select {
+    margin-right: 10px;
+    padding: 5px;
+}
+
+.product-table {
+    width: 100%;
+    background-color: azure;
+}
+
+.product-table table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.product-table th,
+.product-table td {
+    padding: 8px;
+    text-align: left;
+    white-space: nowrap;
+    /* Ngăn chặn các từ bị xuống dòng */
+    overflow: hidden;
+    /* Ẩn phần vượt quá kích thước */
+    text-overflow: ellipsis;
+    /* Hiển thị dấu chấm (...) cho văn bản bị cắt bớt */
+    max-width: 200px;
+}
+
+.product-table th {
+    background-color: #f2f2f2;
+}
+
+.product-table tr {
+    height: 50px;
+}
+
+.filter {
+    margin-bottom: 20px;
+    display: inline;
+}
+
+.filter-button {
+    padding: 6px 15px;
+    font-size: 14px;
+    background-color: #d9d9d9;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.filter-button:hover {
+    background-color: #0056b3;
+}
+
+.pagination {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 20px;
+}
+
+.pagination a {
+    color: black;
+    padding: 8px 16px;
+    text-decoration: none;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background-color: #ddd;
+}
+
+.pagination a:hover {
+    background-color: #007bff;
+}
+
+.pagination input {
+    width: 50px;
+    text-align: center;
+    margin: 0 4px;
+}
+
+.pagination p {
+    font-size: 14px;
+    margin: 0 10px;
+    color: rgb(0, 0, 0);
+    font-weight: 600;
+}

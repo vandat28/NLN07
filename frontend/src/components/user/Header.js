@@ -45,11 +45,11 @@ function Header() {
             </div>
             <div className='grid wide'>
                 <div className='header__main'>
-                    <a href='http://localhost:3000/' className='header__main-logo'>
+                    <Link to='/' className='header__main-logo'>
                         <div className='header__main-logo-container'>
                         </div>
                         <div className='header__main-logo-title'>HealPro</div>
-                    </a>
+                    </Link>
                     <div className='header__main-find'>
                         <input className='header__main-find-input' placeholder='Nhập tên sản phẩm' />
                         <button className='header__main-find-button'>search</button>
