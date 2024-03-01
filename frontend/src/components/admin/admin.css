@@ -98,6 +98,10 @@
     max-width: 200px;
 }
 
+.color-blue {
+    color: #007bff;
+}
+
 .product-table th {
     background-color: #f2f2f2;
 }
@@ -118,10 +122,11 @@
     border: none;
     border-radius: 4px;
     cursor: pointer;
+    margin: 0 10px;
 }
 
 .filter-button:hover {
-    background-color: #0056b3;
+    background-color: #007bff;
 }
 
 .pagination {
@@ -154,4 +159,214 @@
     margin: 0 10px;
     color: rgb(0, 0, 0);
     font-weight: 600;
+}
+
+/* Phần tử modal */
+.modal {
+    display: none;
+    /* Ẩn modal mặc định */
+    position: fixed;
+    /* Vị trí cố định trên màn hình */
+    z-index: 1;
+    /* Hiển thị modal trên tất cả các phần tử khác */
+    left: 0;
+    top: 0px;
+
+    width: 100%;
+    /* Chiều rộng toàn bộ màn hình */
+    background-color: rgba(0, 0, 0, 0.4);
+    /* Màu nền của modal */
+    overflow: auto;
+    /* Hiển thị thanh cuộn khi nội dung quá dài */
+}
+
+/* Nội dung modal */
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    /* Canh giữa modal trên màn hình */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    /* Chiều rộng của nội dung modal */
+}
+
+/* Định dạng phần tử div chứa input và label */
+.input-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1%;
+    justify-content: center;
+}
+
+.input-container {
+    /* Chia đều 2 cột */
+    margin-bottom: 20px;
+    /* Khoảng cách giữa các hàng */
+    width: 49%;
+}
+
+@media (max-width: 768px) {
+    .input-container {
+        flex-basis: 100%;
+        /* Trên màn hình nhỏ hơn, hiển thị 1 cột */
+    }
+}
+
+
+/* Định dạng cho label */
+.input-label {
+    display: block;
+    /* Hiển thị label trên một dòng riêng biệt */
+    font-weight: bold;
+    /* Đậm chữ */
+}
+
+/* Định dạng cho input */
+.input-field {
+    width: 100%;
+    /* Input chiếm toàn bộ chiều rộng của div */
+    padding: 8px;
+    /* Khoảng cách giữa input và viền */
+    border: 1px solid #ccc;
+    /* Viền input */
+    border-radius: 4px;
+    /* Độ cong viền */
+    box-sizing: border-box;
+    /* Không tính thêm padding và border */
+}
+
+/* Định dạng khi input được focus */
+.input-field:focus {
+    outline: none;
+    /* Loại bỏ đường viền khi focus */
+    border-color: #007bff;
+    /* Màu viền khi focus */
+}
+
+/* Định dạng cho nút */
+.modal-button {
+    padding: 10px 20px;
+    /* Kích thước nút */
+    margin-right: 10px;
+    /* Khoảng cách giữa các nút */
+    border: none;
+    /* Loại bỏ viền */
+    border-radius: 4px;
+    /* Độ cong viền */
+    cursor: pointer;
+    /* Hiển thị con trỏ khi rê chuột */
+    transition: background-color 0.3s;
+    /* Hiệu ứng màu nền */
+}
+
+/* Định dạng cho nút "Đóng" */
+.close-button {
+    background-color: #ccc;
+    /* Màu nền */
+    color: #333;
+    /* Màu chữ */
+}
+
+/* Định dạng cho nút "Lưu" */
+.save-button {
+    background-color: #007bff;
+    /* Màu nền */
+    color: #fff;
+    /* Màu chữ */
+}
+
+/* Định dạng khi hover */
+.modal-button:hover {
+    opacity: 0.8;
+    /* Độ trong suốt khi hover */
+}
+
+/* Định dạng cho phần tử div chứa tiêu đề */
+.modal-header {
+    text-align: center;
+    /* Căn giữa tiêu đề */
+    padding: 20px 0;
+    /* Khoảng cách giữa tiêu đề và các phần tử khác */
+}
+
+/* Định dạng cho tiêu đề */
+.modal-title {
+    margin: 0;
+    /* Loại bỏ margin mặc định */
+    font-size: 20px;
+    /* Kích thước chữ */
+    font-weight: bold;
+    /* Chữ đậm */
+    color: #333;
+    /* Màu chữ */
+}
+
+/* Định dạng cho phần tử div chứa nút */
+.modal-buttons {
+    text-align: center;
+    /* Căn giữa nút */
+    margin-top: 20px;
+    /* Khoảng cách từ top */
+}
+
+.modal-body {
+    max-height: 200px;
+    /* Đặt chiều cao tối đa */
+    overflow-y: auto;
+    /* Cho phép cuộn nếu nội dung quá dài */
+}
+
+.category-table {
+    width: 100%;
+    /* Chiều rộng 100% */
+    border-collapse: collapse;
+    /* Loại bỏ khoảng trắng giữa các ô */
+}
+
+.category-table th,
+.category-table td {
+    border: 1px solid #ddd;
+    /* Viền cho các ô */
+    padding: 8px;
+    /* Khoảng cách nội dung và viền */
+}
+
+.category-table th {
+    background-color: #f2f2f2;
+    /* Màu nền cho hàng tiêu đề */
+    text-align: left;
+    /* Căn trái nội dung trong hàng tiêu đề */
+}
+
+.add-category {
+    display: flex;
+    margin-bottom: 20px;
+}
+
+.category-input {
+    flex: 1;
+    /* Input chiếm phần lớn không gian còn lại */
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-right: 10px;
+    /* Khoảng cách giữa input và button */
+}
+
+.add-button {
+    padding: 8px 15px;
+    border: none;
+    border-radius: 4px;
+    background-color: #007bff;
+    color: #fff;
+    cursor: pointer;
+}
+
+.add-button:hover {
+    background-color: #0056b3;
+}
+
+.category-table tr {
+    font-size: 16px;
 }
