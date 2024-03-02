@@ -195,16 +195,14 @@
 /* Định dạng phần tử div chứa input và label */
 .input-grid {
     display: flex;
-    flex-wrap: wrap;
-    gap: 1%;
-    justify-content: center;
+    flex-direction: column;
+    align-items: center;
 }
 
 .input-container {
     /* Chia đều 2 cột */
     margin-bottom: 20px;
-    /* Khoảng cách giữa các hàng */
-    width: 49%;
+    width: 80%;
 }
 
 @media (max-width: 768px) {

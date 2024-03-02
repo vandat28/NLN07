@@ -4,7 +4,10 @@ class productService {
 
     findALl() {
         return new Promise((resolve, reject) => {
-            con.query(`SELECT * FROM sanpham`, function (error, result, fields) {
+            con.query(`SELECT * 
+            FROM sanpham a, loaisanpham b
+            where a.maLoai = b.id;  
+            ;`, function (error, result, fields) {
                 if (error) {
                     reject(error);
                     return;

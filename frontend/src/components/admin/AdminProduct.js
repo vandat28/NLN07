@@ -1,18 +1,30 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 
 
 export default function AdminProduct() {
 
 
-    const products = [
-        { id: "Chọn trạng thái Chọn trạng thái Chọn trạng thái Chọn trạng thái Chọn trạng thái Chọn trạng thái ", name: 'Product 1', type: 'Type A', status: 'Active' },
-        { id: 2, name: 'Product 2', type: 'Type B', status: 'Inactive' },
-        { id: 3, name: 'Product 3', type: 'Type A', status: 'Active' },
-        { id: 1, name: 'Product 1', type: 'Type A', status: 'Active' },
-        { id: 2, name: 'Product 2', type: 'Type B', status: 'Inactive' },
-        // Add more products as needed
-    ];
+    const [data, setData] = useState([])
+
+    useEffect(() => {
+        getApiData()
+    }, []);
+
+    const getApiData = async () => {
+        try {
+            const response = await fetch(`http://localhost:5000/api/products`);
+            const data = await response.json();
+            if (data) {
+                setData(data);
+            }
+        } catch (error) {
+            console.log('Đã xảy ra lỗi:', error);
+        }
+
+    };
+
+
 
 
     return (
@@ -24,14 +36,7 @@ export default function AdminProduct() {
                     <option value="Type B">Type B</option>
                     {/* Add more options for product types */}
                 </select>
-                <select>
-                    <option>- Chọn trạng thái -</option>
-                    <option value="Active">Active</option>
-                    <option value="Inactive">Inactive</option>
-                    {/* Add more options for product statuses */}
-                </select>
                 <div className="filter">
-                    <button className="filter-button">Lọc</button>
                     <button className="filter-button" data-bs-toggle="modal" data-bs-target="#staticBackdrop2">Xem danh mục</button>
                     <button className="filter-button" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Thêm sản phẩm</button>
                 </div>
@@ -40,20 +45,24 @@ export default function AdminProduct() {
                 <table>
                     <thead>
                         <tr>
+                            <th>Hình ảnh</th>
                             <th className='color-blue'>Sản phẩm</th>
                             <th>Loại</th>
-                            <th>Trạng thái</th>
+                            <th>Kho</th>
                             <th className='color-blue'>Giá bán</th>
                             <th>Tùy chọn</th>
                         </tr>
                     </thead>
                     <tbody>
-                        {products.map(product => (
-                            <tr key={product.id}>
-                                <td className='color-blue'>{product.id}</td>
-                                <td>{product.name}</td>
-                                <td>{product.type}</td>
-                                <td className='color-blue'>{product.status}</td>
+                        {data.map((product) => (
+                            <tr key={product.maSP}>
+                                <td> <img style={{ width: '100px', height: '100px' }} src='https://mebiphar.vn/image/cache/catalog/combo/COMBO%203/khau-trang-mebiphar-3d-mask-size-m-mau-trang-500x500.png' /></td>
+                                <td className='color-blue'>
+                                    {product.tenSP}
+                                </td>
+                                <td>{product.tenLoai}</td>
+                                <td>{product.soLuongCon}</td>
+                                <td className='color-blue'>{product.giaBan} VNĐ</td>
                                 <td>
                                     <button type="button" ><i class="fa-solid fa-trash"></i></button>
                                     <button type="button" ><i class="fa-solid fa-pen-to-square"></i></button>
@@ -83,7 +92,7 @@ export default function AdminProduct() {
                                 </div>
                                 <div className="input-container">
                                     <label className="input-label">Hình ảnh</label>
-                                    <input type="text" className="input-field" name="image" />
+                                    <input type="file" className="input-field" name="image" />
                                 </div>
                                 <div className="input-container">
                                     <label className="input-label">Giá bán</label>
@@ -91,7 +100,7 @@ export default function AdminProduct() {
                                 </div>
                                 <div className="input-container">
                                     <label className="input-label">Mô tả</label>
-                                    <input type="text" className="input-field" name="description" />
+                                    <textarea type="text" className="input-field" name="description" />
                                 </div>
                                 <div className="input-container">
                                     <label className="input-label">Loại sản phẩm</label>
