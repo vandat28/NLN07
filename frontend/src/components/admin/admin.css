@@ -170,7 +170,7 @@
     z-index: 1;
     /* Hiển thị modal trên tất cả các phần tử khác */
     left: 0;
-    top: 0px;
+    top: 0;
 
     width: 100%;
     /* Chiều rộng toàn bộ màn hình */
@@ -178,12 +178,13 @@
     /* Màu nền của modal */
     overflow: auto;
     /* Hiển thị thanh cuộn khi nội dung quá dài */
+    height: 100%;
 }
 
 /* Nội dung modal */
 .modal-content {
     background-color: #fefefe;
-    margin: 15% auto;
+    margin: 7% auto;
     /* Canh giữa modal trên màn hình */
     padding: 20px;
     border: 1px solid #888;

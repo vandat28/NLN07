@@ -5,7 +5,6 @@ import React, { useState } from 'react'
 export default function AdminProduct() {
 
 
-
     const products = [
         { id: "Chọn trạng thái Chọn trạng thái Chọn trạng thái Chọn trạng thái Chọn trạng thái Chọn trạng thái ", name: 'Product 1', type: 'Type A', status: 'Active' },
         { id: 2, name: 'Product 2', type: 'Type B', status: 'Inactive' },
@@ -56,8 +55,8 @@ export default function AdminProduct() {
                                 <td>{product.type}</td>
                                 <td className='color-blue'>{product.status}</td>
                                 <td>
-                                    <button type="button"><i class="fa-solid fa-trash"></i></button>
-                                    <button type="button"><i class="fa-solid fa-pen-to-square"></i></button>
+                                    <button type="button" ><i class="fa-solid fa-trash"></i></button>
+                                    <button type="button" ><i class="fa-solid fa-pen-to-square"></i></button>
                                 </td>
                             </tr>
                         ))}
@@ -122,7 +121,6 @@ export default function AdminProduct() {
                             <input type="text" className="category-input" placeholder="Nhập tên danh mục" />
                             <button type="button" className="add-button">Thêm danh mục</button>
                         </div>
-
                         <div className="modal-body">
                             <table className="category-table">
                                 <thead>
@@ -137,7 +135,55 @@ export default function AdminProduct() {
                                         <td>1</td>
                                         <td>Danh mục 1</td>
                                         <td>
-                                            <button type="button"><i class="fa-solid fa-trash"></i></button>
+                                            <button type="button" ><i class="fa-solid fa-trash"></i></button>
+                                            <button type="button" ><i class="fa-regular fa-pen-to-square"></i></button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>Danh mục 1</td>
+                                        <td>
+                                            <button type="button" ><i class="fa-solid fa-trash"></i></button>
+                                            <button type="button" ><i class="fa-regular fa-pen-to-square"></i></button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>Danh mục 1</td>
+                                        <td>
+                                            <button type="button" ><i class="fa-solid fa-trash"></i></button>
+                                            <button type="button" ><i class="fa-regular fa-pen-to-square"></i></button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>Danh mục 1</td>
+                                        <td>
+                                            <button type="button" ><i class="fa-solid fa-trash"></i></button>
+                                            <button type="button" ><i class="fa-regular fa-pen-to-square"></i></button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>Danh mục 1</td>
+                                        <td>
+                                            <button type="button" ><i class="fa-solid fa-trash"></i></button>
+                                            <button type="button" ><i class="fa-regular fa-pen-to-square"></i></button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>Danh mục 1</td>
+                                        <td>
+                                            <button type="button" ><i class="fa-solid fa-trash"></i></button>
+                                            <button type="button" ><i class="fa-regular fa-pen-to-square"></i></button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>Danh mục 1</td>
+                                        <td>
+                                            <button type="button" ><i class="fa-solid fa-trash"></i></button>
                                             <button type="button"><i class="fa-regular fa-pen-to-square"></i></button>
                                         </td>
                                     </tr>
@@ -150,6 +196,7 @@ export default function AdminProduct() {
                     </div>
                 </div>
             </div>
+
         </div>
     )
 }
