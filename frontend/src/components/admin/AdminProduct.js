@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import axios from 'axios';
 
 
 
@@ -6,11 +7,24 @@ export default function AdminProduct() {
 
 
     const [data, setData] = useState([])
+    const [category, setCategory] = useState([])
+    const [categoryName, setCategoryName] = useState('')
+    const [selectedOption, setSelectedOption] = useState('');
+
+
+    const [formData, setFormData] = useState({
+        name: '',
+        price: '',
+        description: '',
+        category: '',
+        image: null,
+        quantity: ''
+    });
 
     useEffect(() => {
         getApiData()
+        getApiDataCategory()
     }, []);
-
     const getApiData = async () => {
         try {
             const response = await fetch(`http://localhost:5000/api/products`);
@@ -23,17 +37,151 @@ export default function AdminProduct() {
         }
 
     };
+    const getApiDataCategory = async () => {
+        try {
+            const response = await fetch(`http://localhost:5000/api/category`);
+            const data = await response.json();
+            if (data) {
+                setCategory(data);
+            }
+        } catch (error) {
+            console.log('Đã xảy ra lỗi:', error);
+        }
 
+    };
+    const addCategory = (event) => {
+        event.preventDefault();
+        console.log(categoryName)
 
+        // Truy cập dữ liệu đã nhập trong formData và xử lý theo yêu cầu của bạn
+        fetch('http://localhost:5000/api/category', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ categoryName })
+        })
+            .then(response => response.json())
+            .then(result => {
+                // Xử lý kết quả từ server
+                console.log(result);
+                getApiDataCategory()
+                setCategoryName('')
+            })
+            .catch(error => {
+                // Xử lý lỗi
+                console.error(error);
+            });
+        // Gửi dữ liệu đến server, thực hiện các tác vụ cần thiết, vv.
+    };
+    const changeCategoryName = (e) => {
+        setCategoryName(e.target.value)
+    }
+    const deleteCategory = (id) => {
+        const isConfirmed = window.confirm('Bạn có chắc muốn xóa không?');
+        if (isConfirmed) {
+            try {
+                fetch(`http://localhost:5000/api/category/${id}`, {
+                    method: 'DELETE',
+                })
+                    .then(response => response.json())
+                    .then(result => {
+                        console.log(result);
+                        getApiDataCategory()
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
 
+                    });
+            } catch (error) {
+                console.log('Đã xảy ra lỗi:', error);
+            }
+            console.log('Xóa thành công');
+        } else {
+            console.log('Hủy xóa');
+        }
 
+    }
+    const handleChange = (event) => {
+        const { name, value } = event.target;
+        setFormData((prevFormData) => ({
+            ...prevFormData,
+            [name]: value
+        }));
+    };
+
+    const handleImageChange = (event) => {
+        const file = event.target.files[0]; // Lấy tệp ảnh từ trường input
+        setFormData((prevFormData) => ({
+            ...prevFormData,
+            image: file
+        }));
+    };
+    const addProduct = (event) => {
+        event.preventDefault();
+        console.log(formData)
+        axios.post('http://localhost:5000/api/products', formData, {
+            headers: {
+                'Content-Type': 'multipart/form-data'
+            }
+        })
+            .then(response => {
+                // Xử lý kết quả từ server
+                console.log(response.data);
+                getApiData()
+                setFormData({
+                    name: '',
+                    price: '',
+                    description: '',
+                    category: '',
+                    image: null,
+                    quantity: ''
+                })
+            })
+            .catch(error => {
+                // Xử lý lỗi
+                console.error(error);
+            });
+        // Gửi dữ liệu đến server, thực hiện các tác vụ cần thiết, vv.
+    };
+    const deleteProduct = (id, productName) => {
+        const isConfirmed = window.confirm(`Bạn có chắc muốn xóa sản phẩm "${productName}" không?`);
+        if (isConfirmed) {
+            try {
+                fetch(`http://localhost:5000/api/products/${id}`, {
+                    method: 'DELETE',
+                })
+                    .then(response => response.json())
+                    .then(result => {
+                        console.log(result);
+                        getApiData()
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+
+                    });
+            } catch (error) {
+                console.log('Đã xảy ra lỗi:', error);
+            }
+            console.log('Xóa thành công');
+        } else {
+            console.log('Hủy xóa');
+        }
+    }
+    const filterCategory = (e) => {
+        setSelectedOption(e.target.value);
+    }
     return (
         <div className="product-manager">
             <div className="filter-section">
-                <select value="Chọn loại" >
-                    <option value="">- Chọn loại -</option>
-                    <option value="Type A">Type A</option>
-                    <option value="Type B">Type B</option>
+                <select value={selectedOption} onChange={filterCategory}>
+                    <option value="">--Chọn--</option>
+                    {category.map(item => (
+                        <option key={item.id} value={item.id}>
+                            {item.tenLoai}
+                        </option>
+                    ))
+                    }
                     {/* Add more options for product types */}
                 </select>
                 <div className="filter">
@@ -56,7 +204,7 @@ export default function AdminProduct() {
                     <tbody>
                         {data.map((product) => (
                             <tr key={product.maSP}>
-                                <td> <img style={{ width: '100px', height: '100px' }} src='https://mebiphar.vn/image/cache/catalog/combo/COMBO%203/khau-trang-mebiphar-3d-mask-size-m-mau-trang-500x500.png' /></td>
+                                <td> <img style={{ width: '100px', height: '100px' }} src={`http://localhost:5000/uploads/${product.anhdaidien}`} /></td>
                                 <td className='color-blue'>
                                     {product.tenSP}
                                 </td>
@@ -64,7 +212,7 @@ export default function AdminProduct() {
                                 <td>{product.soLuongCon}</td>
                                 <td className='color-blue'>{product.giaBan} VNĐ</td>
                                 <td>
-                                    <button type="button" ><i class="fa-solid fa-trash"></i></button>
+                                    <button type="button" onClick={() => deleteProduct(product.maSP, product.tenSP)}><i class="fa-solid fa-trash"></i></button>
                                     <button type="button" ><i class="fa-solid fa-pen-to-square"></i></button>
                                 </td>
                             </tr>
@@ -78,7 +226,7 @@ export default function AdminProduct() {
                 <input className="page" value={1} />
                 <a href="#" className="next"> &raquo;</a>
             </div>
-            <form className="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabIndex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <form onSubmit={addProduct} className="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabIndex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                 <div className="modal-dialog modal-dialog-centered">
                     <div className="modal-content">
                         <div className="modal-header">
@@ -88,27 +236,35 @@ export default function AdminProduct() {
                             <div className='input-grid'>
                                 <div className="input-container">
                                     <label className="input-label">Tên sản phẩm</label>
-                                    <input type="text" className="input-field" name="name" />
+                                    <input type="text" className="input-field" value={formData.name} name="name" onChange={handleChange} />
                                 </div>
                                 <div className="input-container">
                                     <label className="input-label">Hình ảnh</label>
-                                    <input type="file" className="input-field" name="image" />
+                                    <input type="file" className="input-field" onChange={handleImageChange} name="image" />
                                 </div>
                                 <div className="input-container">
                                     <label className="input-label">Giá bán</label>
-                                    <input type="text" className="input-field" name="price" />
+                                    <input type="text" className="input-field" value={formData.price} name="price" onChange={handleChange} />
                                 </div>
                                 <div className="input-container">
                                     <label className="input-label">Mô tả</label>
-                                    <textarea type="text" className="input-field" name="description" />
+                                    <textarea type="text" className="input-field" value={formData.description} name="description" onChange={handleChange} />
                                 </div>
                                 <div className="input-container">
                                     <label className="input-label">Loại sản phẩm</label>
-                                    <input type="text" className="input-field" name="description" />
+                                    <select value={formData.category} name="category" onChange={handleChange} className="form-select" aria-label="Default select example">
+                                        <option>--Chọn--</option>
+                                        {category.map(item => (
+                                            <option key={item.id} value={item.id}>
+                                                {item.tenLoai}
+                                            </option>
+                                        ))
+                                        }
+                                    </select>
                                 </div>
                                 <div className="input-container">
                                     <label className="input-label">Số lượng</label>
-                                    <input type="text" className="input-field" name="description" />
+                                    <input type="text" className="input-field" value={formData.quantity} name="quantity" onChange={handleChange} />
                                 </div>
                             </div>
 
@@ -126,10 +282,10 @@ export default function AdminProduct() {
                         <div className="modal-header">
                             <h5 className="modal-title">Danh mục sản phẩm</h5>
                         </div>
-                        <div className="add-category">
-                            <input type="text" className="category-input" placeholder="Nhập tên danh mục" />
-                            <button type="button" className="add-button">Thêm danh mục</button>
-                        </div>
+                        <form onSubmit={addCategory} className="add-category">
+                            <input type="text" className="category-input" value={categoryName} name="nameCategory" onChange={changeCategoryName} placeholder="Nhập tên danh mục" />
+                            <button type="submit" className="add-button">Thêm danh mục</button>
+                        </form>
                         <div className="modal-body">
                             <table className="category-table">
                                 <thead>
@@ -140,62 +296,16 @@ export default function AdminProduct() {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>Danh mục 1</td>
-                                        <td>
-                                            <button type="button" ><i class="fa-solid fa-trash"></i></button>
-                                            <button type="button" ><i class="fa-regular fa-pen-to-square"></i></button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>Danh mục 1</td>
-                                        <td>
-                                            <button type="button" ><i class="fa-solid fa-trash"></i></button>
-                                            <button type="button" ><i class="fa-regular fa-pen-to-square"></i></button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>Danh mục 1</td>
-                                        <td>
-                                            <button type="button" ><i class="fa-solid fa-trash"></i></button>
-                                            <button type="button" ><i class="fa-regular fa-pen-to-square"></i></button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>Danh mục 1</td>
-                                        <td>
-                                            <button type="button" ><i class="fa-solid fa-trash"></i></button>
-                                            <button type="button" ><i class="fa-regular fa-pen-to-square"></i></button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>Danh mục 1</td>
-                                        <td>
-                                            <button type="button" ><i class="fa-solid fa-trash"></i></button>
-                                            <button type="button" ><i class="fa-regular fa-pen-to-square"></i></button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>Danh mục 1</td>
-                                        <td>
-                                            <button type="button" ><i class="fa-solid fa-trash"></i></button>
-                                            <button type="button" ><i class="fa-regular fa-pen-to-square"></i></button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>Danh mục 1</td>
-                                        <td>
-                                            <button type="button" ><i class="fa-solid fa-trash"></i></button>
-                                            <button type="button"><i class="fa-regular fa-pen-to-square"></i></button>
-                                        </td>
-                                    </tr>
+                                    {category.map((item) => (
+                                        <tr>
+                                            <td>{item.id}</td>
+                                            <td>{item.tenLoai}</td>
+                                            <td>
+                                                <button type="button" onClick={() => deleteCategory(item.id)}><i class="fa-solid fa-trash"></i></button>
+                                                <button type="button" ><i class="fa-regular fa-pen-to-square"></i></button>
+                                            </td>
+                                        </tr>
+                                    ))}
                                 </tbody>
                             </table>
                         </div>
@@ -205,7 +315,6 @@ export default function AdminProduct() {
                     </div>
                 </div>
             </div>
-
         </div>
     )
 }

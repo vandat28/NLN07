@@ -1,4 +1,6 @@
 const productService = require('../service/productService')
+
+
 class products {
     async findAll(req, res) {
         let data = await productService.findALl()
@@ -6,16 +8,28 @@ class products {
     }
 
     async create(req, res) {
-        let data = await productService.create()
-        res.json(data)
+        let product = req.body
+        let avatar = req.file.filename
+        if (product) {
+            let data = await productService.create(product.name, product.price, product.description,
+                product.quantity, product.category, avatar)
+            res.json(data)
+        } else {
+            res.json('Thất bại')
+        }
     }
     async update(req, res) {
         let data = await productService.update()
         res.json(data)
     }
     async delete(req, res) {
-        let data = await productService.delete()
-        res.json(data)
+        let id = req.params.id
+        if (id) {
+            let data = await productService.delete(id)
+            res.json(data)
+        } else {
+            res.json("Xóa thất bại")
+        }
     }
 
 }

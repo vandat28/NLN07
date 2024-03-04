@@ -17,10 +17,10 @@ class productService {
         })
     }
 
-    create() {
+    create(tenSP, giaBan, moTa, soLuongCon, maLoai, anhdaidien) {
         return new Promise((resolve, reject) => {
-            con.query(`INSERT INTO table_name
-            VALUES (value1, value2, value3, ...);`, function (error, result, fields) {
+            con.query(`INSERT INTO sanpham(tenSP, giaBan, moTa, soLuongCon, maLoai, anhdaidien)
+            VALUES ('${tenSP}', '${giaBan}', '${moTa}', ${soLuongCon}, ${maLoai}, '${anhdaidien}');`, function (error, result, fields) {
                 if (error) {
                     reject(error);
                     return;
