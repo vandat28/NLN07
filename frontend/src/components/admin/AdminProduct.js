@@ -1,5 +1,16 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios';
+import BASE_URL from '../configURL';
+
+//chuyển về tiền vnđ
+const formatCurrency = (amount) => {
+    const formatter = new Intl.NumberFormat('vi-VN', {
+        style: 'currency',
+        currency: 'VND'
+    });
+
+    return formatter.format(amount);
+};
 
 
 
@@ -27,7 +38,7 @@ export default function AdminProduct() {
     }, []);
     const getApiData = async () => {
         try {
-            const response = await fetch(`http://localhost:5000/api/products`);
+            const response = await fetch(`${BASE_URL}/api/products`);
             const data = await response.json();
             if (data) {
                 setData(data);
@@ -39,7 +50,7 @@ export default function AdminProduct() {
     };
     const getApiDataCategory = async () => {
         try {
-            const response = await fetch(`http://localhost:5000/api/category`);
+            const response = await fetch(`${BASE_URL}/api/category`);
             const data = await response.json();
             if (data) {
                 setCategory(data);
@@ -47,14 +58,13 @@ export default function AdminProduct() {
         } catch (error) {
             console.log('Đã xảy ra lỗi:', error);
         }
-
     };
     const addCategory = (event) => {
         event.preventDefault();
         console.log(categoryName)
 
         // Truy cập dữ liệu đã nhập trong formData và xử lý theo yêu cầu của bạn
-        fetch('http://localhost:5000/api/category', {
+        fetch(`${BASE_URL}/api/category`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -81,7 +91,7 @@ export default function AdminProduct() {
         const isConfirmed = window.confirm('Bạn có chắc muốn xóa không?');
         if (isConfirmed) {
             try {
-                fetch(`http://localhost:5000/api/category/${id}`, {
+                fetch(`${BASE_URL}/api/category/${id}`, {
                     method: 'DELETE',
                 })
                     .then(response => response.json())
@@ -120,7 +130,7 @@ export default function AdminProduct() {
     const addProduct = (event) => {
         event.preventDefault();
         console.log(formData)
-        axios.post('http://localhost:5000/api/products', formData, {
+        axios.post(`${BASE_URL}/api/products`, formData, {
             headers: {
                 'Content-Type': 'multipart/form-data'
             }
@@ -148,7 +158,7 @@ export default function AdminProduct() {
         const isConfirmed = window.confirm(`Bạn có chắc muốn xóa sản phẩm "${productName}" không?`);
         if (isConfirmed) {
             try {
-                fetch(`http://localhost:5000/api/products/${id}`, {
+                fetch(`${BASE_URL}/api/products/${id}`, {
                     method: 'DELETE',
                 })
                     .then(response => response.json())
@@ -169,7 +179,20 @@ export default function AdminProduct() {
         }
     }
     const filterCategory = (e) => {
-        setSelectedOption(e.target.value);
+        const selectId = e.target.value
+        setSelectedOption(e.target.value)
+        console.log(selectId)
+        findProductsByCategory(selectId)
+
+
+    }
+    const findProductsByCategory = async (id) => {
+        try {
+            const response = await axios.get(`${BASE_URL}/api/products/category/${id}`);
+            setData(response.data);
+        } catch (error) {
+            console.error('Error fetching data:', error);
+        }
     }
     return (
         <div className="product-manager">
@@ -182,7 +205,6 @@ export default function AdminProduct() {
                         </option>
                     ))
                     }
-                    {/* Add more options for product types */}
                 </select>
                 <div className="filter">
                     <button className="filter-button" data-bs-toggle="modal" data-bs-target="#staticBackdrop2">Xem danh mục</button>
@@ -204,16 +226,16 @@ export default function AdminProduct() {
                     <tbody>
                         {data.map((product) => (
                             <tr key={product.maSP}>
-                                <td> <img style={{ width: '100px', height: '100px' }} src={`http://localhost:5000/uploads/${product.anhdaidien}`} /></td>
+                                <td> <img style={{ width: '100px', height: '100px' }} src={`${BASE_URL}/uploads/${product.anhdaidien}`} /></td>
                                 <td className='color-blue'>
                                     {product.tenSP}
                                 </td>
                                 <td>{product.tenLoai}</td>
                                 <td>{product.soLuongCon}</td>
-                                <td className='color-blue'>{product.giaBan} VNĐ</td>
+                                <td className='color-blue'>{formatCurrency(product.giaBan)}</td>
                                 <td>
-                                    <button type="button" onClick={() => deleteProduct(product.maSP, product.tenSP)}><i class="fa-solid fa-trash"></i></button>
-                                    <button type="button" ><i class="fa-solid fa-pen-to-square"></i></button>
+                                    <button className='color-red' type="button" onClick={() => deleteProduct(product.maSP, product.tenSP)}><i class="fa-solid fa-trash"></i></button>
+                                    {/* <button type="button" ><i class="fa-solid fa-pen-to-square"></i></button> */}
                                 </td>
                             </tr>
                         ))}
@@ -301,8 +323,8 @@ export default function AdminProduct() {
                                             <td>{item.id}</td>
                                             <td>{item.tenLoai}</td>
                                             <td>
-                                                <button type="button" onClick={() => deleteCategory(item.id)}><i class="fa-solid fa-trash"></i></button>
-                                                <button type="button" ><i class="fa-regular fa-pen-to-square"></i></button>
+                                                <button className='color-red' type="button" onClick={() => deleteCategory(item.id)}><i class="fa-solid fa-trash"></i></button>
+                                                {/* <button type="button" ><i class="fa-regular fa-pen-to-square"></i></button> */}
                                             </td>
                                         </tr>
                                     ))}

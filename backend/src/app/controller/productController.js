@@ -31,6 +31,11 @@ class products {
             res.json("Xóa thất bại")
         }
     }
+    async findAllByCategoryId(req, res) {
+        let categoryId = req.params.id
+        let data = await productService.findAllByCategoryId(categoryId)
+        res.json(data)
+    }
 
 }
 

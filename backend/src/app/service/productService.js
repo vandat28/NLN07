@@ -56,6 +56,21 @@ class productService {
         })
     }
 
+    findAllByCategoryId(id) {
+        return new Promise((resolve, reject) => {
+            con.query(`SELECT * 
+            FROM sanpham a, loaisanpham b
+            where a.maLoai = b.id
+            and a.maLoai = ${id}`, function (error, result, fields) {
+                if (error) {
+                    reject(error);
+                    return;
+                }
+                resolve(result);
+            });
+        })
+    }
+
 
 }
 

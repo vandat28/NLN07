@@ -98,8 +98,13 @@
     max-width: 200px;
 }
 
+
 .color-blue {
     color: #007bff;
+}
+
+.color-red {
+    color: #eb3933;
 }
 
 .product-table th {

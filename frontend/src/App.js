@@ -6,6 +6,7 @@ import Footer from './components/user/Footer';
 import User from './components/user/User';
 import History from './components/user/History';
 import AdminPage from './components/admin/AdminPage';
+import ProductDetail from './components/user/ProductDetail';
 
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
         <Route path='/admin/*' element={<AdminPage />} />
         <Route path='/user/profile' element={<User />} />
         <Route path='/user/history' element={<History />} />
+        <Route path='/product/:id' element={<ProductDetail />} />
       </Routes>
       <Footer />
     </>
