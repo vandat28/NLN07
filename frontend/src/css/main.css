@@ -1,5 +1,6 @@
 /* Header */
-.header {}
+.header {
+}
 
 .header__form {
     height: var(--header-form);
@@ -36,11 +37,18 @@
     content: "";
     position: absolute;
     width: 1px;
-    height: 24px;
+    height: 16px;
     background-color: #ffffff;
     right: -5px;
-    top: 7px;
+    top: 12px;
     opacity: 0.6;
+}
+
+.header__fixed {
+    width: 100%;
+    z-index: 100;  
+    box-shadow: 0 5px 10px #999;
+    background-color: #fff;
 }
 
 .header__main {
@@ -51,31 +59,6 @@
     justify-content: space-between;
     align-items: center;
     height: calc(var(--header-form) + 40px);
-    z-index: 1;
-    box-shadow: 0 5px 10px #999;
-}
-
-.header__main::after {
-    content: "";
-    position: absolute;
-    background-color: #fff;
-    width: 150px;
-    height: calc(var(--header-form) + 40px);
-    left: -136px;
-    z-index: 1;
-    box-shadow: -10px 5px 10px #999;
-
-}
-
-.header__main::before {
-    content: "";
-    position: absolute;
-    background-color: #fff;
-    width: 150px;
-    height: calc(var(--header-form) + 40px);
-    right: -136px;
-    z-index: 1;
-    box-shadow: 10px 5px 10px #999;
 }
 
 .header__main-logo {
@@ -152,6 +135,7 @@
 /* Home page */
 .main {
     width: 100%;
+    min-height: 800px;
     padding: 20px 0;
     background-image: url('../img/anhNen.jpg');
     background-size: cover;
@@ -522,6 +506,10 @@
 
 .user-caterogy_item-link {
     color: #000;
+}
+
+.user-caterogy_item-link:hover {
+    color: #7496ea;
 }
 
 .user-detail {

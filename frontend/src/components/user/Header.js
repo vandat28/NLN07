@@ -8,13 +8,14 @@ function Header() {
     useEffect(() => {
         const headerMain = document.querySelector('.header__main');
         const headerCover = document.querySelector('.header__cover');
+        const headerFixed = document.querySelector('.header__fixed');
 
         const handleScroll = () => {
             if (window.scrollY > 40) {
-                headerMain.classList.add('fixed');
+                headerFixed.classList.add('fixed');
                 headerCover.classList.add('block');
             } else {
-                headerMain.classList.remove('fixed');
+                headerFixed.classList.remove('fixed');
                 headerCover.classList.remove('block');
             }
         }
@@ -34,31 +35,33 @@ function Header() {
                     <div className='header__form-content grid wide'>
                         <ul className='header__form-list'>
                             <li className='header__form-item'>
-                                <Link to="/Login" className='user-caterogy_item-link'>Đăng nhập</Link>
+                                <Link to="/Login">Đăng nhập</Link>
                             </li>
                             <li className='header__form-item'>
-                                <Link to="/Register" className='user-caterogy_item-link'>Đăng ký</Link>
+                                <Link to="/Register">Đăng ký</Link>
                             </li>
                         </ul>
                     </div>
                 </div>
             </div>
-            <div className='grid wide'>
-                <div className='header__main'>
-                    <Link to='/' className='header__main-logo'>
-                        <div className='header__main-logo-container'>
+            <div className='header__fixed'>
+                <div className='grid wide'>
+                    <div className='header__main'>
+                        <Link to='/' className='header__main-logo'>
+                            <div className='header__main-logo-container'>
+                            </div>
+                            <div className='header__main-logo-title'>HealPro</div>
+                        </Link>
+                        <div className='header__main-find'>
+                            <input className='header__main-find-input' placeholder='Nhập tên sản phẩm' />
+                            <button className='header__main-find-button'>search</button>
                         </div>
-                        <div className='header__main-logo-title'>HealPro</div>
-                    </Link>
-                    <div className='header__main-find'>
-                        <input className='header__main-find-input' placeholder='Nhập tên sản phẩm' />
-                        <button className='header__main-find-button'>search</button>
-                    </div>
-                    <div className='header__main-cart'>
+                        <div className='header__main-cart'>
+                        </div>
                     </div>
                 </div>
-                <div className='header__cover'></div>
             </div>
+            <div className='header__cover'></div>
 
             <Routes>
                 <Route path='/Login' element={<Login />} />

@@ -11,7 +11,7 @@ function User() {
                         <div className='user-caterogy_title'>Người dùng</div>
                         <ul className='user-caterogy_list'>
                             <li className='user-caterogy_item'>
-                                <Link to="/user/profile" className='user-caterogy_item-link'>Tài Khoản Người Dùng</Link>
+                                <Link to="/user/profile" className='user-caterogy_item-link' style={{color:"blue"}}>Tài Khoản Người Dùng</Link>
                             </li>
                             <li className='user-caterogy_item'>
                                 <Link to="/user/history" className='user-caterogy_item-link'>Lịch Sử Mua Hàng</Link>
