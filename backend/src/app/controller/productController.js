@@ -37,6 +37,12 @@ class products {
         res.json(data)
     }
 
+    async findOneById(req, res) {
+        let id = req.params.id
+        let data = await productService.findOneById(id)
+        res.json(data)
+    }
+
 }
 
 module.exports = new products()

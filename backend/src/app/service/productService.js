@@ -71,6 +71,20 @@ class productService {
         })
     }
 
+    findOneById(id) {
+        return new Promise((resolve, reject) => {
+            con.query(`select * from sanpham where maSP = ${id}`, function (error, result, fields) {
+                if (error) {
+                    reject(error);
+                    return;
+                }
+                resolve(result);
+            });
+        })
+    }
+
+
+
 
 }
 
