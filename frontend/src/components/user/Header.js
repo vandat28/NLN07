@@ -31,10 +31,10 @@ function Header() {
     }, [])
 
     useLayoutEffect(() => {
-        if(window.localStorage.length > 0){
+        if (window.localStorage.length > 0) {
             setLogin(true)
-        }else setLogin(false)
-    },[userOnline])
+        } else setLogin(false)
+    }, [userOnline])
 
     return (
         <div className='header'>
