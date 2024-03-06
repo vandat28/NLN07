@@ -22,6 +22,7 @@
 }
 
 .header__form-item {
+    color: #fff;
     position: relative;
     line-height: var(--header-form);
     margin-right: 6px;

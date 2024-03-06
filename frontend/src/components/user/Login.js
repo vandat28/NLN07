@@ -1,8 +1,28 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Routes, Route, Link, Router } from "react-router-dom";
+import BASE_URL from '../configURL';
 import Register from './Register';
 
 function Login() {
+  const [users, setUsers] = useState([])
+  
+  useEffect(() => {
+    getApiData()
+}, []);
+
+  const getApiData = async () => {
+    try {
+        const response = await fetch(`${BASE_URL}/api/accounts`);
+        const data = await response.json();
+        if (data) {
+            setUsers(data);
+        }
+    } catch (error) {
+        console.log('Đã xảy ra lỗi:', error);
+    }
+
+  };
+
   return (
     <div className="Login">
       <div className='grid wide'>
@@ -11,10 +31,28 @@ function Login() {
             <div className='login-infor col c-6'>
               <div className='login-infor_title'>KHÁCH HÀNG ĐÃ ĐĂNG KÝ</div>
               <div className='login-infor_phoneLabel'>Số điện thoại</div>
-              <input className='login-infor_phone' placeholder='Nhập số điện thoại' required pattern='^[0-9]{10,11}$'></input>
+              <input id='login-infor_phone' placeholder='Nhập số điện thoại' required pattern='^[0-9]{10,11}$'></input>
               <div className='login-infor_passwdLabel'>Mật khẩu</div>
-              <input type='password' className='login-infor_passwd' placeholder='Nhập mật khẩu' required></input>
-              <button type='submit' className='login-form_submit'>Đăng nhập</button>
+              <input type='password' id='login-infor_passwd' placeholder='Nhập mật khẩu' required></input>
+              <button type='submit' className='login-form_submit' onClick={() => {
+                  const Uphone = document.querySelector('#login-infor_phone')
+                  const Upasswd = document.querySelector('#login-infor_passwd')
+                  for(let i = 0; i < users.length; i++){
+                    if(users[i].soDienThoai == Uphone.value && users[i].matKhau == Upasswd.value) {
+                      const userCurrent = {
+                        id: users[i].maKH,
+                        name: users[i].hoten,
+                        address: users[i].diachi,
+                        sex: users[i].gioitinh,
+                        yob: users[i].namsinh,
+                        phone: users[i].soDienThoai,
+                      }
+                      const userJSON = JSON.stringify(userCurrent)
+                      window.localStorage.setItem('User', userJSON)
+                      alert("Đăng nhập thành công")
+                    }
+                  }
+              }}>Đăng nhập</button>
             </div>
             <div className='login-app col c-6'>
               <div className='login-app_title'>KHÁCH HÀNG MỚI</div>

@@ -1,8 +1,13 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, Route, Routes } from 'react-router-dom';
 import History from './History';
+import Homepage from './Homepage';
 
 function User() {
+    const userCurrent = JSON.parse(window.localStorage.getItem('User'));
+    const [userOnline, setUserOnline] = useState(userCurrent);
+
+
     return (
         <div className='user'>
             <div className='grid wide'>
@@ -15,6 +20,11 @@ function User() {
                             </li>
                             <li className='user-caterogy_item'>
                                 <Link to="/user/history" className='user-caterogy_item-link'>Lịch Sử Mua Hàng</Link>
+                            </li>
+                            <li className='user-caterogy_item'>
+                                <a href="http://localhost:3000/" className='user-caterogy_item-link' onClick={() => {
+                                    window.localStorage.clear();
+                                }}>Đăng xuất</a>
                             </li>
                         </ul>
                     </div>
@@ -29,11 +39,11 @@ function User() {
                                 <div className='user-detail_label-item'>Năm sinh:</div>
                             </div>
                             <div className='user-detail_info-list col c-8'>
-                                <div className='user-detail_info-item'>Bùi Quốc Thiên</div>
-                                <div className='user-detail_info-item'>0886409254</div>
-                                <div className='user-detail_info-item'>Phường An Khánh, Quận Ninh Kiều, Thành phố Cần Thơ</div>
-                                <div className='user-detail_info-item'>Nam</div>
-                                <div className='user-detail_info-item'>2002</div>
+                                <div className='user-detail_info-item'>{userOnline.name}</div>
+                                <div className='user-detail_info-item'>{userOnline.phone}</div>
+                                <div className='user-detail_info-item'>{userOnline.address}</div>
+                                <div className='user-detail_info-item'>{userOnline.sex}</div>
+                                <div className='user-detail_info-item'>{userOnline.yob}</div>
                             </div>
                         </div>
                     </div>
