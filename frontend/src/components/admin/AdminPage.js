@@ -2,7 +2,7 @@ import React from 'react'
 import Nav from './Nav';
 import AdminProduct from './AdminProduct';
 import { Route, Routes } from 'react-router-dom';
-import './admin.css'
+import './css/admin.css'
 import AdminOrder from './AdminOrder';
 
 

@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom';
 import BASE_URL from '../configURL';
 
 
+
 export default function ProductDetail() {
     const { id } = useParams();
     const [data, setData] = useState([])
@@ -44,31 +45,31 @@ export default function ProductDetail() {
     return (
         <div className="main">
             <div className='grid wide'>
-                {data[0] && <div class="product-div">
-                    <div class="product-div-left">
-                        <div class="img-container">
+                {data[0] && <div className="product-div">
+                    <div className="product-div-left">
+                        <div className="img-container">
                             <img src={`${BASE_URL}/uploads/${data[0].anhdaidien}`} alt="" />
                         </div>
-                        <div class="hover-container">
+                        <div className="hover-container">
                             <div><img src={`${BASE_URL}/uploads/${data[0].anhdaidien}`} /></div>
                             <div><img src={`${BASE_URL}/uploads/fee94d37747f0c54362f9b2377dd0fd6`} /></div>
                         </div>
                     </div>
-                    <div class="product-div-right">
-                        <span class="product-name">{data[0].tenSP}</span>
-                        <span class="product-price">{data[0].giaBan}</span>
-                        <div class="product-rating">
-                            <span><i class="fas fa-star"></i></span>
-                            <span><i class="fas fa-star"></i></span>
-                            <span><i class="fas fa-star"></i></span>
-                            <span><i class="fas fa-star"></i></span>
-                            <span><i class="fas fa-star-half-alt"></i></span>
+                    <div className="product-div-right">
+                        <span className="product-name">{data[0].tenSP}</span>
+                        <span className="product-price">{data[0].giaBan}</span>
+                        <div className="product-rating">
+                            <span><i className="fas fa-star"></i></span>
+                            <span><i className="fas fa-star"></i></span>
+                            <span><i className="fas fa-star"></i></span>
+                            <span><i className="fas fa-star"></i></span>
+                            <span><i className="fas fa-star-half-alt"></i></span>
                             <span>(350 ratings)</span>
                         </div>
-                        <p class="product-description">{data[0].moTa}</p>
-                        <div class="btn-groups">
-                            <button type="button" class="add-cart-btn"><i class="fas fa-shopping-cart"></i> Thêm vào giỏ</button>
-                            <button type="button" class="buy-now-btn"><i class="fas fa-wallet"></i> Mua ngay</button>
+                        <p className="product-description">{data[0].moTa}</p>
+                        <div className="btn-groups">
+                            <button type="button" className="add-cart-btn"><i className="fas fa-shopping-cart"></i> Thêm vào giỏ</button>
+                            <button type="button" className="buy-now-btn"><i className="fas fa-wallet"></i> Mua ngay</button>
                         </div>
                     </div>
                 </div>}
