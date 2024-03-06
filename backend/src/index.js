@@ -1,7 +1,7 @@
 const express = require('express')
 const app = express()
 const path = require('path')
-
+require('dotenv').config();
 const port = 8080
 
 var cors = require('cors')
