@@ -3,6 +3,16 @@ import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom';
 import BASE_URL from '../configURL';
 
+//chuyển về tiền vnđ
+const formatCurrency = (amount) => {
+    const formatter = new Intl.NumberFormat('vi-VN', {
+        style: 'currency',
+        currency: 'VND'
+    });
+
+    return formatter.format(amount);
+};
+
 
 
 export default function ProductDetail() {
@@ -57,7 +67,7 @@ export default function ProductDetail() {
                     </div>
                     <div className="product-div-right">
                         <span className="product-name">{data[0].tenSP}</span>
-                        <span className="product-price">{data[0].giaBan}</span>
+                        <span className="product-price color-red">{formatCurrency(data[0].giaBan)}</span>
                         <div className="product-rating">
                             <span><i className="fas fa-star"></i></span>
                             <span><i className="fas fa-star"></i></span>

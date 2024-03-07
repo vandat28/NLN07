@@ -49,8 +49,11 @@ function Header() {
                                 <Link to="/Register">Đăng ký</Link>
                             </li>}
                             {login && <li className='header__form-item'>
-                                <Link to="/user/profile">{userOnline.name}</Link>
+                                <Link to="/user">{userOnline.name}</Link>
                             </li>}
+                            {login && userOnline.role == 1 ? <li className='header__form-item'>
+                                <Link to="/admin">Admin</Link>
+                            </li> : null}
                         </ul>
                     </div>
                 </div>

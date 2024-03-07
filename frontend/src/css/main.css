@@ -615,9 +615,6 @@
     justify-content: center;
 }
 
-.active {
-    border-color: rgb(255, 145, 163) !important;
-}
 
 .hover-container div:hover {
     border-color: rgb(255, 145, 163);
@@ -685,14 +682,14 @@
 }
 
 .add-cart-btn {
-    background-color: #FF9F00;
-    border: 2px solid #FF9F00;
+    background-color: #2b6de5;
+    border: 2px solid #2b6de5;
     margin-right: 8px;
 }
 
 .add-cart-btn:hover {
     background-color: #fff;
-    color: #FF9F00;
+    color: #2b6de5;
 }
 
 .buy-now-btn {
@@ -730,4 +727,54 @@
         width: 100%;
         margin-bottom: 10px;
     }
+}
+
+/* Style cho modal */
+.login-modal {
+    /* Ẩn modal ban đầu */
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgb(0, 0, 0);
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+/* Style cho nội dung của modal */
+.login-modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 35%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+
+/* Style cho nút "OK" */
+.login-ok-button {
+    background-color: #4caf50;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin-top: 10px;
+    cursor: pointer;
+}
+
+.login-ok-button:hover {
+    background-color: #45a049;
+}
+
+.active {
+    color: red;
+    /* Một màu sắc khác được áp dụng cho liên kết kích hoạt */
 }

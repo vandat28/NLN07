@@ -24,6 +24,7 @@ function Homepage() {
     useEffect(() => {
         getApiData()
         getApiDataCategory()
+
     }, []);
 
     const getApiData = async () => {
@@ -32,6 +33,7 @@ function Homepage() {
             const data = await response.json();
             if (data) {
                 setData(data);
+
             }
         } catch (error) {
             console.log('Đã xảy ra lỗi:', error);

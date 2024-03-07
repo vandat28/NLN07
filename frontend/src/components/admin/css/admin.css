@@ -77,7 +77,15 @@
 
 .product-table {
     width: 100%;
-    background-color: azure;
+    background-color: rgb(241, 238, 238);
+
+}
+
+.product-table tbody {
+    max-height: 300px;
+    /* Đặt chiều cao tối đa cho tbody */
+    overflow-y: auto;
+    /* Kích hoạt thanh cuộn dọc nếu nội dung vượt quá kích thước */
 }
 
 .product-table table {

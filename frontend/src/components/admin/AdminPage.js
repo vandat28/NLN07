@@ -9,16 +9,16 @@ import AdminOrder from './AdminOrder';
 
 export default function AdminPage() {
     return (
-        <div className="main">
-            <div className="grid wide">
-                <Routes>
-                    <Route path="/" element={<Nav />} />
-                    <Route path="/product" element={<AdminProduct />} />
-                    <Route path="/order" element={<AdminOrder />} />
-                    {/* Thêm các route con cho admin */}
-                </Routes>
-            </div>
+
+        <div className="grid wide">
+            <Routes>
+                <Route path="/" element={<Nav />} />
+                <Route path="/product" element={<AdminProduct />} />
+                <Route path="/order" element={<AdminOrder />} />
+                {/* Thêm các route con cho admin */}
+            </Routes>
         </div>
+
     )
 }
 

@@ -16,8 +16,7 @@ function App() {
       <Routes>
         <Route path='/' element={<Homepage />} />
         <Route path='/admin/*' element={<AdminPage />} />
-        <Route path='/user/profile' element={<User />} />
-        <Route path='/user/history' element={<History />} />
+        <Route path='/user/*' element={<User />} />
         <Route path='/product/:id' element={<ProductDetail />} />
       </Routes>
       <Footer />

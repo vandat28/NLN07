@@ -183,13 +183,15 @@ export default function AdminProduct() {
         setSelectedOption(e.target.value)
         console.log(selectId)
         findProductsByCategory(selectId)
-
-
     }
     const findProductsByCategory = async (id) => {
         try {
-            const response = await axios.get(`${BASE_URL}/api/products/category/${id}`);
-            setData(response.data);
+            if (id) {
+                const response = await axios.get(`${BASE_URL}/api/products/category/${id}`);
+                setData(response.data);
+            } else {
+                getApiData()
+            }
         } catch (error) {
             console.error('Error fetching data:', error);
         }
@@ -241,12 +243,6 @@ export default function AdminProduct() {
                         ))}
                     </tbody>
                 </table>
-            </div>
-            <div className="pagination">
-                <p>Tổng số trang: 102 </p>
-                <a href="#" className="prev">&laquo;</a>
-                <input className="page" value={1} />
-                <a href="#" className="next"> &raquo;</a>
             </div>
             <form onSubmit={addProduct} className="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabIndex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                 <div className="modal-dialog modal-dialog-centered">
