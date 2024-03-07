@@ -1,5 +1,4 @@
 /* Header */
-.header {}
 
 .header__form {
     height: var(--header-form);
@@ -123,8 +122,6 @@
     opacity: 0.8;
 }
 
-.header__main-cart {}
-
 .header__cover {
     background-color: #fff;
     height: calc(var(--header-form) + 40px);
@@ -247,8 +244,6 @@
     background-repeat: no-repeat;
 }
 
-.register-form {}
-
 .register-infor {
     height: 260px;
     margin: 40px 0;
@@ -317,7 +312,7 @@
     box-shadow: 0 5px 10px #999;
 }
 
-.register-app_title {}
+
 
 .register-app_passwd {
     width: 100%;
@@ -341,7 +336,7 @@
     margin-bottom: 20px;
 }
 
-.register-app_repasswd {}
+
 
 .register-form_submit {
     padding: 10px;
@@ -368,7 +363,7 @@
     background-repeat: no-repeat;
 }
 
-.login-form {}
+
 
 .login-infor {
     height: 360px;
@@ -411,10 +406,6 @@
     border-radius: 4px;
     box-shadow: 0 5px 10px #999;
 }
-
-.login-app_title {}
-
-.login-app_benefit-list {}
 
 .login-app_benefit-title {
     font-size: 1.6rem;
@@ -516,7 +507,7 @@
     border-bottom: 1px solid #ccc;
 }
 
-.user-detail_label-list {}
+
 
 .user-detail_label-item {
     font-size: 1.6rem;
@@ -524,7 +515,7 @@
     text-align: end;
 }
 
-.user-detail_info-list {}
+
 
 .user-detail_info-item {
     font-size: 1.6rem;
