@@ -45,12 +45,14 @@ function Login() {
         }
         const userJSON = JSON.stringify(userCurrent)
         window.localStorage.setItem('User', userJSON)
+        notify.innerHTML = ''
         setIsLoggedIn(true);
-      }else if(users[i].soDienThoai == Uphone.value && users[i].matKhau != Upasswd.value) {
+        break
+      } else if (users[i].soDienThoai == Uphone.value && users[i].matKhau != Upasswd.value) {
         notify.innerHTML = 'Mật khẩu không đúng'
-      }else if(Uphone.value == '' || Upasswd.value == ''){
+      } else if (Uphone.value == '' || Upasswd.value == '') {
         notify.innerHTML = 'Bạn chưa điền hết form'
-      }else {
+      } else {
         notify.innerHTML = 'Tài khoản chưa được đăng ký'
       }
     }

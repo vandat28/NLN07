@@ -8,9 +8,11 @@ class accountController {
     async create(req, res) {
         let account = req.body
         if (account) {
-            let data = await accountService.create(account.name, account.address, account.gender,
-                account.yob, account.phone, account.passwd)
-            res.json(data)
+            await accountService.createCustomer(account.name, account.address, account.gender,
+                account.yob, account.phone)
+            let customer = await accountService.findOneByPhoneNumber(account.phone)
+            await accountService.createAccount(account.phone, account.passwd, customer[0].maKH)
+            res.json(customer)
         } else {
             res.json('Thất bại')
         }

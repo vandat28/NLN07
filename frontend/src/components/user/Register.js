@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import BASE_URL from '../configURL';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 
 function Register() {
 
     const [data, setData] = useState([])
+    const [isSignUp, setIsSignUp] = useState(false);
     const [formData, setFormData] = useState({
         name: '',
         phone: '',
@@ -62,7 +64,7 @@ function Register() {
         }
 
     };
-    
+
     const handleChange = (event) => {
         const { name, value } = event.target;
         setFormData((prevFormData) => ({
@@ -72,44 +74,35 @@ function Register() {
     };
 
     const addAccount = (event) => {
-        for(let i = 0; i < data.length; i++) {
-            if(data[i].soDienThoai === formData.phone){
-                alert("Rất tiếc! Số điện thoại đã được đăng ký."); return;
+        for (let i = 0; i < data.length; i++) {
+            if (data[i].soDienThoai === formData.phone) {
+                alert("Rất tiếc! Số điện thoại đã được đăng ký.");
+                return;
             }
         }
-        if(formData.passwd !== formData.repasswd){
+        if (formData.passwd !== formData.repasswd) {
             alert("Mật khẩu không trùng khớp");
-        }else {
-        event.preventDefault();
-        console.log(formData)
-        axios.post(`${BASE_URL}/api/accounts`, formData, {
-            headers: {
-                'Content-Type': 'multipart/form-data'
-            }
-        })
-            .then(response => {
-                // Xử lý kết quả từ server
-                console.log(response.data);
-                getApiData()
-                setFormData({
-                    name: '',
-                    phone: '',
-                    address: '',
-                    gender: '',
-                    yob: '',
-                    passwd: '',
-                    repasswd: ''
-                })
-                alert("Đăng nhập thành công");
+        } else {
+            event.preventDefault();
+            console.log(formData)
+            axios.post(`${BASE_URL}/api/accounts`, formData, {
+                headers: {
+                    'Content-Type': 'application/json'
+                }
             })
-            .catch(error => {
-                // Xử lý lỗi
-                console.error(error);
-            });
-        // Gửi dữ liệu đến server, thực hiện các tác vụ cần thiết, vv.
+                .then(response => {
+                    // Xử lý kết quả từ server
+                    console.log(response.data);
+                    setIsSignUp(true);
+                })
+                .catch(error => {
+                    // Xử lý lỗi
+                    console.error(error);
+                });
+            // Gửi dữ liệu đến server, thực hiện các tác vụ cần thiết, vv.
         }
     };
-    
+
 
     return (
         <div className="Register">
@@ -153,8 +146,8 @@ function Register() {
                             </select>
                             <select className="register-infor_gender" value={formData.gender} name="gender" onChange={handleChange}>
                                 <option defaultValue={""}>Giới tính</option>
-                                <option value="Nam">Nam</option>
-                                <option value="Nu">Nữ</option>
+                                <option value="1">Nam</option>
+                                <option value="0">Nữ</option>
                             </select>
                         </div>
                         <div className='register-app col c-6'>
@@ -166,6 +159,14 @@ function Register() {
                     </div>
                 </form>
             </div>
+            {isSignUp && (
+                <div className="login-modal">
+                    <div className="login-modal-content">
+                        <p>Chúc mừng bạn đã đăng ký thành công!</p>
+                        <Link to='/Login' className="login-ok-button">OK</Link>
+                    </div>
+                </div>
+            )}
         </div>
     );
 }

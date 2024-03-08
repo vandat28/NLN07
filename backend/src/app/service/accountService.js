@@ -15,11 +15,9 @@ class accountService {
         })
     }
 
-    create(hoten, diachi, gioitinh, namsinh, sodienthoai, matKhau) {
+    createCustomer(hoten, diachi, gioitinh, namsinh, sodienthoai) {
         return new Promise((resolve, reject) => {
-            con.query(`INSERT INTO giohang(tongTien) VALUES ('0');
-             INSERT INTO khachhang(hoten, diachi, gioitinh, namsinh, sodienthoai) VALUES ('${hoten}', '${diachi}', '${gioitinh}', '${namsinh}', '${sodienthoai}');
-             INSERT INTO taikhoan(soDienThoai, matKhau) VALUES ('${sodienthoai}', '${matKhau}');`, function (error, result, fields) {
+            con.query(`INSERT INTO khachhang(hoten, diachi, gioitinh, namsinh, sodienthoai) VALUES ('${hoten}', '${diachi}', '${gioitinh}', '${namsinh}', '${sodienthoai}');`, function (error, result, fields) {
                 if (error) {
                     reject(error);
                     return;
@@ -28,6 +26,32 @@ class accountService {
             });
         })
     }
+
+    findOneByPhoneNumber(phoneNumber) {
+        return new Promise((resolve, reject) => {
+            con.query(`select * from khachhang where sodienthoai = ${phoneNumber};`, function (error, result, fields) {
+                if (error) {
+                    reject(error);
+                    return;
+                }
+                resolve(result);
+            });
+        })
+    }
+
+    createAccount(sodienthoai, matkhau, maKH) {
+        return new Promise((resolve, reject) => {
+            con.query(`INSERT INTO taikhoan(soDienThoai, matKhau, vaiTro, maKH) VALUES ('${sodienthoai}', '${matkhau}', 0, ${maKH});`, function (error, result, fields) {
+                if (error) {
+                    reject(error);
+                    return;
+                }
+                resolve(result);
+            });
+        })
+    }
+
+
 
     // update(newCategoryName, id) {
     //     return new Promise((resolve, reject) => {
