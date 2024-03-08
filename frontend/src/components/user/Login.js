@@ -31,6 +31,7 @@ function Login() {
     event.preventDefault();
     const Uphone = document.querySelector('#login-infor_phone')
     const Upasswd = document.querySelector('#login-infor_passwd')
+    const notify = document.querySelector('.login-form_notify')
     for (let i = 0; i < users.length; i++) {
       if (users[i].soDienThoai == Uphone.value && users[i].matKhau == Upasswd.value) {
         const userCurrent = {
@@ -45,6 +46,12 @@ function Login() {
         const userJSON = JSON.stringify(userCurrent)
         window.localStorage.setItem('User', userJSON)
         setIsLoggedIn(true);
+      }else if(users[i].soDienThoai == Uphone.value && users[i].matKhau != Upasswd.value) {
+        notify.innerHTML = 'Mật khẩu không đúng'
+      }else if(Uphone.value == '' || Upasswd.value == ''){
+        notify.innerHTML = 'Bạn chưa điền hết form'
+      }else {
+        notify.innerHTML = 'Tài khoản chưa được đăng ký'
       }
     }
   }
@@ -52,16 +59,19 @@ function Login() {
   return (
     <div className="Login">
       <div className='grid wide'>
-        <form className='login-form'>
+        <div className='login-form'>
           <div className='row'>
-            <div className='login-infor col c-6'>
+            <form className='login-infor col c-6'>
               <div className='login-infor_title'>KHÁCH HÀNG ĐÃ ĐĂNG KÝ</div>
               <div className='login-infor_phoneLabel'>Số điện thoại</div>
               <input id='login-infor_phone' placeholder='Nhập số điện thoại' required pattern='^[0-9]{10,11}$'></input>
               <div className='login-infor_passwdLabel'>Mật khẩu</div>
               <input type='password' id='login-infor_passwd' placeholder='Nhập mật khẩu' required></input>
-              <button type='submit' className='login-form_submit' onClick={loginCheck}>Đăng nhập</button>
-            </div>
+              <div className='submit-form'>
+                <button type='submit' className='login-form_submit' onClick={loginCheck}>Đăng nhập</button>
+                <div className='login-form_notify'></div>
+              </div>
+            </form>
             <div className='login-app col c-6'>
               <div className='login-app_title'>KHÁCH HÀNG MỚI</div>
               <ul className='login-app_benefit-list'>
@@ -74,7 +84,7 @@ function Login() {
               </ul>
             </div>
           </div>
-        </form>
+        </div>
       </div>
       {isLoggedIn && (
         <div className="login-modal">

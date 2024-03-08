@@ -434,6 +434,12 @@
     margin-top: 10px;
 }
 
+.submit-form {
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+}
+
 .login-form_submit {
     width: 120px;
     height: 40px;
@@ -446,6 +452,12 @@
     border: 1px solid #7496ea;
     box-shadow: 0 5px 10px #999;
     margin: 10px 0;
+}
+
+.login-form_notify {
+    font-size: 1.6rem;
+    color: red;
+    font-weight: 600;
 }
 
 /* User */
