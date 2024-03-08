@@ -5,15 +5,16 @@ class accountController {
         res.json(data)
     }
 
-    // async create(req, res) {
-    //     let categoryName = req.body.categoryName
-    //     if (categoryName) {
-    //         let result = await accountService.create(categoryName)
-    //         res.json(result)
-    //     } else {
-    //         res.json('Thất bại')
-    //     }
-    // }
+    async create(req, res) {
+        let account = req.body
+        if (account) {
+            let data = await accountService.create(account.name, account.address, account.gender,
+                account.yob, account.phone, account.passwd)
+            res.json(data)
+        } else {
+            res.json('Thất bại')
+        }
+    }
     // async update(req, res) {
     //     let id = req.params.id
     //     let newCategoryName = req.body.newCategoryName

@@ -1,12 +1,5 @@
 import React from 'react'
-//hàm format ngày sinh thành dd/mm/yyyy
-function formatDate(isoDate) {
-    const date = new Date(isoDate);
-    const day = date.getDate().toString().padStart(2, '0');
-    const month = (date.getMonth() + 1).toString().padStart(2, '0');
-    const year = date.getFullYear();
-    return `${day}/${month}/${year}`;
-}
+
 export default function Account(props) {
 
     const { userOnline } = props
@@ -26,11 +19,11 @@ export default function Account(props) {
                     <div className='user-detail_info-item'>{userOnline.name}</div>
                     <div className='user-detail_info-item'>{userOnline.phone}</div>
                     <div className='user-detail_info-item'>{userOnline.address}</div>
-                    {userOnline.sex == 1 ?
+                    {userOnline.sex === 1 ?
                         <div className='user-detail_info-item'>Nam</div> :
                         <div className='user-detail_info-item'>Nữ</div>
                     }
-                    <div className='user-detail_info-item'>{formatDate(userOnline.yob)}</div>
+                    <div className='user-detail_info-item'>{userOnline.yob}</div>
                 </div>
             </div>
         </div>

@@ -1,9 +1,23 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
+import BASE_URL from '../configURL';
+import axios from 'axios';
 
 
 function Register() {
 
+    const [data, setData] = useState([])
+    const [formData, setFormData] = useState({
+        name: '',
+        phone: '',
+        address: '',
+        gender: '',
+        yob: '',
+        passwd: '',
+        repasswd: ''
+    });
+
     useEffect(() => {
+        getApiData()
         const infor = document.querySelector('.register-infor')
         const phone = document.querySelector('.register-infor_phone')
         const name = document.querySelector('.register-infor_name')
@@ -33,20 +47,82 @@ function Register() {
         gender.addEventListener("focus", upHandleIF);
         passwd.addEventListener("focus", upHandleApp);
         repasswd.addEventListener("focus", upHandleApp);
+
     }, [])
+
+    const getApiData = async () => {
+        try {
+            const response = await fetch(`${BASE_URL}/api/accounts`);
+            const data = await response.json();
+            if (data) {
+                setData(data);
+            }
+        } catch (error) {
+            console.log('Đã xảy ra lỗi:', error);
+        }
+
+    };
+    
+    const handleChange = (event) => {
+        const { name, value } = event.target;
+        setFormData((prevFormData) => ({
+            ...prevFormData,
+            [name]: value
+        }));
+    };
+
+    const addAccount = (event) => {
+        for(let i = 0; i < data.length; i++) {
+            if(data[i].soDienThoai === formData.phone){
+                alert("Rất tiếc! Số điện thoại đã được đăng ký."); return;
+            }
+        }
+        if(formData.passwd !== formData.repasswd){
+            alert("Mật khẩu không trùng khớp");
+        }else {
+        event.preventDefault();
+        console.log(formData)
+        axios.post(`${BASE_URL}/api/accounts`, formData, {
+            headers: {
+                'Content-Type': 'multipart/form-data'
+            }
+        })
+            .then(response => {
+                // Xử lý kết quả từ server
+                console.log(response.data);
+                getApiData()
+                setFormData({
+                    name: '',
+                    phone: '',
+                    address: '',
+                    gender: '',
+                    yob: '',
+                    passwd: '',
+                    repasswd: ''
+                })
+                alert("Đăng nhập thành công");
+            })
+            .catch(error => {
+                // Xử lý lỗi
+                console.error(error);
+            });
+        // Gửi dữ liệu đến server, thực hiện các tác vụ cần thiết, vv.
+        }
+    };
+    
 
     return (
         <div className="Register">
             <div className='grid wide'>
-                <form className='register-form'>
+                <form onSubmit={addAccount} className='register-form' data-bs-backdrop="static" data-bs-keyboard="false" tabIndex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                     <div className='row'>
                         <div className='register-infor col c-6'>
                             <div className='register-infor_title'>THÔNG TIN CÁ NHÂN</div>
-                            <input className='register-infor_phone' placeholder='Nhập số điện thoại' required pattern='^[0-9]{10,11}$'></input>
-                            <input type="text" className='register-infor_name' placeholder='Nhập họ và tên' required></input>
-                            <input type="text" className='register-infor_address' placeholder='Nhập địa chỉ' required></input>
-                            <select name="yob" class="register-infor_yob">
-                                <option selected>Năm sinh</option>
+                            <input className='register-infor_phone' placeholder='Nhập số điện thoại' required pattern='^[0-9]{10,11}$' value={formData.phone} name="phone" onChange={handleChange}></input>
+                            <input type="text" className='register-infor_name' placeholder='Nhập họ và tên' required value={formData.name} name="name" onChange={handleChange}></input>
+                            <input type="text" className='register-infor_address' placeholder='Nhập địa chỉ' required value={formData.address} name="address" onChange={handleChange}></input>
+                            <select className="register-infor_yob" value={formData.yob} name="yob" onChange={handleChange}>
+                                <option defaultValue={""}>Năm sinh</option>
                                 <option value="1990">1990</option>
                                 <option value="1991">1991</option>
                                 <option value="1992">1992</option>
@@ -75,16 +151,16 @@ function Register() {
                                 <option value="2015">2015</option>
                                 <option value="2016">2016</option>
                             </select>
-                            <select name="gender" class="register-infor_gender">
-                                <option selected>Giới tính</option>
+                            <select className="register-infor_gender" value={formData.gender} name="gender" onChange={handleChange}>
+                                <option defaultValue={""}>Giới tính</option>
                                 <option value="Nam">Nam</option>
                                 <option value="Nu">Nữ</option>
                             </select>
                         </div>
                         <div className='register-app col c-6'>
                             <div className='register-app_title'>THÔNG TIN ĐĂNG NHẬP</div>
-                            <input type='password' className='register-app_passwd' placeholder='Nhập mật khẩu' required></input>
-                            <input type='password' className='register-app_repasswd' placeholder='Nhập lại mật khẩu' required></input>
+                            <input type='password' className='register-app_passwd' placeholder='Nhập mật khẩu' required value={formData.passwd} name="passwd" onChange={handleChange}></input>
+                            <input type='password' className='register-app_repasswd' placeholder='Nhập lại mật khẩu' required value={formData.repasswd} name="repasswd" onChange={handleChange}></input>
                             <button type='submit' className='register-form_submit'>Tạo tài khoản</button>
                         </div>
                     </div>

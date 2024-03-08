@@ -5,7 +5,7 @@ class accountService {
     findAll() {
         return new Promise((resolve, reject) => {
             con.query(`SELECT * FROM taikhoan a, khachhang b
-            where a.maTK = b.maTK;`, function (error, result, fields) {
+            where a.maKH = b.maKH;`, function (error, result, fields) {
                 if (error) {
                     reject(error);
                     return;
@@ -15,17 +15,19 @@ class accountService {
         })
     }
 
-    // create(categoryName) {
-    //     return new Promise((resolve, reject) => {
-    //         con.query(`insert into loaisanpham(tenLoai) value ('${categoryName}');`, function (error, result, fields) {
-    //             if (error) {
-    //                 reject(error);
-    //                 return;
-    //             }
-    //             resolve(result);
-    //         });
-    //     })
-    // }
+    create(hoten, diachi, gioitinh, namsinh, sodienthoai, matKhau) {
+        return new Promise((resolve, reject) => {
+            con.query(`INSERT INTO giohang(tongTien) VALUES ('0');
+             INSERT INTO khachhang(hoten, diachi, gioitinh, namsinh, sodienthoai) VALUES ('${hoten}', '${diachi}', '${gioitinh}', '${namsinh}', '${sodienthoai}');
+             INSERT INTO taikhoan(soDienThoai, matKhau) VALUES ('${sodienthoai}', '${matKhau}');`, function (error, result, fields) {
+                if (error) {
+                    reject(error);
+                    return;
+                }
+                resolve(result);
+            });
+        })
+    }
 
     // update(newCategoryName, id) {
     //     return new Promise((resolve, reject) => {
