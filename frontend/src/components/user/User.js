@@ -33,7 +33,7 @@ function User() {
                             </li>
                             <li className='user-caterogy_item'>
                                 <a href="http://localhost:3000/" className='user-caterogy_item-link' onClick={() => {
-                                    window.localStorage.clear();
+                                    window.localStorage.removeItem("User");
                                 }}>Đăng xuất</a>
                             </li>
                         </ul>

@@ -6,10 +6,13 @@ import User from './User';
 import Cart from './Cart';
 
 function Header() {
-
     const userCurrent = JSON.parse(window.localStorage.getItem('User'));
+    const userCart = JSON.parse(window.localStorage.getItem('cart'));
+    const [quantity, setQuantity] = useState()
     const [userOnline, setUserOnline] = useState(userCurrent);
+    const [userOffline, setUserOffline] = useState("");
     const [login, setLogin] = useState(false);
+    const [sumItemCart, setSumItemCart] = useState();
 
     useEffect(() => {
         const headerCover = document.querySelector('.header__cover');
@@ -25,17 +28,42 @@ function Header() {
             }
         }
         window.addEventListener('scroll', handleScroll)
+        setSumItemCart(window.localStorage.key(0).length)
 
         return () => {
             window.removeEventListener('scroll', handleScroll);
         };
     }, [])
 
+    // useEffect(() => {   
+    //     setQuantity(userCart[0].quantity)
+    // }, [userCart[0].quantity])
+
     useLayoutEffect(() => {
-        if (window.localStorage.length > 0) {
+        if (window.localStorage.getItem("User") != null) {
             setLogin(true)
-        } else setLogin(false)
+        } else {
+            setLogin(false)
+            setUserOnline(userOffline)
+        }
+
+        if(window.localStorage.key(0) == null){
+            createCart();
+        }
     }, [userOnline])
+
+    
+    const createCart = () => {
+        // const product = {
+        //     img: "",
+        //     name: "",
+        //     price: "",
+        //     decription: "",
+        //     quantity: ""
+        // }
+        window.localStorage.setItem("Cart", [""]);
+        // window.localStorage.setItem("cart", JSON.stringify(product));
+    }
 
     return (
         <div className='header'>
@@ -73,7 +101,7 @@ function Header() {
                         </div>
                         <Link to='/Cart' className='header__main-cart'>
                             <i className="fa-solid fa-cart-shopping header__main-cart-icon"></i>
-                            <div className='header__main-cart-total'></div>
+                            <div className='header__main-cart-total'>{quantity}</div>
                         </Link>
                     </div>
                 </div>

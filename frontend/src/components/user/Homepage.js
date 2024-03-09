@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useLayoutEffect, useState } from 'react';
 import BASE_URL from '../configURL';
 import axios from 'axios';
 import { Routes, Route, Link, Router } from "react-router-dom";
@@ -24,7 +24,7 @@ function Homepage() {
     useEffect(() => {
         getApiData()
         getApiDataCategory()
-
+        
     }, []);
 
     const getApiData = async () => {

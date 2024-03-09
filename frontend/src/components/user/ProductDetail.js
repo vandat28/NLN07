@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useLayoutEffect, useState } from 'react'
 import { useParams } from 'react-router-dom';
 import BASE_URL from '../configURL';
 
@@ -16,6 +16,7 @@ const formatCurrency = (amount) => {
 
 
 export default function ProductDetail() {
+    var cart;
     const { id } = useParams();
     const [data, setData] = useState([])
     const allHoverImages = document.querySelectorAll('.hover-container div img');
@@ -42,6 +43,15 @@ export default function ProductDetail() {
         getProduct(id)
     }, []);
 
+    useLayoutEffect(() => {
+        const oldCart= JSON.parse(localStorage.getItem("cart"));
+
+        if(!oldCart){
+            cart = new Array()  
+        }else{
+            cart = [...oldCart]
+        }
+    })
 
     const getProduct = async (id) => {
         try {
@@ -50,6 +60,29 @@ export default function ProductDetail() {
         } catch (error) {
             console.error('Error fetching data:', error);
         }
+    }
+
+    function addToCart(){
+        var checkSP = 0;
+        const sp = new Object();
+        sp.img = data[0].anhdaidien;
+        sp.name= data[0].tenSP;
+        sp.price = data[0].giaBan; 
+        sp.description = data[0].moTa;
+        sp.quantity = 1;
+        for(let i = 0;i<cart.length;i++){
+            if(sp.name == cart[i].name){
+                checkSP = 1;
+                cart[i].quantity++;
+                console.log(cart[i].quantity);
+                break;
+            }
+        }
+        if(checkSP==0){
+            cart.push(sp);
+        }
+            
+        localStorage.setItem("cart",JSON.stringify(cart));
     }
 
     return (
@@ -62,7 +95,7 @@ export default function ProductDetail() {
                         </div>
                         <div className="hover-container">
                             <div><img src={`${BASE_URL}/uploads/${data[0].anhdaidien}`} /></div>
-                            <div><img src={`${BASE_URL}/uploads/fee94d37747f0c54362f9b2377dd0fd6`} /></div>
+                            {/* <div><img src={`${BASE_URL}/uploads/fee94d37747f0c54362f9b2377dd0fd6`} /></div> */}
                         </div>
                     </div>
                     <div className="product-div-right">
@@ -78,7 +111,7 @@ export default function ProductDetail() {
                         </div>
                         <p className="product-description">{data[0].moTa}</p>
                         <div className="btn-groups">
-                            <button type="button" className="add-cart-btn"><i className="fas fa-shopping-cart"></i> Thêm vào giỏ</button>
+                            <button type="button" className="add-cart-btn" onClick={addToCart}><i className="fas fa-shopping-cart"></i> Thêm vào giỏ</button>
                             <button type="button" className="buy-now-btn"><i className="fas fa-wallet"></i> Mua ngay</button>
                         </div>
                     </div>
