@@ -78,7 +78,10 @@
 
 .product-table {
     width: 100%;
-    background-color: rgb(241, 238, 238);
+    background-color: rgb(255, 255, 255);
+    border-top: 0.5px solid #a5a5a5;
+    border-right: 0.5px solid #a5a5a5;
+    border-left: 0.5px solid #a5a5a5;
 
 }
 

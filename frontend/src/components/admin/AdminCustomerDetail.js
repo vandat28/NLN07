@@ -58,7 +58,7 @@ export default function AdminCustomerDetail() {
                 </div>}
                 <div className='user-detail col c-12' style={{ marginTop: '20px' }}>
                     <div className='user-detail_title'>Lịch sử đơn hàng</div>
-                    <div className="product-table" style={{ marginBottom: '20px', backgroundColor: '#fff' }}>
+                    <div className="product-table" style={{ marginBottom: '20px' }}>
                         <table>
                             <thead>
                                 <tr>
