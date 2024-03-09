@@ -4,8 +4,10 @@ class accountService {
 
     findAll() {
         return new Promise((resolve, reject) => {
-            con.query(`SELECT * FROM taikhoan a, khachhang b
-            where a.maKH = b.maKH;`, function (error, result, fields) {
+            con.query(`SELECT *
+            FROM khachhang a
+            left JOIN taikhoan b
+            ON a.maKH = b.maKH;`, function (error, result, fields) {
                 if (error) {
                     reject(error);
                     return;
@@ -42,6 +44,22 @@ class accountService {
     createAccount(sodienthoai, matkhau, maKH) {
         return new Promise((resolve, reject) => {
             con.query(`INSERT INTO taikhoan(soDienThoai, matKhau, vaiTro, maKH) VALUES ('${sodienthoai}', '${matkhau}', 0, ${maKH});`, function (error, result, fields) {
+                if (error) {
+                    reject(error);
+                    return;
+                }
+                resolve(result);
+            });
+        })
+    }
+
+    findOneById(id) {
+        return new Promise((resolve, reject) => {
+            con.query(`SELECT *
+            FROM khachhang a
+            left JOIN taikhoan b
+            ON a.maKH = b.maKH
+            where a.maKH = ${id};`, function (error, result, fields) {
                 if (error) {
                     reject(error);
                     return;

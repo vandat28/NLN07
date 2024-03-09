@@ -17,6 +17,12 @@ class accountController {
             res.json('Thất bại')
         }
     }
+
+    async findOneById(req, res) {
+        let id = req.params.id
+        let data = await accountService.findOneById(id)
+        res.json(data)
+    }
     // async update(req, res) {
     //     let id = req.params.id
     //     let newCategoryName = req.body.newCategoryName

@@ -140,9 +140,7 @@
     border-radius: 4px;
 }
 
-.header__main-cart-icon {
-    
-}
+.header__main-cart-icon {}
 
 .header__main-cart-total {
     color: #fff;
@@ -259,8 +257,8 @@
     line-height: 16px;
     color: #999;
     margin: 4px 0;
-    overflow: hidden; 
-    text-overflow: ellipsis; 
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .product-item_price {
@@ -468,9 +466,9 @@
 }
 
 .submit-form {
-   display: flex;
-   justify-content: space-between;
-   align-items: center;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .login-form_submit {
@@ -539,7 +537,6 @@
 }
 
 .user-detail {
-    height: 300px;
     border-radius: 2px;
     box-shadow: 0 5px 10px #999;
     background-color: #fff;
@@ -681,7 +678,7 @@
 }
 
 .cart_product-quantity-current {
-    width:80px;
+    width: 80px;
     height: 40px;
     font-size: 1.6rem;
     font-weight: 600;
@@ -943,4 +940,3 @@
     color: red;
     /* Một màu sắc khác được áp dụng cho liên kết kích hoạt */
 }
-

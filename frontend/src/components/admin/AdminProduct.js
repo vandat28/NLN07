@@ -212,6 +212,10 @@ export default function AdminProduct() {
                     <button className="filter-button" data-bs-toggle="modal" data-bs-target="#staticBackdrop2">Xem danh mục</button>
                     <button className="filter-button" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Thêm sản phẩm</button>
                 </div>
+                <div className='header__main-find' style={{ display: 'inline-block', right: '0', position: 'absolute', lineHeight: '0' }}>
+                    <input className='header__main-find-input' placeholder='Nhập tên sản phẩm' />
+                    <button className='header__main-find-button'>search</button>
+                </div>
             </div>
             <div className="product-table">
                 <table>
