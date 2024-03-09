@@ -3,6 +3,7 @@ import { Routes, Route, Link, Router } from "react-router-dom";
 import Register from './Register';
 import Login from './Login';
 import User from './User';
+import Cart from './Cart';
 
 function Header() {
 
@@ -70,8 +71,10 @@ function Header() {
                             <input className='header__main-find-input' placeholder='Nhập tên sản phẩm' />
                             <button className='header__main-find-button'>search</button>
                         </div>
-                        <div className='header__main-cart'>
-                        </div>
+                        <Link to='/Cart' className='header__main-cart'>
+                            <i className="fa-solid fa-cart-shopping header__main-cart-icon"></i>
+                            <div className='header__main-cart-total'></div>
+                        </Link>
                     </div>
                 </div>
             </div>
@@ -80,7 +83,8 @@ function Header() {
             <Routes>
                 <Route path='/Login' element={<Login />} />
                 <Route path='/Register' element={<Register />} />
-                <Route path='/user/profile' element={<User />} />
+                <Route path='/user' element={<User />} />
+                <Route path='/Cart' element={<Cart />} />
             </Routes>
         </div>
     );

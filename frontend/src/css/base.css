@@ -63,3 +63,7 @@ input:focus {
     display: block;
 }
 
+.user-current {
+    color: blue;
+}
+

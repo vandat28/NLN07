@@ -8,7 +8,6 @@ function User() {
     const userCurrent = JSON.parse(window.localStorage.getItem('User'));
     const [userOnline, setUserOnline] = useState(userCurrent);
 
-
     return (
         <div className='user'>
             <div className='grid wide'>
@@ -17,10 +16,20 @@ function User() {
                         <div className='user-caterogy_title'>Người dùng</div>
                         <ul className='user-caterogy_list'>
                             <li className='user-caterogy_item'>
-                                <Link to="/user" className='user-caterogy_item-link'>Hồ Sơ Người Dùng</Link>
+                                <Link to="/user" className='user-caterogy_item-link user-profile user-current' onClick={() => {
+                                    const userProfile = document.querySelector('.user-profile')
+                                    const userHistory = document.querySelector('.user-history')
+                                    userProfile.classList.add('user-current');
+                                    userHistory.classList.remove('user-current');
+                                }}>Hồ Sơ Người Dùng</Link>
                             </li>
                             <li className='user-caterogy_item'>
-                                <Link to="/user/history" className='user-caterogy_item-link'>Lịch Sử Mua Hàng</Link>
+                                <Link to="/user/history" className='user-caterogy_item-link user-history' onClick={() => {
+                                    const userProfile = document.querySelector('.user-profile')
+                                    const userHistory = document.querySelector('.user-history')
+                                    userProfile.classList.remove('user-current');
+                                    userHistory.classList.add('user-current');
+                                }}>Lịch Sử Mua Hàng</Link>
                             </li>
                             <li className='user-caterogy_item'>
                                 <a href="http://localhost:3000/" className='user-caterogy_item-link' onClick={() => {

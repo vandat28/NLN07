@@ -78,6 +78,7 @@ function Homepage() {
                                     <img className='product-item_img' src={`${BASE_URL}/uploads/${product.anhdaidien}`}></img>
                                     <div className='product-item_information'>
                                         <div className='product-item_name'>{product.tenSP}</div>
+                                        <div className='product-item_description'>{product.moTa}</div>
                                         <div className='product-item_price'>{formatCurrency(product.giaBan)}</div>
                                     </div>
                                 </Link>
