@@ -16,7 +16,9 @@ const formatCurrency = (amount) => {
 
 
 export default function ProductDetail() {
-    var cart;
+    var cart, count = 0, total = 0;
+    const cartCount = JSON.parse(window.localStorage.getItem('Cart'));
+    const userCart = JSON.parse(window.localStorage.getItem('cart'));
     const { id } = useParams();
     const [data, setData] = useState([])
     const allHoverImages = document.querySelectorAll('.hover-container div img');
@@ -81,8 +83,15 @@ export default function ProductDetail() {
         if(checkSP==0){
             cart.push(sp);
         }
+
+        for(let i = 0;i<cart.length;i++) {
+            count += cart[i].quantity;
+            total += (cart[i].quantity * cart[i].price)
+        }
             
+        localStorage.setItem("Cart",JSON.stringify({quantity: `${count}`, total: `${total}`}));
         localStorage.setItem("cart",JSON.stringify(cart));
+        window.location.reload();
     }
 
     return (

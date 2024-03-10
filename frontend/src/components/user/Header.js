@@ -12,11 +12,11 @@ function Header() {
     const [userOnline, setUserOnline] = useState(userCurrent);
     const [userOffline, setUserOffline] = useState("");
     const [login, setLogin] = useState(false);
-    const [sumItemCart, setSumItemCart] = useState();
 
     useEffect(() => {
         const headerCover = document.querySelector('.header__cover');
         const headerFixed = document.querySelector('.header__fixed');
+        const cartCount = JSON.parse(window.localStorage.getItem('Cart'));
 
         const handleScroll = () => {
             if (window.scrollY > 40) {
@@ -28,16 +28,11 @@ function Header() {
             }
         }
         window.addEventListener('scroll', handleScroll)
-        setSumItemCart(window.localStorage.key(0).length)
-
+        setQuantity(cartCount.quantity)
         return () => {
             window.removeEventListener('scroll', handleScroll);
         };
     }, [])
-
-    // useEffect(() => {   
-    //     setQuantity(userCart[0].quantity)
-    // }, [userCart[0].quantity])
 
     useLayoutEffect(() => {
         if (window.localStorage.getItem("User") != null) {
@@ -46,24 +41,7 @@ function Header() {
             setLogin(false)
             setUserOnline(userOffline)
         }
-
-        if(window.localStorage.key(0) == null){
-            createCart();
-        }
     }, [userOnline])
-
-    
-    const createCart = () => {
-        // const product = {
-        //     img: "",
-        //     name: "",
-        //     price: "",
-        //     decription: "",
-        //     quantity: ""
-        // }
-        window.localStorage.setItem("Cart", [""]);
-        // window.localStorage.setItem("cart", JSON.stringify(product));
-    }
 
     return (
         <div className='header'>
