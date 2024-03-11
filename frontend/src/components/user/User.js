@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { Link, NavLink, Route, Routes } from 'react-router-dom';
 import History from './History';
 import Account from './Account';
+import DetailOder from './DetailOder';
+
 
 
 function User() {
@@ -24,7 +26,7 @@ function User() {
                                 }}>Hồ Sơ Người Dùng</Link>
                             </li>
                             <li className='user-caterogy_item'>
-                                <Link to="/user/history" className='user-caterogy_item-link user-history' onClick={() => {
+                                <Link to='/user/history' className='user-caterogy_item-link user-history' onClick={() => {
                                     const userProfile = document.querySelector('.user-profile')
                                     const userHistory = document.querySelector('.user-history')
                                     userProfile.classList.remove('user-current');
@@ -40,7 +42,8 @@ function User() {
                     </div>
                     <Routes>
                         <Route path='/' element={<Account userOnline={userOnline} />} />
-                        <Route path='/history' element={<History />} />
+                        <Route path='/history' element={<History userOnline={userOnline} />} />
+                        <Route path='/orderDetail' element={<DetailOder />} />
                     </Routes>
                 </div>
             </div>

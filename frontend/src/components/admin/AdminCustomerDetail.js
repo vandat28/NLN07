@@ -1,14 +1,34 @@
 import React, { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import BASE_URL from '../configURL';
+import axios from 'axios';
+import { format, utcToZonedTime } from 'date-fns-tz';
+// Hàm chuyển đổi định dạng ngày tháng
+const formatDate = (isoDate) => {
+    const vietnamTimezone = 'Asia/Ho_Chi_Minh'; // Múi giờ Việt Nam
+    const zonedDate = utcToZonedTime(isoDate, vietnamTimezone);
+    return format(zonedDate, "HH:mm:ss dd/MM/yyyy");
+};
 
+
+//chuyển về tiền vnđ
+const formatCurrency = (amount) => {
+    const formatter = new Intl.NumberFormat('vi-VN', {
+        style: 'currency',
+        currency: 'VND'
+    });
+
+    return formatter.format(amount);
+};
 export default function AdminCustomerDetail() {
     const { id } = useParams()
 
     const [user, setUser] = useState([])
+    const [data, setData] = useState([])
 
     useEffect(() => {
         getApiData(id)
+        getOrders(id)
     }, []);
 
     const getApiData = async (id) => {
@@ -23,6 +43,15 @@ export default function AdminCustomerDetail() {
             console.log('Đã xảy ra lỗi:', error);
         }
     };
+
+    const getOrders = async (id) => {
+        try {
+            const response = await axios.get(`${BASE_URL}/api/order/history?id=${id}`);
+            setData(response.data);
+        } catch (error) {
+            console.error('Error fetching data:', error);
+        }
+    }
 
     return (
 
@@ -43,13 +72,13 @@ export default function AdminCustomerDetail() {
                             <div className='user-detail_label-item'>Tài khoản:</div>
                         </div>
                         <div className='user-detail_info-list col c-7'>
-                            <div className='user-detail_info-item'>{user[0].hoten}</div>
-                            <div className='user-detail_info-item'>{user[0].sodienthoai}</div>
-                            <div className='user-detail_info-item'>{user[0].diachi}</div>
+                            <div className='user-detail_info-item'>{user[0].hoten ? user[0].hoten : 'Chưa xác định'}</div>
+                            <div className='user-detail_info-item'>{user[0].sodienthoai ? user[0].sodienthoai : 'Chưa xác định'}</div>
+                            <div className='user-detail_info-item'>{user[0].diachi ? user[0].diachi : 'Chưa xác định'}</div>
                             <div className='user-detail_info-item'>
-                                {user[0].gioitinh === 1 ? 'Name' : 'Nữ'}
+                                {user[0].gioitinh === 1 ? 'Nam' : 'Nữ'}
                             </div>
-                            <div className='user-detail_info-item'>{user[0].namsinh}</div>
+                            <div className='user-detail_info-item'>{user[0].namsinh ? user[0].namsinh : 'Chưa xác định'}</div>
                             <div className='user-detail_info-item'>
                                 {user[0].maTK === null ? 'Chưa đăng ký' : 'Đã đăng ký'}
                             </div>
@@ -58,65 +87,33 @@ export default function AdminCustomerDetail() {
                 </div>}
                 <div className='user-detail col c-12' style={{ marginTop: '20px' }}>
                     <div className='user-detail_title'>Lịch sử đơn hàng</div>
+
                     <div className="product-table" style={{ marginBottom: '20px' }}>
                         <table>
                             <thead>
                                 <tr>
-                                    <th>Mã đơn hàng</th>
+                                    <th>Mã đơn</th>
                                     <th>Tổng tiền</th>
                                     <th>Ngày đặt</th>
                                     <th>Tình trạng đơn</th>
                                     <th>Thanh toán</th>
+                                    <th></th>
                                 </tr>
                             </thead>
                             <tbody>
-
-                                <tr >
-                                    <td>1</td>
-                                    <td>2</td>
-                                    <td>3</td>
-                                    <td>4</td>
-                                    <td>5</td>
-                                </tr>
-                                <tr >
-                                    <td>1</td>
-                                    <td>2</td>
-                                    <td>3</td>
-                                    <td>4</td>
-                                    <td>5</td>
-                                </tr>
-                                <tr >
-                                    <td>1</td>
-                                    <td>2</td>
-                                    <td>3</td>
-                                    <td>4</td>
-                                    <td>5</td>
-                                </tr>
-                                <tr >
-                                    <td>1</td>
-                                    <td>2</td>
-                                    <td>3</td>
-                                    <td>4</td>
-                                    <td>5</td>
-                                </tr>
-                                <tr >
-                                    <td>1</td>
-                                    <td>2</td>
-                                    <td>3</td>
-                                    <td>4</td>
-                                    <td>5</td>
-                                </tr>
-                                <tr >
-                                    <td>1</td>
-                                    <td>2</td>
-                                    <td>3</td>
-                                    <td>4</td>
-                                    <td>5</td>
-                                </tr>
-
+                                {data && data.map(item => (
+                                    <tr key={item.maDH}>
+                                        <td>{item.maDH}</td>
+                                        <td>{formatCurrency(item.tongTien)}</td>
+                                        <td>{formatDate(item.ngayDat)}</td>
+                                        <td>{item.tinhtrang}</td>
+                                        <td>{item.phuongthuc}</td>
+                                    </tr>
+                                ))}
                             </tbody>
                         </table>
                     </div>
+
                 </div>
             </div>
         </div>

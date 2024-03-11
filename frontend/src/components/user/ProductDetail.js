@@ -46,11 +46,11 @@ export default function ProductDetail() {
     }, []);
 
     useLayoutEffect(() => {
-        const oldCart= JSON.parse(localStorage.getItem("cart"));
+        const oldCart = JSON.parse(localStorage.getItem("cart"));
 
-        if(!oldCart){
-            cart = new Array()  
-        }else{
+        if (!oldCart) {
+            cart = new Array()
+        } else {
             cart = [...oldCart]
         }
     })
@@ -64,33 +64,34 @@ export default function ProductDetail() {
         }
     }
 
-    function addToCart(){
+    function addToCart() {
         var checkSP = 0;
         const sp = new Object();
+        sp.id = data[0].maSP
         sp.img = data[0].anhdaidien;
-        sp.name= data[0].tenSP;
-        sp.price = data[0].giaBan; 
+        sp.name = data[0].tenSP;
+        sp.price = data[0].giaBan;
         sp.description = data[0].moTa;
         sp.quantity = 1;
-        for(let i = 0;i<cart.length;i++){
-            if(sp.name == cart[i].name){
+        for (let i = 0; i < cart.length; i++) {
+            if (sp.name == cart[i].name) {
                 checkSP = 1;
                 cart[i].quantity++;
                 console.log(cart[i].quantity);
                 break;
             }
         }
-        if(checkSP==0){
+        if (checkSP == 0) {
             cart.push(sp);
         }
 
-        for(let i = 0;i<cart.length;i++) {
+        for (let i = 0; i < cart.length; i++) {
             count += cart[i].quantity;
             total += (cart[i].quantity * cart[i].price)
         }
-            
-        localStorage.setItem("Cart",JSON.stringify({quantity: `${count}`, total: `${total}`}));
-        localStorage.setItem("cart",JSON.stringify(cart));
+
+        localStorage.setItem("Cart", JSON.stringify({ quantity: `${count}`, total: `${total}` }));
+        localStorage.setItem("cart", JSON.stringify(cart));
         window.location.reload();
     }
 

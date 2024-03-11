@@ -33,14 +33,14 @@ function Login() {
     const Upasswd = document.querySelector('#login-infor_passwd')
     const notify = document.querySelector('.login-form_notify')
     for (let i = 0; i < users.length; i++) {
-      if (users[i].soDienThoai == Uphone.value && users[i].matKhau == Upasswd.value) {
+      if (users[i].sodienthoai == Uphone.value && users[i].matkhau == Upasswd.value) {
         const userCurrent = {
           id: users[i].maKH,
           name: users[i].hoten,
           address: users[i].diachi,
           sex: users[i].gioitinh,
           yob: users[i].namsinh,
-          phone: users[i].soDienThoai,
+          phone: users[i].sodienthoai,
           role: users[i].vaiTro
         }
         const userJSON = JSON.stringify(userCurrent)
@@ -48,7 +48,7 @@ function Login() {
         notify.innerHTML = ''
         setIsLoggedIn(true);
         break
-      } else if (users[i].soDienThoai == Uphone.value && users[i].matKhau != Upasswd.value) {
+      } else if (users[i].sodienthoai == Uphone.value && users[i].matkhau != Upasswd.value) {
         notify.innerHTML = 'Mật khẩu không đúng'
       } else if (Uphone.value == '' || Upasswd.value == '') {
         notify.innerHTML = 'Bạn chưa điền hết form'

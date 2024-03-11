@@ -4,7 +4,7 @@ class accountService {
 
     findAll() {
         return new Promise((resolve, reject) => {
-            con.query(`SELECT *
+            con.query(`SELECT a.*, b.maTK,  b.matkhau
             FROM khachhang a
             left JOIN taikhoan b
             ON a.maKH = b.maKH;`, function (error, result, fields) {
@@ -55,7 +55,7 @@ class accountService {
 
     findOneById(id) {
         return new Promise((resolve, reject) => {
-            con.query(`SELECT *
+            con.query(`SELECT a.*, b.maTK
             FROM khachhang a
             left JOIN taikhoan b
             ON a.maKH = b.maKH

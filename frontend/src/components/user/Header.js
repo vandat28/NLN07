@@ -28,7 +28,9 @@ function Header() {
             }
         }
         window.addEventListener('scroll', handleScroll)
-        setQuantity(cartCount.quantity)
+        if (cartCount) {
+            setQuantity(cartCount.quantity)
+        }
         return () => {
             window.removeEventListener('scroll', handleScroll);
         };
@@ -79,7 +81,7 @@ function Header() {
                         </div>
                         <Link to='/Cart' className='header__main-cart'>
                             <i className="fa-solid fa-cart-shopping header__main-cart-icon"></i>
-                            <div className='header__main-cart-total'>{quantity}</div>
+                            {quantity && <div className='header__main-cart-total'>{quantity}</div>}
                         </Link>
                     </div>
                 </div>
