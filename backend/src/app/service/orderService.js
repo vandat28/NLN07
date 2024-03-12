@@ -2,20 +2,26 @@ const con = require('../configdb/connectDB')
 
 class orderService {
 
-    // findAll() {
-    //     return new Promise((resolve, reject) => {
-    //         con.query(`SELECT *
-    //         FROM khachhang a
-    //         left JOIN taikhoan b
-    //         ON a.maKH = b.maKH;`, function (error, result, fields) {
-    //             if (error) {
-    //                 reject(error);
-    //                 return;
-    //             }
-    //             resolve(result);
-    //         });
-    //     })
-    // }
+    findAll() {
+        return new Promise((resolve, reject) => {
+            con.query(`select a.*, b.phuongthuc, c.tinhtrang, d.hoten, d.diachi, d.sodienthoai
+            from donhang a 
+            inner join phuongthucthanhtoan b
+            on a.phuongthucthanhtoan = b.id
+            inner join tinhtrangdonhang c
+            on a.tinhtrangdonhang = c.id
+            inner join khachhang d
+            on a.maKH = d.maKH
+            ORDER BY maDH DESC;
+            `, function (error, result, fields) {
+                if (error) {
+                    reject(error);
+                    return;
+                }
+                resolve(result);
+            });
+        })
+    }
 
 
 
@@ -84,10 +90,10 @@ class orderService {
         })
     }
 
-    update(tinhTrang, maDH) {
+    update(tinhTrang, thanhToan, maDH) {
         return new Promise((resolve, reject) => {
             con.query(`UPDATE donhang
-            SET tinhtrangdonhang = ${tinhTrang}
+            SET tinhtrangdonhang = ${tinhTrang}, tinhTrangThanhToan = ${thanhToan}
             WHERE maDH = ${maDH};`, function (error, result, fields) {
                 if (error) {
                     reject(error);
@@ -100,7 +106,7 @@ class orderService {
 
     findAllByCustomerId(maKH) {
         return new Promise((resolve, reject) => {
-            con.query(`select a.maDH, a.ngayDat, a.tongTien, a.maKH, b.phuongthuc, c.tinhtrang
+            con.query(`select a.maDH, a.ngayDat, a.tongTien, a.maKH, a.tinhtrangthanhtoan, b.phuongthuc, c.tinhtrang, c.id as idTT
             from donhang a 
             inner join phuongthucthanhtoan b
             on a.phuongthucthanhtoan = b.id
@@ -116,7 +122,26 @@ class orderService {
         })
     }
 
-
+    findAllByTinhTrangId(id) {
+        return new Promise((resolve, reject) => {
+            con.query(`select a.*, b.phuongthuc, c.tinhtrang, d.hoten, d.diachi, d.sodienthoai
+            from donhang a 
+            inner join phuongthucthanhtoan b
+            on a.phuongthucthanhtoan = b.id
+            inner join tinhtrangdonhang c
+            on a.tinhtrangdonhang = c.id
+            inner join khachhang d
+            on a.maKH = d.maKH
+            where c.id = ${id}
+            ORDER BY maDH DESC;`, function (error, result, fields) {
+                if (error) {
+                    reject(error);
+                    return;
+                }
+                resolve(result);
+            });
+        })
+    }
 
 
 

@@ -4,7 +4,6 @@ import Homepage from './components/user/Homepage';
 import { Route, Routes } from 'react-router-dom';
 import Footer from './components/user/Footer';
 import User from './components/user/User';
-import History from './components/user/History';
 import AdminPage from './components/admin/AdminPage';
 import ProductDetail from './components/user/ProductDetail';
 
@@ -15,10 +14,10 @@ function App() {
     const count = {
       quantity: "0"
     }
-    window.localStorage.setItem("Cart",JSON.stringify(count));
+    window.localStorage.setItem("Cart", JSON.stringify(count));
   }
 
-  if(window.localStorage.key(0) == null){
+  if (window.localStorage.key(0) == null) {
     createCart();
   }
 

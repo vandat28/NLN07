@@ -111,6 +111,16 @@
     max-width: 200px;
 }
 
+.product-table td span {
+    font-size: 12px;
+    color: #868686;
+}
+
+.product-table td h4 {
+    font-size: 13px;
+    color: #0056b3;
+}
+
 
 .color-blue {
     color: #007bff;
@@ -387,4 +397,50 @@
 
 .category-table tr {
     font-size: 16px;
+}
+
+.main-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1%;
+}
+
+.large-button {
+    font-size: 1.2em;
+    padding: 20px 40px;
+    border: 0.5px solid #3498db;
+    border-radius: 10px;
+    background-color: #3498db;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    width: 19.2%;
+}
+
+.large-button:hover {
+    background-color: #fff;
+    color: #3498db;
+}
+
+.large-button:active {
+    background-color: #1f618d;
+}
+
+.small-button {
+    font-size: 0.8em;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: #3498db;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.small-button:hover {
+    background-color: #2980b9;
+}
+
+.small-button:active {
+    background-color: #1f618d;
 }

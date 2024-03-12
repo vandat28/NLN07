@@ -41,7 +41,7 @@ function Login() {
           sex: users[i].gioitinh,
           yob: users[i].namsinh,
           phone: users[i].sodienthoai,
-          role: users[i].vaiTro
+          role: users[i].vaitro
         }
         const userJSON = JSON.stringify(userCurrent)
         window.localStorage.setItem('User', userJSON)

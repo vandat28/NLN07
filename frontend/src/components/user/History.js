@@ -34,6 +34,7 @@ function History(props) {
         try {
             const response = await axios.get(`${BASE_URL}/api/order/history?id=${id}`);
             setData(response.data);
+            console.table(response.data)
         } catch (error) {
             console.error('Error fetching data:', error);
         }
@@ -61,8 +62,8 @@ function History(props) {
                                 <td>{formatCurrency(item.tongTien)}</td>
                                 <td>{formatDate(item.ngayDat)}</td>
                                 <td>{item.tinhtrang}</td>
-                                <td>{item.phuongthuc}</td>
-                                <td><Link to={`/user/orderDetail?id=${item.maDH}&total=${item.tongTien}`} className='color-blue'>Xem chi tiết</Link></td>
+                                <td>{item.tinhtrangthanhtoan === 0 ? 'Chưa thanh toán' : 'Đã thanh toán'}</td>
+                                <td><Link to={`/user/orderDetail?id=${item.maDH}&total=${item.tongTien}&tinhTrang=${item.idTT}`} className='color-blue'>Xem chi tiết</Link></td>
                             </tr>
                         ))}
                     </tbody>

@@ -1,10 +1,14 @@
-const e = require('express');
 const orderService = require('../service/orderService')
 class orderController {
-    // async findAll(req, res) {
-    //     let data = await accountService.findAll()
-    //     res.json(data)
-    // }
+    async findAll(req, res) {
+        try {
+            let orders = await orderService.findAll()
+            res.status(200).json(orders);
+        } catch (error) {
+            console.error('Đã xảy ra lỗi:', error);
+            res.status(500).json({ message: 'Đã xảy ra lỗi khi tạo đơn hàng.' });
+        }
+    }
 
     async create(req, res) {
         const order = req.body;
@@ -24,11 +28,21 @@ class orderController {
         }
     }
 
-
     async findAllByCustomerId(req, res) {
         try {
             const maKH = req.query.id
             let orders = await orderService.findAllByCustomerId(maKH)
+            res.status(200).json(orders);
+        } catch (error) {
+            console.error('Đã xảy ra lỗi:', error);
+            res.status(500).json({ message: 'Đã xảy ra lỗi khi tạo đơn hàng.' });
+        }
+    }
+
+    async findAllByTinhTrangId(req, res) {
+        try {
+            const id = req.query.id
+            let orders = await orderService.findAllByTinhTrangId(id)
             res.status(200).json(orders);
         } catch (error) {
             console.error('Đã xảy ra lỗi:', error);
@@ -47,16 +61,19 @@ class orderController {
         }
     }
 
-    // async update(req, res) {
-    //     let id = req.params.id
-    //     let newCategoryName = req.body.newCategoryName
-    //     if (id && newCategoryName) {
-    //         let data = await accountService.update(newCategoryName, id)
-    //         res.json(data)
-    //     } else {
-    //         res.json("Xóa thất bại")
-    //     }
-    // }
+    async updateTT(req, res) {
+        const tinhTrang = req.body.tinhTrang;
+        const thanhToan = req.body.thanhToan;
+        const maDH = req.params.id
+        try {
+            await orderService.update(tinhTrang, thanhToan, maDH)
+            res.status(200).json({ message: 'Đã cập nhật đơn hàng thành công' });
+        } catch (error) {
+            console.error('Đã xảy ra lỗi:', error);
+            res.status(500).json({ message: 'Đã xảy ra lỗi khi cập nhật đơn hàng' });
+        }
+    }
+
     // async delete(req, res) {
     //     let id = req.params.id
     //     if (id) {
