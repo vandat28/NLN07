@@ -1,7 +1,9 @@
 import axios from 'axios';
 import React, { useEffect, useLayoutEffect, useState } from 'react'
 import { useParams } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import BASE_URL from '../configURL';
+import Carousel from 'react-multi-carousel'
 
 //chuyển về tiền vnđ
 const formatCurrency = (amount) => {
@@ -16,11 +18,10 @@ const formatCurrency = (amount) => {
 
 
 export default function ProductDetail() {
-    var cart, count = 0, total = 0;
-    const cartCount = JSON.parse(window.localStorage.getItem('Cart'));
-    const userCart = JSON.parse(window.localStorage.getItem('cart'));
+    var cart, count = 0;
     const { id } = useParams();
     const [data, setData] = useState([])
+    const [same, setSame] = useState([])
     const allHoverImages = document.querySelectorAll('.hover-container div img');
     const imgContainer = document.querySelector('.img-container');
 
@@ -87,13 +88,39 @@ export default function ProductDetail() {
 
         for (let i = 0; i < cart.length; i++) {
             count += cart[i].quantity;
-            total += (cart[i].quantity * cart[i].price)
         }
 
-        localStorage.setItem("Cart", JSON.stringify({ quantity: `${count}`, total: `${total}` }));
+        localStorage.setItem("Cart", JSON.stringify({ quantity: `${count}` }));
         localStorage.setItem("cart", JSON.stringify(cart));
         window.location.reload();
     }
+
+    const findProductsByCategory = async (id) => {
+        try {
+            const response = await axios.get(`${BASE_URL}/api/products/category/${id}`);
+            setSame(response.data);
+        } catch (error) {
+            console.error('Error fetching data:', error);
+        }
+    }
+
+    const responsive = {
+        desktop: {
+            breakpoint: { max: 3000, min: 1024 },
+            items: 3,
+            slidesToSlide: 3, // Number of slides to slide at a time
+        },
+        tablet: {
+            breakpoint: { max: 1024, min: 464 },
+            items: 2,
+            slidesToSlide: 2,
+        },
+        mobile: {
+            breakpoint: { max: 464, min: 0 },
+            items: 1,
+            slidesToSlide: 1,
+        },
+    };
 
     return (
         <div className="main">
@@ -126,7 +153,23 @@ export default function ProductDetail() {
                         </div>
                     </div>
                 </div>}
-
+                <div className='product-same'>
+                    <div className='product-same_title'>CÁC SẢN PHẨM LIÊN QUAN</div>
+                    {/* <ul className='product-same_list'>
+                    </ul> */}
+                    <Carousel responsive={responsive} style={{ padding: "0" }}>
+                        {same.map(product => (
+                            <Link to={`/product/${product.maSP}`} className='product-item c-2-4'>
+                                <img className='product-item_img' src={`${BASE_URL}/uploads/${product.anhdaidien}`}></img>
+                                <div className='product-item_information'>
+                                    <div className='product-same_item_name'>{product.tenSP}</div>
+                                    <div className='product-same_item_description'>{product.moTa}</div>
+                                    <div className='product-item_price'>{formatCurrency(product.giaBan)}</div>
+                                </div>
+                            </Link>
+                        ))}
+                    </Carousel>
+                </div>
             </div>
         </div>
     )

@@ -70,18 +70,18 @@ function Header() {
             <div className='header__fixed'>
                 <div className='grid wide'>
                     <div className='header__main'>
-                        <Link to='/' className='header__main-logo'>
+                        <a href='http://localhost:3000' className='header__main-logo'>
                             <div className='header__main-logo-container'>
                             </div>
                             <div className='header__main-logo-title'>HealPro</div>
-                        </Link>
+                        </a>
                         <div className='header__main-find'>
                             <input className='header__main-find-input' placeholder='Nhập tên sản phẩm' />
                             <button className='header__main-find-button'>search</button>
                         </div>
                         <Link to='/Cart' className='header__main-cart'>
                             <i className="fa-solid fa-cart-shopping header__main-cart-icon"></i>
-                            {quantity && <div className='header__main-cart-total'>{quantity}</div>}
+                            <div className='header__main-cart-total'>{quantity}</div>
                         </Link>
                     </div>
                 </div>

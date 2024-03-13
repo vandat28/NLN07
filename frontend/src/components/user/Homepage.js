@@ -24,7 +24,7 @@ function Homepage() {
     useEffect(() => {
         getApiData()
         getApiDataCategory()
-        
+
     }, []);
 
     const getApiData = async () => {
@@ -67,7 +67,10 @@ function Homepage() {
                         <ul className='caterory-list'>
                             <div className='caterory-title'>Danh mục sản phẩm</div>
                             {category.map((item) => (
-                                <li key={item.id} className='caterory-item' onClick={() => findProductsByCategory(item.id)}>{item.tenLoai}</li>
+                                <li key={item.id} className='caterory-item' onClick={() => findProductsByCategory(item.id)}>
+                                    {item.tenLoai}
+                                    <i class="fa-solid fa-square-caret-down caterory-item-icon"></i>
+                                </li>
                             ))}
                         </ul>
                     </div>
