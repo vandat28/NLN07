@@ -83,7 +83,7 @@ DROP TABLE IF EXISTS `donhang`;
  SET character_set_client = utf8mb4 ;
 CREATE TABLE `donhang` (
   `maDH` int(11) NOT NULL AUTO_INCREMENT,
-  `ngayDat` datetime DEFAULT NULL,
+  `ngayDat` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   `tongTien` float DEFAULT NULL,
   `tinhTrangThanhToan` tinyint(4) DEFAULT NULL,
   `maKH` int(11) DEFAULT NULL,
@@ -96,7 +96,7 @@ CREATE TABLE `donhang` (
   CONSTRAINT `fk_idKH` FOREIGN KEY (`maKH`) REFERENCES `khachhang` (`makh`),
   CONSTRAINT `fk_idPT` FOREIGN KEY (`phuongthucthanhtoan`) REFERENCES `phuongthucthanhtoan` (`id`),
   CONSTRAINT `fk_idTT` FOREIGN KEY (`tinhtrangdonhang`) REFERENCES `tinhtrangdonhang` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -109,7 +109,10 @@ DROP TABLE IF EXISTS `giohang`;
 CREATE TABLE `giohang` (
   `maGH` int(11) NOT NULL AUTO_INCREMENT,
   `tongTien` float DEFAULT NULL,
-  PRIMARY KEY (`maGH`)
+  `maKH` int(11) DEFAULT NULL,
+  PRIMARY KEY (`maGH`),
+  KEY `fk_GH_KH_idx` (`maKH`),
+  CONSTRAINT `fk_GH_KH` FOREIGN KEY (`maKH`) REFERENCES `khachhang` (`makh`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -157,16 +160,10 @@ CREATE TABLE `khachhang` (
   `hoten` varchar(45) DEFAULT NULL,
   `diachi` varchar(255) DEFAULT NULL,
   `gioitinh` int(11) DEFAULT NULL,
-  `namsinh` date DEFAULT NULL,
+  `namsinh` int(11) DEFAULT NULL,
   `sodienthoai` varchar(45) DEFAULT NULL,
-  `maTK` int(11) DEFAULT NULL,
-  `maGH` int(11) DEFAULT NULL,
-  PRIMARY KEY (`maKH`),
-  KEY `fk_KH_idTK_idx` (`maTK`),
-  KEY `fk_KH_idGH_idx` (`maGH`),
-  CONSTRAINT `fk_KH_idGH` FOREIGN KEY (`maGH`) REFERENCES `giohang` (`magh`),
-  CONSTRAINT `fk_KH_idTK` FOREIGN KEY (`maTK`) REFERENCES `taikhoan` (`matk`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  PRIMARY KEY (`maKH`)
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -180,7 +177,7 @@ CREATE TABLE `loaisanpham` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `tenLoai` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -194,7 +191,7 @@ CREATE TABLE `phuongthucthanhtoan` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `phuongthuc` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -221,7 +218,7 @@ CREATE TABLE `sanpham` (
   KEY `fk_idhang_idx` (`maHSX`),
   CONSTRAINT `fk_idhang` FOREIGN KEY (`maHSX`) REFERENCES `hangsanxuat` (`mahsx`),
   CONSTRAINT `fk_idloai` FOREIGN KEY (`maLoai`) REFERENCES `loaisanpham` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -236,8 +233,11 @@ CREATE TABLE `taikhoan` (
   `soDienThoai` varchar(45) DEFAULT NULL,
   `matKhau` varchar(45) DEFAULT NULL,
   `vaiTro` int(11) DEFAULT NULL,
-  PRIMARY KEY (`maTK`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `maKH` int(11) DEFAULT NULL,
+  PRIMARY KEY (`maTK`),
+  KEY `fk_TK_KH_idx` (`maKH`),
+  CONSTRAINT `fk_TK_KH` FOREIGN KEY (`maKH`) REFERENCES `khachhang` (`makh`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -251,7 +251,7 @@ CREATE TABLE `tinhtrangdonhang` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `tinhtrang` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -263,4 +263,4 @@ CREATE TABLE `tinhtrangdonhang` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-03-04 23:19:11
+-- Dump completed on 2024-03-13 19:09:52
