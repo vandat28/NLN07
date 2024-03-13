@@ -118,6 +118,10 @@ function Cart() {
                                             cartCount.quantity--;
                                             window.localStorage.setItem("cart", JSON.stringify(userCart));
                                             window.localStorage.setItem("Cart", JSON.stringify(cartCount));
+
+                                            if(userCart.length == 0){
+                                                window.localStorage.removeItem("cart");
+                                            }
                                             window.location.reload();
                                         }}>-</button>
                                         <input className='cart_product-quantity-current' placeholder={`${item.quantity}`}></input>
