@@ -16,15 +16,14 @@ const formatCurrency = (amount) => {
 
 
 function Homepage() {
-
     const [data, setData] = useState([])
     const [category, setCategory] = useState([])
-
+    const [currentIndex, setCurrentIndex] = useState(0)
+    const slides = document.querySelector('.slides');
 
     useEffect(() => {
         getApiData()
         getApiDataCategory()
-
     }, []);
 
     const getApiData = async () => {
@@ -51,6 +50,7 @@ function Homepage() {
             console.log('Đã xảy ra lỗi:', error);
         }
     };
+
     const findProductsByCategory = async (id) => {
         try {
             const response = await axios.get(`${BASE_URL}/api/products/category/${id}`);
@@ -59,6 +59,11 @@ function Homepage() {
             console.error('Error fetching data:', error);
         }
     }
+
+    function showSlide(index) {
+        slides.style.transform = `translateX(-${index * 20}%)`;
+    }
+
     return (
         <div className="main">
             <div className="grid wide">
@@ -69,12 +74,43 @@ function Homepage() {
                             {category.map((item) => (
                                 <li key={item.id} className='caterory-item' onClick={() => findProductsByCategory(item.id)}>
                                     {item.tenLoai}
-                                    <i class="fa-solid fa-square-caret-down caterory-item-icon"></i>
+                                    <i className="fa-solid fa-square-caret-down caterory-item-icon"></i>
                                 </li>
                             ))}
                         </ul>
                     </div>
                     <div className='product col c-9'>
+                        <div className='advertisement carousel'>
+                            <ul className='slides'>
+                                {data.map(product => (
+                                    <Link to={`/product/${product.maSP}`} className='slide col c-2-4'>
+                                        <img className='product-item_img' src={`${BASE_URL}/uploads/${product.anhdaidien}`}></img>
+                                        <div className='product-item_information'>
+                                            <div className='product-same_item_name'>{product.tenSP}</div>
+                                            <div className='product-same_item_description'>{product.moTa}</div>
+                                            <div className='product-item_price'>{formatCurrency(product.giaBan)}</div>
+                                        </div>
+                                    </Link>
+                                ))}
+                            </ul>
+                            <button className="button-slide prev" onClick={() => {
+                                if (currentIndex > 0) {
+                                    showSlide(currentIndex - 1);
+                                    setCurrentIndex(currentIndex - 1);
+                                }
+                                // stopAutoSlide();
+                            }}><i className="fa-solid fa-arrow-left"></i></button>
+                            <button className="button-slide next" onClick={() => {
+                                if (currentIndex < slides.children.length - 1) {
+                                    showSlide(currentIndex + 1);
+                                    setCurrentIndex(currentIndex + 1);
+                                } else {
+                                    showSlide(0);
+                                    setCurrentIndex(0);
+                                }
+                                // stopAutoSlide();
+                            }}><i className="fa-solid fa-arrow-right"></i></button>
+                        </div>
                         <ul className='product-list row'>
                             {data.map(product => (
                                 <Link to={`/product/${product.maSP}`} className='product-item c-2-4'>
@@ -90,7 +126,7 @@ function Homepage() {
                     </div>
                 </div>
             </div>
-        </div>
+        </div >
     );
 }
 

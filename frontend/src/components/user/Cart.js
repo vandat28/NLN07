@@ -119,7 +119,7 @@ function Cart() {
                                             window.localStorage.setItem("cart", JSON.stringify(userCart));
                                             window.localStorage.setItem("Cart", JSON.stringify(cartCount));
 
-                                            if(userCart.length == 0){
+                                            if (userCart.length == 0) {
                                                 window.localStorage.removeItem("cart");
                                             }
                                             window.location.reload();
@@ -141,7 +141,7 @@ function Cart() {
                         <div className='cart_product-total-title'>Tổng tiền:</div>
                         <div className='cart_product-total-price' style={{ color: "red" }}>{formatCurrency(total)}</div>
                     </div>
-                    <button class="order-button" onClick={orderProducts}>Đặt hàng</button>
+                    <button className="order-button" onClick={orderProducts}>Đặt hàng</button>
                 </div>
                 {isOrder && (
                     <div className="login-modal">

@@ -3,7 +3,6 @@ import React, { useEffect, useLayoutEffect, useState } from 'react'
 import { useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import BASE_URL from '../configURL';
-import Carousel from 'react-multi-carousel'
 
 //chuyển về tiền vnđ
 const formatCurrency = (amount) => {
@@ -22,8 +21,10 @@ export default function ProductDetail() {
     const { id } = useParams();
     const [data, setData] = useState([])
     const [same, setSame] = useState([])
+    const [currentIndex, setCurrentIndex] = useState(0)
     const allHoverImages = document.querySelectorAll('.hover-container div img');
     const imgContainer = document.querySelector('.img-container');
+    const slides = document.querySelector('.slides');
 
     window.addEventListener('DOMContentLoaded', () => {
         allHoverImages[0].parentElement.classList.add('active');
@@ -42,6 +43,7 @@ export default function ProductDetail() {
             img.parentElement.classList.remove('active');
         });
     }
+
     useEffect(() => {
         getProduct(id)
     }, []);
@@ -56,14 +58,6 @@ export default function ProductDetail() {
         }
     })
 
-    const getProduct = async (id) => {
-        try {
-            const response = await axios.get(`${BASE_URL}/api/products/${id}`);
-            setData(response.data);
-        } catch (error) {
-            console.error('Error fetching data:', error);
-        }
-    }
 
     function addToCart() {
         var checkSP = 0;
@@ -104,23 +98,20 @@ export default function ProductDetail() {
         }
     }
 
-    const responsive = {
-        desktop: {
-            breakpoint: { max: 3000, min: 1024 },
-            items: 3,
-            slidesToSlide: 3, // Number of slides to slide at a time
-        },
-        tablet: {
-            breakpoint: { max: 1024, min: 464 },
-            items: 2,
-            slidesToSlide: 2,
-        },
-        mobile: {
-            breakpoint: { max: 464, min: 0 },
-            items: 1,
-            slidesToSlide: 1,
-        },
-    };
+    const getProduct = async (id) => {
+        try {
+            const response = await axios.get(`${BASE_URL}/api/products/${id}`);
+            setData(response.data);
+            findProductsByCategory(response.data[0].maLoai)
+
+        } catch (error) {
+            console.error('Error fetching data:', error);
+        }
+    }
+
+    function showSlide(index) {
+        slides.style.transform = `translateX(-${index * 20}%)`;
+    }
 
     return (
         <div className="main">
@@ -155,20 +146,35 @@ export default function ProductDetail() {
                 </div>}
                 <div className='product-same'>
                     <div className='product-same_title'>CÁC SẢN PHẨM LIÊN QUAN</div>
-                    {/* <ul className='product-same_list'>
-                    </ul> */}
-                    <Carousel responsive={responsive} style={{ padding: "0" }}>
-                        {same.map(product => (
-                            <Link to={`/product/${product.maSP}`} className='product-item c-2-4'>
-                                <img className='product-item_img' src={`${BASE_URL}/uploads/${product.anhdaidien}`}></img>
-                                <div className='product-item_information'>
-                                    <div className='product-same_item_name'>{product.tenSP}</div>
-                                    <div className='product-same_item_description'>{product.moTa}</div>
-                                    <div className='product-item_price'>{formatCurrency(product.giaBan)}</div>
-                                </div>
-                            </Link>
-                        ))}
-                    </Carousel>
+                    <div className='carousel'>
+                        <ul className='slides'>
+                            {same.map(product => (
+                                <Link to={`/product/${product.maSP}`} className='slide col c-2-4'>
+                                    <img className='product-item_img' src={`${BASE_URL}/uploads/${product.anhdaidien}`}></img>
+                                    <div className='product-item_information'>
+                                        <div className='product-same_item_name'>{product.tenSP}</div>
+                                        <div className='product-same_item_description'>{product.moTa}</div>
+                                        <div className='product-item_price'>{formatCurrency(product.giaBan)}</div>
+                                    </div>
+                                </Link>
+                            ))}
+                        </ul>
+                        <button className="button-slide prev" onClick={() => {
+                            if (currentIndex > 0) {
+                                showSlide(currentIndex - 1);
+                                setCurrentIndex(currentIndex - 1);
+                            }
+                        }}><i className="fa-solid fa-arrow-left"></i></button>
+                        <button className="button-slide next" onClick={() => {
+                            if (currentIndex < slides.children.length - 1) {
+                                showSlide(currentIndex + 1);
+                                setCurrentIndex(currentIndex + 1);
+                            } else {
+                                showSlide(0);
+                                setCurrentIndex(0);
+                            }
+                        }}><i className="fa-solid fa-arrow-right"></i></button>
+                    </div>
                 </div>
             </div>
         </div>

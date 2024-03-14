@@ -222,6 +222,11 @@
     padding: 10px 0;
 }
 
+.advertisement {
+    background-color: #fff;
+    margin-bottom: 20px;
+}
+
 .product-list,
 .product-same_list {
     list-style: none;
@@ -255,6 +260,7 @@
 
 .product-item_name {
     display: -webkit-box;
+    text-transform: uppercase;
     color: blue;
     font-size: 1.4rem;
     height: 32px;
