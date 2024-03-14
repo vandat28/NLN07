@@ -18,6 +18,7 @@ const formatCurrency = (amount) => {
 function Homepage() {
     const [data, setData] = useState([])
     const [category, setCategory] = useState([])
+    const [advertisement, setAdvertisement] = useState([])
     const [currentIndex, setCurrentIndex] = useState(0)
     const slides = document.querySelector('.slides');
 
@@ -32,7 +33,7 @@ function Homepage() {
             const data = await response.json();
             if (data) {
                 setData(data);
-
+                setAdvertisement(data);
             }
         } catch (error) {
             console.log('Đã xảy ra lỗi:', error);
@@ -81,8 +82,9 @@ function Homepage() {
                     </div>
                     <div className='product col c-9'>
                         <div className='advertisement carousel'>
+                            <div className='advertisement-title'>NHỮNG MẶT HÀNG BÁN CHẠY</div>
                             <ul className='slides'>
-                                {data.map(product => (
+                                {advertisement.map(product => (
                                     <Link to={`/product/${product.maSP}`} className='slide col c-2-4'>
                                         <img className='product-item_img' src={`${BASE_URL}/uploads/${product.anhdaidien}`}></img>
                                         <div className='product-item_information'>
