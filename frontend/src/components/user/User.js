@@ -21,16 +21,16 @@ function User() {
                                 <Link to="/user" className='user-caterogy_item-link user-profile user-current' onClick={() => {
                                     const userProfile = document.querySelector('.user-profile')
                                     const userHistory = document.querySelector('.user-history')
-                                    userProfile.classList.add('user-current');
-                                    userHistory.classList.remove('user-current');
+                                    userProfile.style.color = "blue"
+                                    userHistory.style.color = "#000"
                                 }}>Hồ Sơ Người Dùng</Link>
                             </li>
                             <li className='user-caterogy_item'>
                                 <Link to='/user/history' className='user-caterogy_item-link user-history' onClick={() => {
                                     const userProfile = document.querySelector('.user-profile')
                                     const userHistory = document.querySelector('.user-history')
-                                    userProfile.classList.remove('user-current');
-                                    userHistory.classList.add('user-current');
+                                    userProfile.style.color = "#000"
+                                    userHistory.style.color = "blue"
                                 }}>Lịch Sử Mua Hàng</Link>
                             </li>
                             <li className='user-caterogy_item'>

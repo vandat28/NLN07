@@ -16,7 +16,6 @@ const formatCurrency = (amount) => {
 
 export default function AdminProduct() {
 
-
     const [data, setData] = useState([])
     const [category, setCategory] = useState([])
     const [categoryName, setCategoryName] = useState('')
@@ -240,8 +239,8 @@ export default function AdminProduct() {
                                 <td>{product.soLuongCon}</td>
                                 <td className='color-blue'>{formatCurrency(product.giaBan)}</td>
                                 <td>
-                                    <button className='color-red' type="button" onClick={() => deleteProduct(product.maSP, product.tenSP)}><i class="fa-solid fa-trash"></i></button>
-                                    {/* <button type="button" ><i class="fa-solid fa-pen-to-square"></i></button> */}
+                                    <button className='color-red' type="button" onClick={() => deleteProduct(product.maSP, product.tenSP)}><i className="fa-solid fa-trash"></i></button>
+                                    {/* <button type="button" ><i className="fa-solid fa-pen-to-square"></i></button> */}
                                 </td>
                             </tr>
                         ))}
@@ -306,8 +305,26 @@ export default function AdminProduct() {
                         </div>
                         <form onSubmit={addCategory} className="add-category">
                             <input type="text" className="category-input" value={categoryName} name="nameCategory" onChange={changeCategoryName} placeholder="Nhập tên danh mục" />
-                            <button type="submit" className="add-button">Thêm danh mục</button>
+                            <button type="submit" className="add-button" onClick={(event) => {
+                                const inputValue = document.querySelector(".category-input")
+                                const warnValue = document.querySelector(".modal-body_warning")
+                                var count = 0
+                                for (let i = 0; i < category.length; i++) {
+                                    if (category[i].tenLoai.toUpperCase() === inputValue.value.toUpperCase()) {
+                                        warnValue.innerHTML = 'Danh mục đã có';
+                                        warnValue.style.color = 'red';
+                                        event.preventDefault()
+                                        count++;
+                                        break;
+                                    }
+                                }
+                                if (count == 0) {
+                                    warnValue.innerHTML = 'Thêm thành công';
+                                    warnValue.style.color = 'green'
+                                }
+                            }}>Thêm danh mục</button>
                         </form>
+                        <div className='modal-body_warning'></div>
                         <div className="modal-body">
                             <table className="category-table">
                                 <thead>
@@ -323,8 +340,8 @@ export default function AdminProduct() {
                                             <td>{item.id}</td>
                                             <td>{item.tenLoai}</td>
                                             <td>
-                                                <button className='color-red' type="button" onClick={() => deleteCategory(item.id)}><i class="fa-solid fa-trash"></i></button>
-                                                {/* <button type="button" ><i class="fa-regular fa-pen-to-square"></i></button> */}
+                                                <button className='color-red' type="button" onClick={() => deleteCategory(item.id)}><i className="fa-solid fa-trash"></i></button>
+                                                {/* <button type="button" ><i className="fa-regular fa-pen-to-square"></i></button> */}
                                             </td>
                                         </tr>
                                     ))}

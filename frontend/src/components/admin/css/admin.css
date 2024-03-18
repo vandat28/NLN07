@@ -338,6 +338,12 @@
     /* Khoảng cách từ top */
 }
 
+.modal-body_warning {
+    margin-bottom: 10px;
+    font-size: 1.6rem;
+    margin: 10px 0;
+}
+
 .modal-body {
     max-height: 200px;
     /* Đặt chiều cao tối đa */
@@ -369,7 +375,6 @@
 
 .add-category {
     display: flex;
-    margin-bottom: 20px;
 }
 
 .category-input {

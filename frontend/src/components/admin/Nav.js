@@ -5,7 +5,7 @@ export default function Nav() {
     return (
         <>
             <h1 className='title'>Danh mục quản lý</h1>
-            <div class="sidebar-nav">
+            <div className="sidebar-nav">
                 <Link to='/admin/product'>
                     <img src='/img/productadmin.png' />
                     <p>Sản phẩm</p>

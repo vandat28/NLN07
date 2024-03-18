@@ -58,7 +58,9 @@ function Header() {
                                 <Link to="/Register">Đăng ký</Link>
                             </li>}
                             {login && <li className='header__form-item'>
-                                <Link to="/user">{userOnline.name}</Link>
+                                <Link to="/user">
+                                    <i className="fa-regular fa-user" style={{ paddingRight: "4px" }}></i>{userOnline.name}
+                                </Link>
                             </li>}
                             {login && userOnline.role == 1 ? <li className='header__form-item'>
                                 <Link to="/admin">Admin</Link>
@@ -94,7 +96,7 @@ function Header() {
                 <Route path='/user' element={<User />} />
                 <Route path='/Cart' element={<Cart />} />
             </Routes>
-        </div>
+        </div >
     );
 }
 

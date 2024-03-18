@@ -176,6 +176,22 @@ export default function ProductDetail() {
                         }}><i className="fa-solid fa-arrow-right"></i></button>
                     </div>
                 </div>
+                <div className='product-feedback'>
+                    <div className='product-same_title'>Đánh giá sản phẩm</div>
+                    <div className='product-feedback_container'>
+                        <ul className='product-feedback_list'>
+                            <li className='product-feedback_item'>
+                                <div className='product-feedback_avatar'>
+                                    <i className="fa-regular fa-user"></i>
+                                </div>
+                                <div className='product-feedback_content'>
+                                    <div className='product-feedback_item-user'>Quốc Thiên</div>
+                                    <div className='product-feedback_item-comment'>Xịn</div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
             </div>
         </div>
     )
