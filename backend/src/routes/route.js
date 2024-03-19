@@ -9,7 +9,7 @@ function route(app) {
     app.use('/api/products', products)
     app.use('/api/category', category)
     app.use('/api/order', order)
-    app.use('/api/feedback', feedback)
+    app.use('/api/feedbacks', feedback)
 }
 
 module.exports = route

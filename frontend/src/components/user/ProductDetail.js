@@ -20,6 +20,7 @@ export default function ProductDetail() {
     var cart, count = 0;
     const { id } = useParams();
     const [data, setData] = useState([])
+    const [feedback, setFeedBack] = useState([])
     const [same, setSame] = useState([])
     const [currentIndex, setCurrentIndex] = useState(0)
     const allHoverImages = document.querySelectorAll('.hover-container div img');
@@ -46,6 +47,7 @@ export default function ProductDetail() {
 
     useEffect(() => {
         getProduct(id)
+        getFeedBack(id)
     }, []);
 
     useLayoutEffect(() => {
@@ -103,6 +105,16 @@ export default function ProductDetail() {
             const response = await axios.get(`${BASE_URL}/api/products/${id}`);
             setData(response.data);
             findProductsByCategory(response.data[0].maLoai)
+
+        } catch (error) {
+            console.error('Error fetching data:', error);
+        }
+    }
+
+    const getFeedBack = async (id) => {
+        try {
+            const response = await axios.get(`${BASE_URL}/api/feedbacks/${id}`);
+            setFeedBack(response.data);
 
         } catch (error) {
             console.error('Error fetching data:', error);
@@ -180,15 +192,16 @@ export default function ProductDetail() {
                     <div className='product-same_title'>Đánh giá sản phẩm</div>
                     <div className='product-feedback_container'>
                         <ul className='product-feedback_list'>
-                            <li className='product-feedback_item'>
-                                <div className='product-feedback_avatar'>
-                                    <i className="fa-regular fa-user"></i>
-                                </div>
-                                <div className='product-feedback_content'>
-                                    <div className='product-feedback_item-user'>Quốc Thiên</div>
-                                    <div className='product-feedback_item-comment'>Xịn</div>
-                                </div>
-                            </li>
+                            {feedback.map(jugde => (
+                                <li className='product-feedback_item'>
+                                    <div className='product-feedback_avatar'>
+                                        <i className="fa-regular fa-user"></i>
+                                    </div>
+                                    <div className='product-feedback_content'>
+                                        <div className='product-feedback_item-user'>{jugde.hoten}</div>
+                                        <div className='product-feedback_item-comment'>{jugde.binhLuan}</div>
+                                    </div>
+                                </li>))}
                         </ul>
                     </div>
                 </div>
