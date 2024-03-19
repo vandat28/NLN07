@@ -5,7 +5,7 @@ const feedbackController = require("../app/controller/feedbackController")
 
 router.get('/:id', feedbackController.findAllById)
 router.get('/', feedbackController.findAll)
-// router.post('/', feedbackController.create)
+router.post('/', feedbackController.createFeedBack)
 // router.put('/:id', feedbackController.update)
 // router.delete('/:id', feedbackController.delete)
 

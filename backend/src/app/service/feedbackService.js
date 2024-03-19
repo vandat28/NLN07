@@ -30,17 +30,17 @@ class feedbackService {
             });
         })
     }
-    // createFeedback(hoten, diachi, gioitinh, namsinh, sodienthoai) {
-    //     return new Promise((resolve, reject) => {
-    //         con.query(`INSERT INTO khachhang(hoten, diachi, gioitinh, namsinh, sodienthoai) VALUES ('${hoten}', '${diachi}', '${gioitinh}', '${namsinh}', '${sodienthoai}');`, function (error, result, fields) {
-    //             if (error) {
-    //                 reject(error);
-    //                 return;
-    //             }
-    //             resolve(result);
-    //         });
-    //     })
-    // }
+    createFeedBack(binhluan, mucdanhgia, masp, matk) {
+        return new Promise((resolve, reject) => {
+            con.query(`INSERT INTO danhgia(binhLuan, mucDanhGia, maSP, maTK) VALUES ('${binhluan}', '${mucdanhgia}', '${masp}', '${matk}');`, function (error, result, fields) {
+                if (error) {
+                    reject(error);
+                    return;
+                }
+                resolve(result);
+            });
+        })
+    }
 
     // findOneByPhoneNumber(phoneNumber) {
     //     return new Promise((resolve, reject) => {

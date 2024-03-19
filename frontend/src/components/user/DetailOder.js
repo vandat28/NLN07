@@ -14,6 +14,7 @@ const formatCurrency = (amount) => {
 
 
 export default function DetailOder() {
+    const user = JSON.parse(window.localStorage.getItem("User"));
     const location = useLocation();
     const searchParams = new URLSearchParams(location.search);
     const id = searchParams.get('id');
@@ -21,6 +22,13 @@ export default function DetailOder() {
     const tinhTrangId = searchParams.get('tinhTrang');
     const [data, setData] = useState([])
     const [isReceived, setIsReceived] = useState(false)
+
+    const [formFeedBack, setFormFeedBack] = useState({
+        comment: '',
+        evaluate: '',
+        SpID: '',
+        UserID: ''
+    })
 
 
     useEffect(() => {
@@ -69,6 +77,30 @@ export default function DetailOder() {
 
     }
 
+    const addFeedBack = (event) => {
+        event.preventDefault();
+        axios.post(`${BASE_URL}/api/feedbacks`, formFeedBack, {
+            headers: {
+                'Content-Type': 'multipart/form-data'
+            }
+        })
+            .then(response => {
+                // Xử lý kết quả từ server
+                console.log(response.data);
+                setFormFeedBack({
+                    comment: '',
+                    evaluate: '',
+                    SpID: '',
+                    UserID: ''
+                })
+            })
+            .catch(error => {
+                // Xử lý lỗi
+                console.error(error);
+            });
+        // Gửi dữ liệu đến server, thực hiện các tác vụ cần thiết, vv.
+    };
+
     return (
         <div className='user-detail col c-9'>
             <div className='user-detail_title'>
@@ -97,11 +129,31 @@ export default function DetailOder() {
             </div>
             <div className='main-buttons' style={{ justifyContent: 'flex-end' }}>
                 {isReceived ?
-                    <a href='http://localhost:3000/' className="large-button" style={{ width: '18%', textAlign: 'center' }}>Đánh giá</a>
+                    <button className="large-button" style={{ width: '18%', textAlign: 'center' }} data-toggle="modal" data-target="#myModal">Đánh giá</button>
                     :
                     <button className="large-button" onClick={() => receivedOrder(id, 4, 1)} style={{ width: '18%', textAlign: 'center' }}>Đã nhận hàng</button>
                 }
             </div>
-        </div>
+            {/* <h2>Modal Example</h2>
+            <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button>
+
+            <div class="modal fade" id="myModal" role="dialog">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">Modal Header</h4>
+                        </div>
+                        <div class="modal-body">
+                            <p>Some text in the modal.</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div> */}
+        </div >
     )
 }

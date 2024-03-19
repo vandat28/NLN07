@@ -11,18 +11,15 @@ class feedbackController {
         let data = await feedbackService.findAllById(id)
         res.json(data)
     }
-    // async create(req, res) {
-    //     let account = req.body
-    //     if (account) {
-    //         await feedbackService.createCustomer(account.name, account.address, account.gender,
-    //             account.yob, account.phone)
-    //         let customer = await feedbackService.findOneByPhoneNumber(account.phone)
-    //         await feedbackService.createAccount(account.phone, account.passwd, customer[0].maKH)
-    //         res.json(customer)
-    //     } else {
-    //         res.json('Thất bại')
-    //     }
-    // }
+    async createFeedBack(req, res) {
+        let feedBack = req.body
+        if (feedBack) {
+            let result = await feedbackService.createFeedBack(feedBack.comment, feedBack.evaluate, feedBack.SpID, feedBack.UserID)
+            res.json(result)
+        } else {
+            res.json('Thất bại')
+        }
+    }
 
     // async update(req, res) {
     //     let id = req.params.id
