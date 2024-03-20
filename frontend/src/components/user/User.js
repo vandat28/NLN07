@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { Link, NavLink, Route, Routes } from 'react-router-dom';
+import React, { useState } from 'react';
+import { Link, Route, Routes } from 'react-router-dom';
 import History from './History';
 import Account from './Account';
 import DetailOder from './DetailOder';

@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useLayoutEffect, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom';
 import BASE_URL from '../configURL';
 import axios from 'axios';
+
 
 const formatCurrency = (amount) => {
     const formatter = new Intl.NumberFormat('vi-VN', {
@@ -14,6 +15,7 @@ const formatCurrency = (amount) => {
 
 
 export default function DetailOder() {
+
     const user = JSON.parse(window.localStorage.getItem("User"));
     const location = useLocation();
     const searchParams = new URLSearchParams(location.search);
@@ -37,6 +39,17 @@ export default function DetailOder() {
             setIsReceived(true)
         }
     }, []);
+
+    useLayoutEffect(() => {
+        const stars = document.querySelectorAll(".invaluate-icon");
+        stars.forEach((star, index, parent) => {
+            star.addEventListener("click", function () {
+                for (let i = 0; i <= index; i++) {
+                    parent[i].classList.add('yellow');
+                }
+            })
+        })
+    })
 
     const getOrders = async (id) => {
         try {
@@ -129,31 +142,25 @@ export default function DetailOder() {
             </div>
             <div className='main-buttons' style={{ justifyContent: 'flex-end' }}>
                 {isReceived ?
-                    <button className="large-button" style={{ width: '18%', textAlign: 'center' }} data-toggle="modal" data-target="#myModal">Đánh giá</button>
+                    <button className="large-button" style={{ width: '18%', textAlign: 'center' }}>Đánh giá</button>
                     :
                     <button className="large-button" onClick={() => receivedOrder(id, 4, 1)} style={{ width: '18%', textAlign: 'center' }}>Đã nhận hàng</button>
                 }
             </div>
-            {/* <h2>Modal Example</h2>
-            <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button>
-
-            <div class="modal fade" id="myModal" role="dialog">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal">&times;</button>
-                            <h4 class="modal-title">Modal Header</h4>
-                        </div>
-                        <div class="modal-body">
-                            <p>Some text in the modal.</p>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        </div>
-                    </div>
-
+            <div className='invaluate-container'>
+                <div className='invaluate-title'>Đánh giá sản phẩm</div>
+                <div className='invaluate-star'>
+                    Chất lượng:
+                    <i className="fa-solid fa-star invaluate-icon" style={{ marginLeft: "10px" }}></i>
+                    <i className="fa-solid fa-star invaluate-icon"></i>
+                    <i className="fa-solid fa-star invaluate-icon"></i>
+                    <i className="fa-solid fa-star invaluate-icon"></i>
+                    <i className="fa-solid fa-star invaluate-icon"></i>
                 </div>
-            </div> */}
+                <textarea type='text' className='invaluate-content' placeholder='Nhận xét' />
+                <button type='button' className='invaluate-btn'>Gửi</button>
+            </div>
         </div >
+
     )
 }
