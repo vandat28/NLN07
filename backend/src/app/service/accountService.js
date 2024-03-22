@@ -69,7 +69,17 @@ class accountService {
         })
     }
 
-
+    findAccountById(id) {
+        return new Promise((resolve, reject) => {
+            con.query(`SELECT * FROM taikhoan t where t.maKH = ${id}`, function (error, result, fields) {
+                if (error) {
+                    reject(error);
+                    return;
+                }
+                resolve(result);
+            });
+        })
+    }
 
     // update(newCategoryName, id) {
     //     return new Promise((resolve, reject) => {

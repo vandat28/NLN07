@@ -1,4 +1,5 @@
 const feedbackService = require('../service/feedbackService')
+const accountService = require('../service/accountService')
 
 class feedbackController {
     async findAll(req, res) {
@@ -14,7 +15,8 @@ class feedbackController {
     async createFeedBack(req, res) {
         let feedBack = req.body
         if (feedBack) {
-            let result = await feedbackService.createFeedBack(feedBack.comment, feedBack.evaluate, feedBack.SpID, feedBack.UserID)
+            let account = await accountService.findAccountById(feedBack.UserID)
+            let result = await feedbackService.createFeedBack(feedBack.comment, feedBack.evaluate, feedBack.SpID, account[0].maTK)
             res.json(result)
         } else {
             res.json('Thất bại')

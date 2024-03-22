@@ -24,6 +24,8 @@ export default function DetailOder() {
     const tinhTrangId = searchParams.get('tinhTrang');
     const [data, setData] = useState([])
     const [isReceived, setIsReceived] = useState(false)
+    const [evaluateA, setEvaluateA] = useState(false)
+    const [stars, setStars] = useState(0);
 
     const [formFeedBack, setFormFeedBack] = useState({
         comment: '',
@@ -39,17 +41,6 @@ export default function DetailOder() {
             setIsReceived(true)
         }
     }, []);
-
-    useLayoutEffect(() => {
-        const stars = document.querySelectorAll(".invaluate-icon");
-        stars.forEach((star, index, parent) => {
-            star.addEventListener("click", function () {
-                for (let i = 0; i <= index; i++) {
-                    parent[i].classList.add('yellow');
-                }
-            })
-        })
-    })
 
     const getOrders = async (id) => {
         try {
@@ -92,9 +83,10 @@ export default function DetailOder() {
 
     const addFeedBack = (event) => {
         event.preventDefault();
+        console.log(formFeedBack);
         axios.post(`${BASE_URL}/api/feedbacks`, formFeedBack, {
             headers: {
-                'Content-Type': 'multipart/form-data'
+                'Content-Type': 'application/json'
             }
         })
             .then(response => {
@@ -142,24 +134,99 @@ export default function DetailOder() {
             </div>
             <div className='main-buttons' style={{ justifyContent: 'flex-end' }}>
                 {isReceived ?
-                    <button className="large-button" style={{ width: '18%', textAlign: 'center' }}>Đánh giá</button>
+                    <button className="large-button" style={{ width: '18%', textAlign: 'center' }} onClick={() => { setEvaluateA(true) }}>Đánh giá</button>
                     :
                     <button className="large-button" onClick={() => receivedOrder(id, 4, 1)} style={{ width: '18%', textAlign: 'center' }}>Đã nhận hàng</button>
                 }
             </div>
-            <div className='invaluate-container'>
+            {evaluateA && <div className='invaluate-container'>
                 <div className='invaluate-title'>Đánh giá sản phẩm</div>
                 <div className='invaluate-star'>
                     Chất lượng:
-                    <i className="fa-solid fa-star invaluate-icon" style={{ marginLeft: "10px" }}></i>
-                    <i className="fa-solid fa-star invaluate-icon"></i>
-                    <i className="fa-solid fa-star invaluate-icon"></i>
-                    <i className="fa-solid fa-star invaluate-icon"></i>
-                    <i className="fa-solid fa-star invaluate-icon"></i>
+                    <div onClick={() => {
+                        const star1 = document.querySelector(".invaluate-icon1");
+                        const star2 = document.querySelector(".invaluate-icon2");
+                        const star3 = document.querySelector(".invaluate-icon3");
+                        const star4 = document.querySelector(".invaluate-icon4");
+                        const star5 = document.querySelector(".invaluate-icon5");
+                        star1.classList.add('yellow');
+                        star2.classList.remove('yellow');
+                        star3.classList.remove('yellow');
+                        star4.classList.remove('yellow');
+                        star5.classList.remove('yellow');
+                        setStars(1);
+                    }}><i className="fa-solid fa-star invaluate-icon1" style={{ marginLeft: "10px" }}></i>
+                    </div>
+                    <div onClick={() => {
+                        const star1 = document.querySelector(".invaluate-icon1");
+                        const star2 = document.querySelector(".invaluate-icon2");
+                        const star3 = document.querySelector(".invaluate-icon3");
+                        const star4 = document.querySelector(".invaluate-icon4");
+                        const star5 = document.querySelector(".invaluate-icon5");
+                        star1.classList.add('yellow');
+                        star2.classList.add('yellow');
+                        star3.classList.remove('yellow');
+                        star4.classList.remove('yellow');
+                        star5.classList.remove('yellow');
+                        setStars(2);
+                    }}><i className="fa-solid fa-star invaluate-icon2" ></i>
+                    </div>
+                    <div onClick={() => {
+                        const star1 = document.querySelector(".invaluate-icon1");
+                        const star2 = document.querySelector(".invaluate-icon2");
+                        const star3 = document.querySelector(".invaluate-icon3");
+                        const star4 = document.querySelector(".invaluate-icon4");
+                        const star5 = document.querySelector(".invaluate-icon5");
+                        star1.classList.add('yellow');
+                        star2.classList.add('yellow');
+                        star3.classList.add('yellow');
+                        star4.classList.remove('yellow');
+                        star5.classList.remove('yellow');
+                        setStars(3);
+                    }}><i className="fa-solid fa-star invaluate-icon3" ></i>
+                    </div>
+                    <div onClick={() => {
+                        const star1 = document.querySelector(".invaluate-icon1");
+                        const star2 = document.querySelector(".invaluate-icon2");
+                        const star3 = document.querySelector(".invaluate-icon3");
+                        const star4 = document.querySelector(".invaluate-icon4");
+                        const star5 = document.querySelector(".invaluate-icon5");
+                        star1.classList.add('yellow');
+                        star2.classList.add('yellow');
+                        star3.classList.add('yellow');
+                        star4.classList.add('yellow');
+                        star5.classList.remove('yellow');
+                        setStars(4);
+                    }}><i className="fa-solid fa-star invaluate-icon4" ></i>
+                    </div>
+                    <div onClick={() => {
+                        const star1 = document.querySelector(".invaluate-icon1");
+                        const star2 = document.querySelector(".invaluate-icon2");
+                        const star3 = document.querySelector(".invaluate-icon3");
+                        const star4 = document.querySelector(".invaluate-icon4");
+                        const star5 = document.querySelector(".invaluate-icon5");
+                        star1.classList.add('yellow');
+                        star2.classList.add('yellow');
+                        star3.classList.add('yellow');
+                        star4.classList.add('yellow');
+                        star5.classList.add('yellow');
+                        setStars(5);
+                    }}><i className="fa-solid fa-star invaluate-icon5" ></i>
+                    </div>
                 </div>
                 <textarea type='text' className='invaluate-content' placeholder='Nhận xét' />
-                <button type='button' className='invaluate-btn'>Gửi</button>
-            </div>
+                <button type='submit' className='invaluate-btn' onClick={(e) => {
+                    const eContent = document.querySelector('.invaluate-content')
+                    const sendForm = {
+                        comment: `${eContent.value}`,
+                        evaluate: `${stars}`,
+                        SpID: `${id}`,
+                        UserID: `${user.id}`
+                    }
+                    setFormFeedBack(sendForm)
+                    addFeedBack(e);
+                }}>Gửi</button>
+            </div>}
         </div >
 
     )

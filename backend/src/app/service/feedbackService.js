@@ -32,7 +32,7 @@ class feedbackService {
     }
     createFeedBack(binhluan, mucdanhgia, masp, matk) {
         return new Promise((resolve, reject) => {
-            con.query(`INSERT INTO danhgia(binhLuan, mucDanhGia, maSP, maTK) VALUES ('${binhluan}', '${mucdanhgia}', '${masp}', '${matk}');`, function (error, result, fields) {
+            con.query(`INSERT INTO danhgia(binhLuan, mucDanhGia, maSP, maTK) VALUES ('${binhluan}', ${mucdanhgia}, ${masp}, ${matk});`, function (error, result, fields) {
                 if (error) {
                     reject(error);
                     return;

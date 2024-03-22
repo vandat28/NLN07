@@ -48,7 +48,7 @@ export default function ProductDetail() {
     useEffect(() => {
         getProduct(id)
         getFeedBack(id)
-    }, []);
+    });
 
     useLayoutEffect(() => {
         const oldCart = JSON.parse(localStorage.getItem("cart"));
@@ -199,6 +199,8 @@ export default function ProductDetail() {
                                     </div>
                                     <div className='product-feedback_content'>
                                         <div className='product-feedback_item-user'>{jugde.hoten}</div>
+                                        <div className='product-feedback_item-star'>
+                                        </div>
                                         <div className='product-feedback_item-comment'>{jugde.binhLuan}</div>
                                     </div>
                                 </li>))}
