@@ -199,7 +199,8 @@ export default function ProductDetail() {
                                     </div>
                                     <div className='product-feedback_content'>
                                         <div className='product-feedback_item-user'>{jugde.hoten}</div>
-                                        <div className='product-feedback_item-star'>
+                                        <div className='product-feedback_item-star' >
+                                            {jugde.mucDanhGia} <i class="fa-solid fa-star yellow"></i>
                                         </div>
                                         <div className='product-feedback_item-comment'>{jugde.binhLuan}</div>
                                     </div>

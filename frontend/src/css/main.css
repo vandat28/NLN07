@@ -575,6 +575,7 @@
     box-shadow: 0 5px 10px #999;
     background-color: #fff;
     padding: 10px;
+    /* transition: down ease 2s; */
 }
 
 .user-detail_title {
@@ -770,7 +771,14 @@
 
 .product-feedback_item-user {
     font-size: 1.4rem;
-    padding: 0 0 10px;
+    padding: 0 0 4px;
+}
+
+.product-feedback_item-star {
+    display: flex;
+    align-items: center;
+    font-size: 1.4rem;
+    margin-bottom: 4px;
 }
 
 .product-feedback_item-comment {
