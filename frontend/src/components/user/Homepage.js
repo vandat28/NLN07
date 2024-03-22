@@ -1,5 +1,5 @@
 import React, { useEffect, useLayoutEffect, useState } from 'react';
-import BASE_URL from '../configURL';
+import BASE_URL from '../../configURL';
 import axios from 'axios';
 import { Routes, Route, Link, Router } from "react-router-dom";
 
@@ -15,42 +15,12 @@ const formatCurrency = (amount) => {
 };
 
 
-function Homepage() {
-    const [data, setData] = useState([])
-    const [category, setCategory] = useState([])
-    const [advertisement, setAdvertisement] = useState([])
+function Homepage(props) {
+
+
     const [currentIndex, setCurrentIndex] = useState(0)
     const slides = document.querySelector('.slides');
-
-    useEffect(() => {
-        getApiData()
-        getApiDataCategory()
-    }, []);
-
-    const getApiData = async () => {
-        try {
-            const response = await fetch(`${BASE_URL}/api/products`);
-            const data = await response.json();
-            if (data) {
-                setData(data);
-                setAdvertisement(data);
-            }
-        } catch (error) {
-            console.log('Đã xảy ra lỗi:', error);
-        }
-
-    };
-    const getApiDataCategory = async () => {
-        try {
-            const response = await fetch(`${BASE_URL}/api/category`);
-            const data = await response.json();
-            if (data) {
-                setCategory(data);
-            }
-        } catch (error) {
-            console.log('Đã xảy ra lỗi:', error);
-        }
-    };
+    const { data, category, setData, advertisement } = props
 
     const findProductsByCategory = async (id) => {
         try {
@@ -60,6 +30,8 @@ function Homepage() {
             console.error('Error fetching data:', error);
         }
     }
+
+
 
     function showSlide(index) {
         slides.style.transform = `translateX(-${index * 20}%)`;

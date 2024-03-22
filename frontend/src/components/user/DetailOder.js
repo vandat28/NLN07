@@ -1,6 +1,6 @@
 import React, { useEffect, useLayoutEffect, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom';
-import BASE_URL from '../configURL';
+import BASE_URL from '../../configURL';
 import axios from 'axios';
 
 

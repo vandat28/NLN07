@@ -14,7 +14,7 @@ class orderController {
         const order = req.body;
         try {
             // Tạo đơn hàng chính
-            await orderService.createOrder(order.tongTien, 0, order.maKH, 1);
+            await orderService.createOrder(order.tongTien, order.tinhTrangThanhToan, order.maKH, order.phuongThucThanhToan);
             const orderId = await orderService.findOrderId();
             // Lặp qua từng sản phẩm trong đơn hàng và tạo chi tiết đơn hàng cho mỗi sản phẩm
             for (const product of order.sanPham) {

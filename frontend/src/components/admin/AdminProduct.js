@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios';
-import BASE_URL from '../configURL';
+import BASE_URL from '../../configURL';
 
 //chuyển về tiền vnđ
 const formatCurrency = (amount) => {

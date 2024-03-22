@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link, Route, Routes, useLocation } from 'react-router-dom';
-import BASE_URL from '../configURL';
+import BASE_URL from '../../configURL';
 import axios from 'axios';
 import { format, utcToZonedTime } from 'date-fns-tz';
 

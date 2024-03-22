@@ -2,7 +2,7 @@ import axios from 'axios';
 import React, { useEffect, useLayoutEffect, useState } from 'react'
 import { useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
-import BASE_URL from '../configURL';
+import BASE_URL from '../../configURL';
 
 //chuyển về tiền vnđ
 const formatCurrency = (amount) => {

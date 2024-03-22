@@ -7,6 +7,7 @@ const multer = require('multer');
 const upload = multer({ dest: './src/public/uploads/' })
 
 
+router.get('/search', products.findAllByName)
 router.get('/:id', products.findOneById)
 router.get('/category/:id', products.findAllByCategoryId)
 router.get('/', products.findAll)

@@ -3,8 +3,14 @@ const productService = require('../service/productService')
 
 class products {
     async findAll(req, res) {
-        let data = await productService.findALl()
-        res.json(data)
+        try {
+            let data = await productService.findALl()
+            res.json(data)
+        } catch (error) {
+            console.error('Đã xảy ra lỗi:', error);
+            res.status(500).json({ message: 'Đã xảy ra lỗi khi tạo đơn hàng.' });
+        }
+
     }
 
     async create(req, res) {
@@ -41,6 +47,17 @@ class products {
         let id = req.params.id
         let data = await productService.findOneById(id)
         res.json(data)
+    }
+
+    async findAllByName(req, res) {
+        try {
+            const searchTxt = req.query.searchTxt
+            let products = await productService.findAllByName(searchTxt)
+            res.status(200).json(products);
+        } catch (error) {
+            console.error('Đã xảy ra lỗi:', error);
+            res.status(500).json({ message: 'Đã xảy ra lỗi khi tạo đơn hàng.' });
+        }
     }
 
 }

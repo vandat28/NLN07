@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
-import BASE_URL from '../configURL';
+import BASE_URL from '../../configURL';
 import axios from 'axios';
 import { format, utcToZonedTime } from 'date-fns-tz';
 // Hàm chuyển đổi định dạng ngày tháng

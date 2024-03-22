@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import BASE_URL from '../configURL';
+import BASE_URL from '../../configURL';
 import { Link } from 'react-router-dom';
 
 export default function AdminCustomer() {
