@@ -134,7 +134,11 @@ export default function DetailOder() {
             </div>
             <div className='main-buttons' style={{ justifyContent: 'flex-end' }}>
                 {isReceived ?
-                    <button className="large-button" style={{ width: '18%', textAlign: 'center' }} onClick={() => { setEvaluateA(true) }}>Đánh giá</button>
+                    <button className="large-button" style={{ width: '18%', textAlign: 'center' }} onClick={() => {
+                        const rollDown = document.querySelector('.user-detail')
+                        rollDown.classList.add('rollDown')
+                        setEvaluateA(true)
+                    }}>Đánh giá</button>
                     :
                     <button className="large-button" onClick={() => receivedOrder(id, 4, 1)} style={{ width: '18%', textAlign: 'center' }}>Đã nhận hàng</button>
                 }
@@ -215,17 +219,19 @@ export default function DetailOder() {
                     </div>
                 </div>
                 <textarea type='text' className='invaluate-content' placeholder='Nhận xét' />
-                <button type='submit' className='invaluate-btn' onClick={(e) => {
-                    const eContent = document.querySelector('.invaluate-content')
-                    const sendForm = {
-                        comment: `${eContent.value}`,
-                        evaluate: `${stars}`,
-                        SpID: `${id}`,
-                        UserID: `${user.id}`
-                    }
-                    setFormFeedBack(sendForm)
-                    addFeedBack(e);
-                }}>Gửi</button>
+                <div className='btn-container'>
+                    <button type='submit' className='invaluate-btn' onClick={(e) => {
+                        const eContent = document.querySelector('.invaluate-content')
+                        const sendForm = {
+                            comment: `${eContent.value}`,
+                            evaluate: `${stars}`,
+                            SpID: `${id}`,
+                            UserID: `${user.id}`
+                        }
+                        setFormFeedBack(sendForm)
+                        addFeedBack(e);
+                    }}>Gửi</button>
+                </div>
             </div>}
         </div >
 

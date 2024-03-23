@@ -316,6 +316,7 @@
     border-radius: 4px;
     box-shadow: 0 5px 10px #999;
     z-index: 1;
+    transform: translateX(4px);
 }
 
 .register-infor_title,
@@ -375,6 +376,7 @@
     background-color: #fff;
     border-radius: 4px;
     box-shadow: 0 5px 10px #999;
+    transform: translateX(-4px);
 }
 
 
@@ -416,6 +418,11 @@
     margin: 0 auto;
     box-shadow: 0 5px 10px #999;
     float: right;
+}
+
+.register-form_submit:hover {
+    -webkit-animation: shake-top 0.8s cubic-bezier(0.455, 0.030, 0.515, 0.955) both;
+    animation: shake-top 0.8s cubic-bezier(0.455, 0.030, 0.515, 0.955) both;
 }
 
 /* Login */
@@ -571,11 +578,12 @@
 }
 
 .user-detail {
+    min-height: 350px;
     border-radius: 2px;
     box-shadow: 0 5px 10px #999;
     background-color: #fff;
     padding: 10px;
-    /* transition: down ease 2s; */
+    overflow: hidden;
 }
 
 .user-detail_title {
@@ -836,7 +844,7 @@
 }
 
 .img-container img {
-    width: 200px;
+    width: 280px;
 
 }
 
@@ -873,10 +881,10 @@
 }
 
 .product-name {
-    font-size: 26px;
+    font-size: 2.4rem;
     margin-bottom: 22px;
     font-weight: 700;
-    letter-spacing: 1px;
+    line-height: 30px;
     opacity: 0.9;
 }
 
@@ -1016,6 +1024,11 @@
 
 .invaluate-content:focus {
     outline: none;
+}
+
+.btn-container {
+    display: flex;
+    justify-content: end;
 }
 
 .invaluate-btn {

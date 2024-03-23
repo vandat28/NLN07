@@ -32,16 +32,18 @@ function Register() {
         const repasswd = document.querySelector('.register-app_repasswd')
 
         const upHandleIF = () => {
-            infor.classList.add('up');
+            infor.classList.add('slide-Left');
             regis_App.classList.remove('up');
+            regis_App.classList.remove('slide-Right');
         }
 
         const upHandleApp = () => {
-            regis_App.classList.add('up');
+            regis_App.classList.add('slide-Right');
             infor.classList.remove('up');
+            infor.classList.remove('slide-Left');
         }
 
-        phone.addEventListener("focus", upHandleIF);
+        phone.addEventListener("focus", upHandleIF,);
         name.addEventListener("focus", upHandleIF);
         address.addEventListener("focus", upHandleIF);
         address.addEventListener("focus", upHandleIF);
@@ -75,13 +77,15 @@ function Register() {
 
     const addAccount = (event) => {
         for (let i = 0; i < data.length; i++) {
-            if (data[i].soDienThoai === formData.phone) {
+            if (data[i].sodienthoai === formData.phone) {
                 alert("Rất tiếc! Số điện thoại đã được đăng ký.");
-                return;
+                event.preventDefault();
+                break;
             }
         }
         if (formData.passwd !== formData.repasswd) {
             alert("Mật khẩu không trùng khớp");
+            event.preventDefault();
         } else {
             event.preventDefault();
             console.log(formData)
@@ -160,7 +164,7 @@ function Register() {
                 </form>
             </div>
             {isSignUp && (
-                <div className="login-modal">
+                <div className="login-modal" style={{ zIndex: "10;" }}>
                     <div className="login-modal-content">
                         <p>Chúc mừng bạn đã đăng ký thành công!</p>
                         <Link to='/Login' className="login-ok-button">OK</Link>

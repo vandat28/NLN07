@@ -126,6 +126,23 @@ input:focus {
     color: rgb(243, 243, 33);
 }
 
+.rollDown {
+    animation: down ease 1s;
+}
+
+.slide-Left {
+    animation: turnLeft ease 1s forwards;
+}
+
+.slide-Right {
+    animation: turnRight ease 1s forwards;
+}
+
+.shake-top {
+    -webkit-animation: shake-top 0.8s cubic-bezier(0.455, 0.030, 0.515, 0.955) both;
+    animation: shake-top 0.8s cubic-bezier(0.455, 0.030, 0.515, 0.955) both;
+}
+
 @keyframes down {
     0% {
         height: 348.8px;
@@ -133,5 +150,127 @@ input:focus {
 
     100% {
         height: 612px;
+    }
+}
+
+@keyframes turnLeft {
+    0% {
+        transform: translateX(0);
+        z-index: 0;
+    }
+
+    50% {
+        transform: translateX(-10px);
+    }
+
+    100% {
+        transform: translateX(4px);
+        z-index: 2;
+    }
+}
+
+@keyframes turnRight {
+    0% {
+        transform: translateX(0);
+        z-index: 0;
+    }
+
+    50% {
+        transform: translateX(10px);
+    }
+
+    100% {
+        transform: translateX(-4px);
+        z-index: 2;
+    }
+}
+
+@keyframes up {
+    0% {
+        z-index: 0;
+    }
+
+    100% {
+        z-index: 2;
+    }
+}
+
+@-webkit-keyframes shake-top {
+
+    0%,
+    100% {
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg);
+        -webkit-transform-origin: 50% 0;
+        transform-origin: 50% 0;
+    }
+
+    10% {
+        -webkit-transform: rotate(2deg);
+        transform: rotate(2deg);
+    }
+
+    20%,
+    40%,
+    60% {
+        -webkit-transform: rotate(-4deg);
+        transform: rotate(-4deg);
+    }
+
+    30%,
+    50%,
+    70% {
+        -webkit-transform: rotate(4deg);
+        transform: rotate(4deg);
+    }
+
+    80% {
+        -webkit-transform: rotate(-2deg);
+        transform: rotate(-2deg);
+    }
+
+    90% {
+        -webkit-transform: rotate(2deg);
+        transform: rotate(2deg);
+    }
+}
+
+@keyframes shake-top {
+
+    0%,
+    100% {
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg);
+        -webkit-transform-origin: 50% 0;
+        transform-origin: 50% 0;
+    }
+
+    10% {
+        -webkit-transform: rotate(2deg);
+        transform: rotate(2deg);
+    }
+
+    20%,
+    40%,
+    60% {
+        -webkit-transform: rotate(-4deg);
+        transform: rotate(-4deg);
+    }
+
+    30%,
+    50%,
+    70% {
+        -webkit-transform: rotate(4deg);
+        transform: rotate(4deg);
+    }
+
+    80% {
+        -webkit-transform: rotate(-2deg);
+        transform: rotate(-2deg);
+    }
+
+    90% {
+        -webkit-transform: rotate(2deg);
+        transform: rotate(2deg);
     }
 }
