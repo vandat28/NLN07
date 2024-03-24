@@ -17,9 +17,7 @@ const formatCurrency = (amount) => {
 
 function Homepage(props) {
 
-
     const [currentIndex, setCurrentIndex] = useState(0)
-    const slides = document.querySelector('.slides');
     const { data, category, setData, advertisement } = props
 
     const findProductsByCategory = async (id) => {
@@ -31,11 +29,20 @@ function Homepage(props) {
         }
     }
 
+    useEffect(() => {
+        const slides = document.querySelector('.slides');
+        const intervalId = setInterval(() => {
+            if (currentIndex < slides.children.length - 1) {
+                slides.style.transform = `translateX(-${(currentIndex + 1) * 20}%)`;
+                setCurrentIndex(currentIndex + 1);
+            } else {
+                slides.style.transform = `translateX(-${0 * 20}%)`;
+                setCurrentIndex(0);
+            }
+        }, 3000);
 
-
-    function showSlide(index) {
-        slides.style.transform = `translateX(-${index * 20}%)`;
-    }
+        return () => clearInterval(intervalId);
+    }, [currentIndex])
 
     return (
         <div className="main">
@@ -58,7 +65,10 @@ function Homepage(props) {
                             <ul className='slides'>
                                 {advertisement.map(product => (
                                     <Link to={`/product/${product.maSP}`} className='slide col c-2-4'>
-                                        <img className='product-item_img' src={`${BASE_URL}/uploads/${product.anhdaidien}`}></img>
+                                        <div className='product-item_img-container'>
+                                            <img className='product-item_img' src={`${BASE_URL}/uploads/${product.anhdaidien}`}></img>
+                                            <div className='new'>New</div>
+                                        </div>
                                         <div className='product-item_information'>
                                             <div className='product-same_item_name'>{product.tenSP}</div>
                                             <div className='product-same_item_description'>{product.moTa}</div>
@@ -68,21 +78,21 @@ function Homepage(props) {
                                 ))}
                             </ul>
                             <button className="button-slide prev" onClick={() => {
+                                const slides = document.querySelector('.slides');
                                 if (currentIndex > 0) {
-                                    showSlide(currentIndex - 1);
+                                    slides.style.transform = `translateX(-${(currentIndex - 1) * 20}%)`;
                                     setCurrentIndex(currentIndex - 1);
                                 }
-                                // stopAutoSlide();
                             }}><i className="fa-solid fa-arrow-left"></i></button>
                             <button className="button-slide next" onClick={() => {
+                                const slides = document.querySelector('.slides');
                                 if (currentIndex < slides.children.length - 1) {
-                                    showSlide(currentIndex + 1);
+                                    slides.style.transform = `translateX(-${(currentIndex + 1) * 20}%)`;
                                     setCurrentIndex(currentIndex + 1);
                                 } else {
-                                    showSlide(0);
+                                    slides.style.transform = `translateX(-${0 * 20}%)`;
                                     setCurrentIndex(0);
                                 }
-                                // stopAutoSlide();
                             }}><i className="fa-solid fa-arrow-right"></i></button>
                         </div>
                         <ul className='product-list row'>

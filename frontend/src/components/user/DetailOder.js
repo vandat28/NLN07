@@ -218,7 +218,7 @@ export default function DetailOder() {
                     }}><i className="fa-solid fa-star invaluate-icon5" ></i>
                     </div>
                 </div>
-                <textarea type='text' className='invaluate-content' placeholder='Nhận xét' />
+                <textarea type='text' className='invaluate-content' required placeholder='Nhận xét' />
                 <div className='btn-container'>
                     <button type='submit' className='invaluate-btn' onClick={(e) => {
                         const eContent = document.querySelector('.invaluate-content')

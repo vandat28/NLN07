@@ -84,6 +84,7 @@ input:focus {
 }
 
 .slide {
+    position: relative;
     flex: 0 0 auto;
     width: 100%;
     box-shadow: 0 4px 4px #999;
@@ -112,6 +113,33 @@ input:focus {
 .button-slide:hover {
     opacity: 0.9;
     background-color: #7496ea;
+}
+
+.new {
+    position: absolute;
+    text-align: center;
+    content: "";
+    font-size: 1.2rem;
+    width: 30px;
+    height: 14px;
+    background-color: #7496ea;
+    top: 10px;
+    left: -4px;
+    padding: 0 2px;
+    border-top-left-radius: 2px;
+    border-top-right-radius: 2px;
+    border-bottom-right-radius: 2px;
+}
+
+.new::after {
+    position: absolute;
+    content: "";
+    display: inline-block;
+    left: 0;
+    bottom: -.2rem;
+    border-top: .2rem solid;
+    border-left: .4rem solid transparent;
+    filter: brightness(60%);
 }
 
 .prev {
