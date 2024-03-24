@@ -14,10 +14,9 @@ const formatCurrency = (amount) => {
 };
 
 
-function Cart() {
+function Cart({ onCartIncrease, onCartDecrease }) {
 
     const userCart = JSON.parse(window.localStorage.getItem('cart'));
-    const cartCount = JSON.parse(window.localStorage.getItem('Cart'));
     const user = JSON.parse(window.localStorage.getItem('User'));
     const [show, setShow] = useState(false);
     const [total, setTotal] = useState(0);
@@ -44,7 +43,7 @@ function Cart() {
                 return total
             }, 0))
         }
-    }, [])
+    })
 
     const orderProducts = (event) => {
         event.preventDefault();
@@ -172,22 +171,18 @@ function Cart() {
                                                     }
                                                 }
                                             }
-                                            cartCount.quantity--;
                                             window.localStorage.setItem("cart", JSON.stringify(userCart));
-                                            window.localStorage.setItem("Cart", JSON.stringify(cartCount));
-
                                             if (userCart.length == 0) {
                                                 window.localStorage.removeItem("cart");
+                                                setTotal(0)
                                             }
-                                            window.location.reload();
+                                            onCartDecrease()
                                         }}>-</button>
                                         <input className='cart_product-quantity-current' placeholder={`${item.quantity}`}></input>
                                         <button className='cart_product-quantity-increase' onClick={() => {
                                             userCart[i].quantity++;
-                                            cartCount.quantity++;
                                             window.localStorage.setItem("cart", JSON.stringify(userCart));
-                                            window.localStorage.setItem("Cart", JSON.stringify(cartCount));
-                                            window.location.reload();
+                                            onCartIncrease()
                                         }}>+</button>
                                     </div>
                                 </li>

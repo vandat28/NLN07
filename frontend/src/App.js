@@ -16,7 +16,7 @@ function App() {
   const [data, setData] = useState([])
   const [category, setCategory] = useState([])
   const [advertisement, setAdvertisement] = useState([])
-
+  const [quantity, setQuantity] = useState(0)
 
   const createCart = () => {
     const count = {
@@ -60,18 +60,22 @@ function App() {
     }
   };
 
+  const handleCartIncrease = () => {
+    setQuantity(quantity + 1);
+  }
 
-
-
+  const handleCartDecrease = () => {
+    setQuantity(quantity - 1);
+  }
 
   return (
     <>
-      <Header setData={setData} />
+      <Header setData={setData} quantity={quantity} onCartIncrease={handleCartIncrease} onCartDecrease={handleCartDecrease} />
       <Routes>
         <Route path='/' element={<Homepage data={data} setData={setData} advertisement={advertisement} category={category} />} />
         <Route path='/admin/*' element={<AdminPage />} />
         <Route path='/user/*' element={<User />} />
-        <Route path='/product/:id' element={<ProductDetail />} />
+        <Route path='/product/:id' element={<ProductDetail onCartIncrease={handleCartIncrease} />} />
       </Routes>
       <Footer />
     </>

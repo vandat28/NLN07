@@ -16,7 +16,7 @@ const formatCurrency = (amount) => {
 
 
 
-export default function ProductDetail() {
+export default function ProductDetail({ onCartIncrease }) {
     var cart, count = 0;
     const { id } = useParams();
     const [data, setData] = useState([])
@@ -88,7 +88,6 @@ export default function ProductDetail() {
 
         localStorage.setItem("Cart", JSON.stringify({ quantity: `${count}` }));
         localStorage.setItem("cart", JSON.stringify(cart));
-        window.location.reload();
     }
 
     const findProductsByCategory = async (id) => {
@@ -151,7 +150,10 @@ export default function ProductDetail() {
                         </div>
                         <p className="product-description">{data[0].moTa}</p>
                         <div className="btn-groups">
-                            <button type="button" className="add-cart-btn" onClick={addToCart}><i className="fas fa-shopping-cart"></i> Thêm vào giỏ</button>
+                            <button type="button" className="add-cart-btn" onClick={() => {
+                                onCartIncrease()
+                                addToCart()
+                            }}><i className="fas fa-shopping-cart"></i> Thêm vào giỏ</button>
                             <button type="button" className="buy-now-btn"><i className="fas fa-wallet"></i> Mua ngay</button>
                         </div>
                     </div>

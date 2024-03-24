@@ -18,7 +18,7 @@ const formatCurrency = (amount) => {
 function Homepage(props) {
 
     const [currentIndex, setCurrentIndex] = useState(0)
-    const { data, category, setData, advertisement } = props
+    const { data, category, setData, advertisement, quantityCart } = props
 
     const findProductsByCategory = async (id) => {
         try {

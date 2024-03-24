@@ -9,8 +9,7 @@ import BASE_URL from '../../configURL';
 function Header(props) {
     const userCurrent = JSON.parse(window.localStorage.getItem('User'));
     const userCart = JSON.parse(window.localStorage.getItem('cart'));
-    const { setData } = props
-    const [quantity, setQuantity] = useState()
+    const { setData, quantity, onCartIncrease, onCartDecrease } = props
     const [userOnline, setUserOnline] = useState(userCurrent);
     const [userOffline, setUserOffline] = useState("");
     const [login, setLogin] = useState(false);
@@ -19,7 +18,6 @@ function Header(props) {
     useEffect(() => {
         const headerCover = document.querySelector('.header__cover');
         const headerFixed = document.querySelector('.header__fixed');
-        const cartCount = JSON.parse(window.localStorage.getItem('Cart'));
 
         const handleScroll = () => {
             if (window.scrollY > 40) {
@@ -31,9 +29,6 @@ function Header(props) {
             }
         }
         window.addEventListener('scroll', handleScroll)
-        if (cartCount) {
-            setQuantity(cartCount.quantity)
-        }
         return () => {
             window.removeEventListener('scroll', handleScroll);
         };
@@ -50,8 +45,6 @@ function Header(props) {
 
     const handleChange = async (event) => {
         setSearch(event.target.value);
-
-
     };
 
     const handleSearch = async (event) => {
@@ -91,11 +84,11 @@ function Header(props) {
             <div className='header__fixed'>
                 <div className='grid wide'>
                     <div className='header__main'>
-                        <a href='http://localhost:3000' className='header__main-logo'>
+                        <Link to='http://localhost:3000' className='header__main-logo'>
                             <div className='header__main-logo-container'>
                             </div>
                             <div className='header__main-logo-title'>HealPro</div>
-                        </a>
+                        </Link>
                         <form onSubmit={handleSearch} className='header__main-find'>
                             <input className='header__main-find-input' placeholder='Nhập tên sản phẩm' value={search} onChange={handleChange} />
                             <button type='submit' className='header__main-find-button'>search</button>
@@ -113,7 +106,7 @@ function Header(props) {
                 <Route path='/Login' element={<Login />} />
                 <Route path='/Register' element={<Register />} />
                 <Route path='/user' element={<User />} />
-                <Route path='/Cart' element={<Cart />} />
+                <Route path='/Cart' element={<Cart onCartIncrease={onCartIncrease} onCartDecrease={onCartDecrease} />} />
             </Routes>
         </div >
     );
