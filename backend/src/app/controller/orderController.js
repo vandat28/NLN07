@@ -63,10 +63,21 @@ class orderController {
 
     async updateTT(req, res) {
         const tinhTrang = req.body.tinhTrang;
+        const maDH = req.params.id
+        try {
+            await orderService.update(tinhTrang, maDH)
+            res.status(200).json({ message: 'Đã cập nhật đơn hàng thành công' });
+        } catch (error) {
+            console.error('Đã xảy ra lỗi:', error);
+            res.status(500).json({ message: 'Đã xảy ra lỗi khi cập nhật đơn hàng' });
+        }
+    }
+
+    async updateTTTT(req, res) {
         const thanhToan = req.body.thanhToan;
         const maDH = req.params.id
         try {
-            await orderService.update(tinhTrang, thanhToan, maDH)
+            await orderService.updateTT(thanhToan, maDH)
             res.status(200).json({ message: 'Đã cập nhật đơn hàng thành công' });
         } catch (error) {
             console.error('Đã xảy ra lỗi:', error);

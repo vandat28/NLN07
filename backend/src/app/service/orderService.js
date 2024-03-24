@@ -90,10 +90,23 @@ class orderService {
         })
     }
 
-    update(tinhTrang, thanhToan, maDH) {
+    update(tinhTrang, maDH) {
         return new Promise((resolve, reject) => {
             con.query(`UPDATE donhang
-            SET tinhtrangdonhang = ${tinhTrang}, tinhTrangThanhToan = ${thanhToan}
+            SET tinhtrangdonhang = ${tinhTrang}
+            WHERE maDH = ${maDH};`, function (error, result, fields) {
+                if (error) {
+                    reject(error);
+                    return;
+                }
+                resolve(result);
+            });
+        })
+    }
+    updateTT(thoanhToan, maDH) {
+        return new Promise((resolve, reject) => {
+            con.query(`UPDATE donhang
+            SET tinhTrangThanhToan = ${thoanhToan}
             WHERE maDH = ${maDH};`, function (error, result, fields) {
                 if (error) {
                     reject(error);

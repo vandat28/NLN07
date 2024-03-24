@@ -80,10 +80,10 @@ export default function AdminOrder() {
             console.error('Error fetching data:', error);
         }
     }
-    const updateOrder = async (maDH, tinhTrang, thanhToan) => {
+    const updateOrder = async (maDH, tinhTrang) => {
         try {
             // Thực hiện yêu cầu PUT
-            const response = await axios.put(`${BASE_URL}/api/order/${maDH}`, { tinhTrang, thanhToan });
+            const response = await axios.put(`${BASE_URL}/api/order/${maDH}`, { tinhTrang });
             // Xử lý kết quả từ phản hồi server
             console.log(response.data); // In ra dữ liệu phản hồi từ server
         } catch (error) {
@@ -92,15 +92,15 @@ export default function AdminOrder() {
         }
     }
 
-    const approveOrder = async (maDH, tinhTrang, thanhToan) => {
-        await updateOrder(maDH, tinhTrang, thanhToan)
+    const approveOrder = async (maDH, tinhTrang) => {
+        await updateOrder(maDH, tinhTrang)
         getOrdersByTT(1)
     }
 
-    const gotOrder = async (maDH, tinhTrang, thanhToan) => {
+    const gotOrder = async (maDH, tinhTrang) => {
         const isConfirmed = window.confirm(`Đơn vị vận chuyển đã lấy đơn hàng #${maDH}`);
         if (isConfirmed) {
-            await updateOrder(maDH, tinhTrang, thanhToan)
+            await updateOrder(maDH, tinhTrang)
             getOrdersByTT(2)
         } else {
 
@@ -162,7 +162,7 @@ export default function AdminOrder() {
                                         <button className="small-button" data-bs-toggle="modal" data-bs-target="#staticBackdrop"
                                             onClick={() => handleApproveOrder(item.maDH, item.tongTien, item.hoten, item.sodienthoai, item.diachi)}>{option}</button> : ''}
                                     {option === 'Đã lấy hàng' ?
-                                        <button className="small-button" onClick={() => gotOrder(item.maDH, 3, 0)}>{option}</button> : ''}
+                                        <button className="small-button" onClick={() => gotOrder(item.maDH, 3)}>{option}</button> : ''}
                                 </td>
                             </tr>
                         ))}
@@ -201,7 +201,7 @@ export default function AdminOrder() {
                         </div>
                         <div className="modal-buttons">
                             <button type="button" className="modal-button close-button" data-bs-dismiss="modal">Đóng</button>
-                            <button type="button" style={{ backgroundColor: '#3498db', color: '#fff' }} className="modal-button close-button" data-bs-dismiss="modal" onClick={() => approveOrder(user.maDH, 2, 0)}>Duyệt</button>
+                            <button type="button" style={{ backgroundColor: '#3498db', color: '#fff' }} className="modal-button close-button" data-bs-dismiss="modal" onClick={() => approveOrder(user.maDH, 2)}>Duyệt</button>
                         </div>
                     </div>
                 </div>
