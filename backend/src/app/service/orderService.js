@@ -76,7 +76,7 @@ class orderService {
 
     findOneById(maDH) {
         return new Promise((resolve, reject) => {
-            con.query(`SELECT a.maDH, a.soLuongSP, b.tenSP, b.giaBan,b.anhdaidien
+            con.query(`SELECT a.maDH, a.soLuongSP, b.tenSP, b.giaBan,b.anhdaidien, b.maSP
             FROM chitietdonhang a
             inner join sanpham b 
             on a.maSP = b.maSP

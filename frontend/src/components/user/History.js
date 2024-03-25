@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Link, Route, Routes, useLocation } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import BASE_URL from '../../configURL';
 import axios from 'axios';
 import { format, utcToZonedTime } from 'date-fns-tz';
@@ -34,7 +34,6 @@ function History(props) {
         try {
             const response = await axios.get(`${BASE_URL}/api/order/history?id=${id}`);
             setData(response.data);
-            console.table(response.data)
         } catch (error) {
             console.error('Error fetching data:', error);
         }

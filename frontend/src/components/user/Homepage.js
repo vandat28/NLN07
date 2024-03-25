@@ -1,7 +1,7 @@
-import React, { useEffect, useLayoutEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import BASE_URL from '../../configURL';
 import axios from 'axios';
-import { Routes, Route, Link, Router } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 
 //chuyển về tiền vnđ
@@ -18,7 +18,7 @@ const formatCurrency = (amount) => {
 function Homepage(props) {
 
     const [currentIndex, setCurrentIndex] = useState(0)
-    const { data, category, setData, advertisement, quantityCart } = props
+    const { data, category, setData, advertisement } = props
 
     const findProductsByCategory = async (id) => {
         try {

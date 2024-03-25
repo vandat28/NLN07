@@ -177,7 +177,7 @@ input:focus {
     }
 
     100% {
-        height: 612px;
+        height: auto;
     }
 }
 

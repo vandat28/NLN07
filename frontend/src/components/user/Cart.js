@@ -1,6 +1,5 @@
 import React, { useEffect, useLayoutEffect, useState } from 'react';
 import BASE_URL from '../../configURL';
-import { Link, Route, Routes } from 'react-router-dom';
 import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
 
 //chuyển về tiền vnđ

@@ -1,5 +1,5 @@
-import React, { useEffect, useLayoutEffect, useState } from 'react';
-import { Routes, Route, Link, Router } from "react-router-dom";
+import React, { useEffect, useLayoutEffect, useState, memo } from 'react';
+import { Routes, Route, Link } from "react-router-dom";
 import Register from './Register';
 import Login from './Login';
 import User from './User';
@@ -112,4 +112,4 @@ function Header(props) {
     );
 }
 
-export default Header;
+export default memo(Header);
