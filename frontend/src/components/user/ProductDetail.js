@@ -16,7 +16,7 @@ const formatCurrency = (amount) => {
 
 
 
-export default function ProductDetail({ onCartIncrease }) {
+export default function ProductDetail({ onCartIncrease, cartANIMATION }) {
     var cart, count = 0;
     const { id } = useParams();
     const [data, setData] = useState([])
@@ -152,6 +152,7 @@ export default function ProductDetail({ onCartIncrease }) {
                         <div className="btn-groups">
                             <button type="button" className="add-cart-btn" onClick={() => {
                                 onCartIncrease()
+                                cartANIMATION()
                                 addToCart()
                             }}><i className="fas fa-shopping-cart"></i> Thêm vào giỏ</button>
                             <button type="button" className="buy-now-btn"><i className="fas fa-wallet"></i> Mua ngay</button>

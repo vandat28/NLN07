@@ -208,7 +208,7 @@ export default function DetailOder() {
                                     }}><i className={`fa-solid fa-star invaluate-icon${i}`} id={`star5-product${i}`}></i>
                                     </div>
                                 </div>
-                                <textarea type='text' className={`invaluate-content product${i}`} required placeholder='Nhận xét' />
+                                <textarea type='text' className={`invaluate-content product${i}`} required placcdeholder='Nhận xét' />
                                 <div className='btn-container'>
                                     <div className={`notify-btn${i}`}></div>
                                     <button type='submit' className='invaluate-btn' onClick={(e) => {

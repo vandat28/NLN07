@@ -68,14 +68,22 @@ function App() {
     setQuantity(quantity - 1);
   }
 
+  const cartANIMATION = () => {
+    const cartAni = document.querySelector(".header__main-cart-total")
+    cartAni.classList.add("wobble-ver-left")
+    setTimeout(function () {
+      cartAni.classList.remove("wobble-ver-left")
+    }, 800)
+  }
+
   return (
     <>
-      <Header setData={setData} quantity={quantity} onCartIncrease={handleCartIncrease} onCartDecrease={handleCartDecrease} />
+      <Header setData={setData} quantity={quantity} onCartIncrease={handleCartIncrease} onCartDecrease={handleCartDecrease} cartANIMATION={cartANIMATION} />
       <Routes>
         <Route path='/' element={<Homepage data={data} setData={setData} advertisement={advertisement} category={category} />} />
         <Route path='/admin/*' element={<AdminPage />} />
         <Route path='/user/*' element={<User />} />
-        <Route path='/product/:id' element={<ProductDetail onCartIncrease={handleCartIncrease} />} />
+        <Route path='/product/:id' element={<ProductDetail onCartIncrease={handleCartIncrease} cartANIMATION={cartANIMATION} />} />
       </Routes>
       <Footer />
     </>

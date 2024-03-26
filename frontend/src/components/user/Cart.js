@@ -13,7 +13,7 @@ const formatCurrency = (amount) => {
 };
 
 
-function Cart({ onCartIncrease, onCartDecrease }) {
+function Cart({ onCartIncrease, onCartDecrease, cartANIMATION }) {
 
     const userCart = JSON.parse(window.localStorage.getItem('cart'));
     const user = JSON.parse(window.localStorage.getItem('User'));
@@ -176,12 +176,14 @@ function Cart({ onCartIncrease, onCartDecrease }) {
                                                 setTotal(0)
                                             }
                                             onCartDecrease()
+                                            cartANIMATION()
                                         }}>-</button>
                                         <input className='cart_product-quantity-current' placeholder={`${item.quantity}`}></input>
                                         <button className='cart_product-quantity-increase' onClick={() => {
                                             userCart[i].quantity++;
                                             window.localStorage.setItem("cart", JSON.stringify(userCart));
                                             onCartIncrease()
+                                            cartANIMATION()
                                         }}>+</button>
                                     </div>
                                 </li>

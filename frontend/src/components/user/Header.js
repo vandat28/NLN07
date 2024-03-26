@@ -9,7 +9,7 @@ import BASE_URL from '../../configURL';
 function Header(props) {
     const userCurrent = JSON.parse(window.localStorage.getItem('User'));
     const userCart = JSON.parse(window.localStorage.getItem('cart'));
-    const { setData, quantity, onCartIncrease, onCartDecrease } = props
+    const { setData, quantity, onCartIncrease, onCartDecrease, cartANIMATION } = props
     const [userOnline, setUserOnline] = useState(userCurrent);
     const [userOffline, setUserOffline] = useState("");
     const [login, setLogin] = useState(false);
@@ -106,7 +106,7 @@ function Header(props) {
                 <Route path='/Login' element={<Login />} />
                 <Route path='/Register' element={<Register />} />
                 <Route path='/user' element={<User />} />
-                <Route path='/Cart' element={<Cart onCartIncrease={onCartIncrease} onCartDecrease={onCartDecrease} />} />
+                <Route path='/Cart' element={<Cart onCartIncrease={onCartIncrease} onCartDecrease={onCartDecrease} cartANIMATION={cartANIMATION} />} />
             </Routes>
         </div >
     );
