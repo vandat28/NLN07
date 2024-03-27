@@ -60,6 +60,16 @@ class products {
         }
     }
 
+    async findAllByQuantity(req, res) {
+        try {
+            let products = await productService.findAllByQuantity()
+            res.status(200).json(products);
+        } catch (error) {
+            console.error('Đã xảy ra lỗi:', error);
+            res.status(500).json({ message: 'Đã xảy ra lỗi khi tạo đơn hàng.' });
+        }
+    }
+
 }
 
 module.exports = new products()

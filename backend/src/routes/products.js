@@ -6,7 +6,7 @@ const products = require("../app/controller/productController")
 const multer = require('multer');
 const upload = multer({ dest: './src/public/uploads/' })
 
-
+router.get('/selling-products', products.findAllByQuantity)
 router.get('/search', products.findAllByName)
 router.get('/:id', products.findOneById)
 router.get('/category/:id', products.findAllByCategoryId)

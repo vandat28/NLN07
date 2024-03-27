@@ -95,6 +95,18 @@ class productService {
         })
     }
 
+    findAllByQuantity() {
+        return new Promise((resolve, reject) => {
+            con.query(`SELECT * FROM sanpham where soLuongCon < 1991  ;`, function (error, result, fields) {
+                if (error) {
+                    reject(error);
+                    return;
+                }
+                resolve(result);
+            });
+        })
+    }
+
 
 
 }

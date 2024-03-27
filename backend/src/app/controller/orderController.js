@@ -19,6 +19,8 @@ class orderController {
             // Lặp qua từng sản phẩm trong đơn hàng và tạo chi tiết đơn hàng cho mỗi sản phẩm
             for (const product of order.sanPham) {
                 await orderService.createOrderDetail(product.id, orderId[0].id, product.quantity);
+                let quantity = await orderService.findQuantity(product.id)
+                await orderService.updateQuatity(product.id, quantity[0].soLuongCon, product.quantity)
             }
 
             res.status(200).json({ message: 'Đã tạo đơn hàng thành công.' });
@@ -84,6 +86,8 @@ class orderController {
             res.status(500).json({ message: 'Đã xảy ra lỗi khi cập nhật đơn hàng' });
         }
     }
+
+
 
     // async delete(req, res) {
     //     let id = req.params.id

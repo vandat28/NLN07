@@ -31,6 +31,7 @@ function App() {
   useEffect(() => {
     getApiData()
     getApiDataCategory()
+    getApiDataSelling()
   }, []);
 
   const getApiData = async () => {
@@ -40,6 +41,20 @@ function App() {
       if (data) {
         setData(data);
         setAdvertisement(data);
+      }
+    } catch (error) {
+      console.log('Đã xảy ra lỗi:', error);
+    }
+
+  };
+
+  const getApiDataSelling = async () => {
+    try {
+      const response = await fetch(`${BASE_URL}/api/products/selling-products`);
+      const data = await response.json();
+      if (data) {
+        setAdvertisement(data);
+        console.log(data)
       }
     } catch (error) {
       console.log('Đã xảy ra lỗi:', error);

@@ -156,6 +156,29 @@ class orderService {
         })
     }
 
+    findQuantity(maSP) {
+        return new Promise((resolve, reject) => {
+            con.query(`select soLuongCon from sanpham where maSP = ${maSP};`, function (error, result, fields) {
+                if (error) {
+                    reject(error);
+                    return;
+                }
+                resolve(result);
+            });
+        })
+    }
+
+    updateQuatity(maSP, soLuongCon, soLuong) {
+        return new Promise((resolve, reject) => {
+            con.query(`update sanpham set soLuongCon = (${soLuongCon} - ${soLuong}) where maSP = ${maSP};`, function (error, result, fields) {
+                if (error) {
+                    reject(error);
+                    return;
+                }
+                resolve(result);
+            });
+        })
+    }
 
 
 }
