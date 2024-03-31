@@ -4,6 +4,7 @@ var router = express.Router()
 const orderController = require("../app/controller/orderController")
 
 
+router.get('/', orderController.findAll)
 router.put('/thanhtoan/:id', orderController.updateTTTT)
 router.get('/history', orderController.findAllByCustomerId)
 router.get('/detail', orderController.findOneById)

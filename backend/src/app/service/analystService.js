@@ -2,10 +2,23 @@ const con = require('../configdb/connectDB')
 
 class analystService {
 
-    findOrderIn7Days() {
+    countOrdersIn7Days() {
         return new Promise((resolve, reject) => {
-            con.query(`SELECT DATE(ngayDat) as ngay FROM healpro.donhang 
-            where ngayDat >= DATE_SUB(NOW(), INTERVAL 7 DAY) group by DATE(ngayDat);`, function (error, result, fields) {
+            con.query(`SELECT count(maDH) as tongDon FROM donhang 
+            where ngayDat >= DATE_SUB(NOW(), INTERVAL 7 DAY)`, function (error, result, fields) {
+                if (error) {
+                    reject(error);
+                    return;
+                }
+                resolve(result);
+            });
+        })
+    }
+
+    countOrdersPaidIn7Days() {
+        return new Promise((resolve, reject) => {
+            con.query(`SELECT count(maDH) as tongDon FROM donhang 
+            where ngayDat >= DATE_SUB(NOW(), INTERVAL 7 DAY) and tinhTrangThanhToan = 1;`, function (error, result, fields) {
                 if (error) {
                     reject(error);
                     return;

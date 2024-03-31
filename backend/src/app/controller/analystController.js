@@ -44,6 +44,27 @@ class analystController {
         }
     }
 
+    async countOrdersIn7Days(req, res) {
+        try {
+            let orders = await analystService.countOrdersIn7Days()
+            console.log(orders)
+            res.status(200).json(orders);
+        } catch (error) {
+            console.error('Đã xảy ra lỗi:', error);
+            res.status(500).json('Đã xảy ra lỗi:', error);
+        }
+    }
+
+    async countOrdersPaidIn7Days(req, res) {
+        try {
+            const orders = await analystService.countOrdersPaidIn7Days()
+            res.status(200).json(orders);
+        } catch (error) {
+            console.error('Đã xảy ra lỗi:', error);
+            res.status(500).json('Đã xảy ra lỗi:', error);
+        }
+    }
+
 
 }
 module.exports = new analystController()

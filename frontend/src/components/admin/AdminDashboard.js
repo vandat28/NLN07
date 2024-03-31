@@ -13,11 +13,15 @@ const formatCurrency = (amount) => {
 
 export default function AdminDashboard() {
     const [data, setData] = useState([])
+    const [count1, setCount1] = useState([])
+    const [count2, setCount2] = useState([])
     const [chartData, setChartData] = useState({})
     const [sum, setSum] = useState(0)
 
     useEffect(() => {
         getOrders()
+        getOrdersIn7Days()
+        getOrdersPaidIn7Days()
     }, []);
 
     const getOrders = async () => {
@@ -42,6 +46,24 @@ export default function AdminDashboard() {
                 sum += item.tongtien;
             });
             setSum(sum)
+        } catch (error) {
+            console.error('Error fetching data:', error);
+        }
+    }
+    const getOrdersIn7Days = async () => {
+        try {
+            const response = await axios.get(`${BASE_URL}/api/analyst/count-7days`);
+            setCount1(response.data[0].tongDon)
+            console.log(response.data[0].tongDon)
+        } catch (error) {
+            console.error('Error fetching data:', error);
+        }
+    }
+    const getOrdersPaidIn7Days = async () => {
+        try {
+            const response = await axios.get(`${BASE_URL}/api/analyst/count-paid-7days`);
+            setCount2(response.data[0].tongDon)
+            console.log(response.data[0].tongDon)
         } catch (error) {
             console.error('Error fetching data:', error);
         }
@@ -169,7 +191,7 @@ export default function AdminDashboard() {
 
                             </div>
                             <div class="dt_sum">
-                                <div class="sup_dt_sum">0</div>
+                                <div class="sup_dt_sum">{count2}</div>
                             </div>
 
                         </div>
@@ -221,7 +243,7 @@ export default function AdminDashboard() {
 
                             </div>
                             <div class="dt_sum">
-                                <div class="sup_dt_sum">0</div>
+                                <div class="sup_dt_sum">{count1}</div>
                             </div>
 
                         </div>
